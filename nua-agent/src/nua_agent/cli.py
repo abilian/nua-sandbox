@@ -1,22 +1,63 @@
+"""
+Manages the application lifecycle.
+
+Build:
+
+- pre-build
+- fetch-source
+- build
+
+Run (TODO):
+
+- start
+- stop
+
+"""
 from __future__ import annotations
 
-import importlib.metadata
 from typing import Optional
 
 import typer
 
+from . import setup
+from .build import find_builder
+from .util import print_version
+
 app = typer.Typer()
 
 
+@app.command()
+def pre_build():
+    """Setup build image."""
+    setup.configure_apt()
+    setup.install_build_packages()
+
+
+@app.command()
+def fetch_source():
+    """Fetch application source."""
+    setup.fetch_app_source()
+
+
+@app.command()
+def fetch_source():
+    """Fetch application source."""
+    setup.fetch_app_source()
+
+
+@app.command()
+def build():
+    builder = find_builder()
+    # TODO:
+
+
+#
+# Boilerplate
+#
 def _version_callback(value: bool) -> None:
     if value:
         print_version()
         raise typer.Exit(0)
-
-
-def print_version():
-    version = importlib.metadata.version("nua_agent")
-    typer.echo(f"Nua Dev version: {version}")
 
 
 OPTS = {
@@ -36,11 +77,6 @@ OPTS = {
 
 
 @app.command()
-def build():
-    """Build image."""
-
-
-@app.command()
 def version():
     """Show version."""
     print_version()
@@ -57,7 +93,7 @@ def main(
     ctx: typer.Context,
     version: Optional[bool] = OPTS["version"],
 ):
-    """Nua dev toolbox."""
+    """Nua agent (runs in containers)."""
     if ctx.invoked_subcommand is None:
         _usage()
 

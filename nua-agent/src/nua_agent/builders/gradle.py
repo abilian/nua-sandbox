@@ -1,0 +1,43 @@
+from os import environ, makedirs
+from os.path import exists, join
+from subprocess import call
+
+from click import secho as echo
+
+from .base import Builder
+from .common import check_requirements, found_app
+
+
+class GradleBuilder(Builder):
+    """Build a Java application using Gradle."""
+
+    def accept(self):
+        if not self._check_files(["build.gradle"]):
+            return False
+        found_app("Java Gradle")
+        return check_requirements(["java", "gradle"])
+
+    def _build(self):
+        java_path = join(ENV_ROOT, self.app)
+        build_path = join(APP_ROOT, self.app, "build")
+        env_file = join(APP_ROOT, self.app, "ENV")
+        env = {
+            "VIRTUAL_ENV": java_path,
+            "PATH": ":".join(
+                [join(java_path, "bin"), join(self.app, ".bin"), environ["PATH"]]
+            ),
+        }
+        if exists(env_file):
+            env.update(parse_settings(env_file, env))
+        if not exists(java_path):
+            makedirs(java_path)
+        if not exists(build_path):
+            echo("-----> Building Java Application")
+            call("gradle build", cwd=join(APP_ROOT, self.app), env=env, shell=True)
+
+        else:
+            echo("-----> Removing previous builds")
+            echo("-----> Rebuilding Java Application")
+            call(
+                "gradle clean build", cwd=join(APP_ROOT, self.app), env=env, shell=True
+            )

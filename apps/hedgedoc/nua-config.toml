@@ -1,0 +1,160 @@
+[metadata]
+id = "hedgedoc"
+version = "1.9.6"
+release = 11
+title = "Hedgedoc"
+author = "Hedgedoc developers"
+tagline = "Hedgedoc"
+website = "https://nua.rocks/"
+tags = ["Markdown", "Documentation", "Collaboration"]
+license = "AGPL-3.0"
+# profile = ["node"]
+src-url = "https://github.com/hedgedoc/hedgedoc/releases/download/{version}/hedgedoc-{version}.tar.gz"
+
+[profile]
+# use a specific docker image containing nodejs:
+node = ">=14.13.1,<17"
+
+[build]
+
+meta-packages = ["psycopg2"]
+
+packages = [
+    "fontconfig",
+    "fonts-noto"
+]
+
+build-packages = [
+    "build-essential",
+    "python3-dev",
+    "libsqlite3-dev",
+    "netcat",
+    "libicu-dev",
+    "libssl-dev",
+    "git",
+]
+
+
+[[assign]]
+key = "POSTGRES_PASSWORD"
+random_str = true
+
+[[assign]]
+key = "CMD_DB_HOST"
+resource_host = "database"
+
+[[assign]]
+key = "CMD_DB_PASSWORD"
+random_str = true
+
+[run]
+# parameters passed as a dict to docker run
+auto_remove = false
+
+[run.env]
+# IMPORTANT:to be set at the actual domain deployed:
+CMD_DOMAIN = "localhost"
+
+NODE_ENV = "production"
+DEBUG = "true"
+UPLOADS_MODE = "0700"
+
+# DB_HOST=<hostname or ip>
+# DB_PORT= 5432
+# DB_USER=hedgedoc
+# DB_PASS=<secret password>
+# DB_NAME=hedgedoc
+TZ = "Europe/Paris"
+
+# CMD_URL_PATH # if sub directory
+# CMD_DB_URL = "postgres://hedgedoc:password@database:5432/hedgedoc"
+# CMD_DB_URL = "sqlite:///nua/data/sqlite.db"
+# HSTS_ENABLE defines if HSTS headers should be sent. Set this to true if you use HTTPS.
+CMD_HSTS_ENABLE = "false"
+# URL_ADDPORT defines if generated links should contain the port.
+CMD_URL_ADDPORT = "false"
+CMD_PROTOCOL_USESSL = "false"
+# CMD_ALLOW_ORIGIN=['localhost'] #optional
+# CMD_ALLOW_ORIGIN =
+
+# See https://docs.hedgedoc.org/configuration/#users-and-privileges
+CMD_ALLOW_ANONYMOUS = "true"
+CMD_ALLOW_ANONYMOUS_EDITS = "true"
+# CMD_ALLOW_FREEURL
+# CMD_REQUIRE_FREEURL_AUTHENTICATION
+# CMD_DEFAULT_PERMISSION
+
+CMD_EMAIL = "true"
+CMD_ALLOW_EMAIL_REGISTER = "true"
+
+# postgres:
+# CMD_DB_HOST = ""  # will be replaced by actual local network configuration of docker
+CMD_DB_PORT = "5432"
+CMD_DB_DIALECT = "postgres"
+CMD_DB_USERNAME = "hedgedoc"
+# CMD_DB_PASSWORD = "some_secret"
+CMD_DB_DATABASE = "hedgedoc"
+# CMD_DB_URL = "postgres://username:password@localhost:5432/hedgedoc"
+# Postgres password of the "remote" resource DB:
+
+[port.web]
+container = 3000
+
+[healthcheck]
+command = "node /nua/build/hedgedoc/healthcheck.mjs"
+interval = 10
+
+[[volume]]
+# declare a local volume for plublic uploads
+# bind example: type = "bind"
+type = "volume"
+
+# Name of the driver used to create the volume: (for type == "volume")
+# driver = "local"  # default for "volume" type
+# Mount source (e.g. a volume name or a host path):
+source_prefix = "hedgedoc_uploads"
+
+# Container path:
+target = "/hedgedoc/public/uploads"
+# mode (default to 'rw'
+# mode = "rw"
+
+[volume.backup]
+method = "sync"
+destination = "local"
+frequency = "24h"
+
+
+[[resource]]
+# A resource is another container required by the main app container, its
+# configuration is described below, under the key of name of the resource. Several
+# resources can be declared. The resource host will appear in the local network
+# with a hostname equal to the container name. The name of the resource hostname
+# is available in the environment variable NUA_${name_of_the_resource}_HOST, ie in
+# this example: NUA_DATABASE_HOST
+
+# declaration of the required image for the resurce, here the official Postgres
+# Docker image
+name = "database"
+type = "docker"
+image = "docker.io/library/postgres:14.5"
+
+[resource.backup]
+method = "pg_dumpall"
+destination = "local"
+frequency = "24h"
+
+[resource.run]
+detach = true
+restart_policy.name = "always"
+
+[[resource.volume]]
+# here we declare a mounted volume (ie: managed by Docker daemon)
+# The mount type (bind / volume / tmpfs / npipe). Default: volume :
+type = "volume"
+# Name of the driver used to create the volume: (for type == "volume")
+driver = "local"
+# Mount source (e.g. a volume name or a host path):
+source_prefix = "hedgedoc_postgres"
+# Container path:
+target = "/var/lib/postgresql/data"

@@ -1,0 +1,438 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "required": [
+    "metadata",
+    "build",
+//    "assign",
+//    "resource",
+//    "volume",
+//    "healthcheck",
+//    "port",
+//    "profile",
+//    "run"
+  ],
+  "properties": {
+    "assign": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "random_str": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "key",
+            "random_str"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "resource_host": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "key",
+            "resource_host"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "random_str": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "key",
+            "random_str"
+          ]
+        }
+      ]
+    },
+    "resource": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "image": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "volume": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "driver": {
+                      "type": "string"
+                    },
+                    "source_prefix": {
+                      "type": "string"
+                    },
+                    "target": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "driver",
+                    "source_prefix",
+                    "target",
+                    "type"
+                  ]
+                }
+              ]
+            },
+            "backup": {
+              "type": "object",
+              "properties": {
+                "destination": {
+                  "type": "string"
+                },
+                "frequency": {
+                  "type": "string"
+                },
+                "method": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "destination",
+                "frequency",
+                "method"
+              ]
+            },
+            "run": {
+              "type": "object",
+              "properties": {
+                "detach": {
+                  "type": "boolean"
+                },
+                "restart_policy": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                }
+              },
+              "required": [
+                "detach",
+                "restart_policy"
+              ]
+            }
+          },
+          "required": [
+            "image",
+            "name",
+            "type",
+            "volume",
+            "backup",
+            "run"
+          ]
+        }
+      ]
+    },
+    "volume": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "source_prefix": {
+              "type": "string"
+            },
+            "target": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "backup": {
+              "type": "object",
+              "properties": {
+                "destination": {
+                  "type": "string"
+                },
+                "frequency": {
+                  "type": "string"
+                },
+                "method": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "destination",
+                "frequency",
+                "method"
+              ]
+            }
+          },
+          "required": [
+            "source_prefix",
+            "target",
+            "type",
+            "backup"
+          ]
+        }
+      ]
+    },
+    "build": {
+      "type": "object",
+      "properties": {
+        "build-packages": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "meta-packages": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "packages": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    "healthcheck": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string"
+        },
+        "interval": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "command",
+        "interval"
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "release": {
+          "type": "integer"
+        },
+        "src-url": {
+          "type": "string"
+        },
+        "tagline": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "author",
+        "id",
+        "license",
+        "title"
+      ]
+    },
+    "port": {
+      "type": "object",
+      "properties": {
+        "web": {
+          "type": "object",
+          "properties": {
+            "container": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "container"
+          ]
+        }
+      },
+      "required": [
+        "web"
+      ]
+    },
+    "profile": {
+      "type": "object",
+      "properties": {
+        "node": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "node"
+      ]
+    },
+    "run": {
+      "type": "object",
+      "properties": {
+        "auto_remove": {
+          "type": "boolean"
+        },
+        "env": {
+          "type": "object",
+          "properties": {
+            "CMD_ALLOW_ANONYMOUS": {
+              "type": "string"
+            },
+            "CMD_ALLOW_ANONYMOUS_EDITS": {
+              "type": "string"
+            },
+            "CMD_ALLOW_EMAIL_REGISTER": {
+              "type": "string"
+            },
+            "CMD_DB_DATABASE": {
+              "type": "string"
+            },
+            "CMD_DB_DIALECT": {
+              "type": "string"
+            },
+            "CMD_DB_PORT": {
+              "type": "string"
+            },
+            "CMD_DB_USERNAME": {
+              "type": "string"
+            },
+            "CMD_DOMAIN": {
+              "type": "string"
+            },
+            "CMD_EMAIL": {
+              "type": "string"
+            },
+            "CMD_HSTS_ENABLE": {
+              "type": "string"
+            },
+            "CMD_PROTOCOL_USESSL": {
+              "type": "string"
+            },
+            "CMD_URL_ADDPORT": {
+              "type": "string"
+            },
+            "DEBUG": {
+              "type": "string"
+            },
+            "NODE_ENV": {
+              "type": "string"
+            },
+            "TZ": {
+              "type": "string"
+            },
+            "UPLOADS_MODE": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "CMD_ALLOW_ANONYMOUS",
+            "CMD_ALLOW_ANONYMOUS_EDITS",
+            "CMD_ALLOW_EMAIL_REGISTER",
+            "CMD_DB_DATABASE",
+            "CMD_DB_DIALECT",
+            "CMD_DB_PORT",
+            "CMD_DB_USERNAME",
+            "CMD_DOMAIN",
+            "CMD_EMAIL",
+            "CMD_HSTS_ENABLE",
+            "CMD_PROTOCOL_USESSL",
+            "CMD_URL_ADDPORT",
+            "DEBUG",
+            "NODE_ENV",
+            "TZ",
+            "UPLOADS_MODE"
+          ]
+        }
+      },
+      "required": [
+        "auto_remove",
+        "env"
+      ]
+    }
+  }
+}

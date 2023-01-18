@@ -1,3 +1,14 @@
+# Specific to this project
+_nua-config.json
+Dockerfile.nua
+
+# Stuff not ready yet
+old-apps/
+
+# ------------------------------------------------------------------------ 
+
+# Generic
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -55,9 +66,6 @@ ENV/
 # IDE settings
 .vscode/
 .idea/
-
-# Stuff not ready yet
-old-apps/
 
 # Secret
 .envrc

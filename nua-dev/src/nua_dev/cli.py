@@ -1,19 +1,34 @@
 from __future__ import annotations
 
+import importlib.metadata
 from typing import Optional
 
 import typer
 
-from nua_agent import setup
-from nua_agent.util import print_version
+from .builder import Builder
 
 app = typer.Typer()
 
 
+@app.command()
+def build():
+    """Build image."""
+    builder = Builder()
+    builder.build()
+
+
+#
+# Boilerplate
+#
 def _version_callback(value: bool) -> None:
     if value:
         print_version()
         raise typer.Exit(0)
+
+
+def print_version():
+    version = importlib.metadata.version("nua_agent")
+    typer.echo(f"Nua Dev version: {version}")
 
 
 OPTS = {
@@ -33,14 +48,6 @@ OPTS = {
 
 
 @app.command()
-def setup_for_build():
-    """Setup build image."""
-    setup.configure_apt()
-    setup.install_packages()
-    setup.install_nodejs()
-
-
-@app.command()
 def version():
     """Show version."""
     print_version()
@@ -57,7 +64,7 @@ def main(
     ctx: typer.Context,
     version: Optional[bool] = OPTS["version"],
 ):
-    """Nua agent (runs in containers)."""
+    """Nua dev toolbox."""
     if ctx.invoked_subcommand is None:
         _usage()
 

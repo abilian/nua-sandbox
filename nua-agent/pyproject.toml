@@ -7,10 +7,9 @@ authors = [
     "Jerome Dumonteil <jd@abilian.com>",
 ]
 license = "MIT"
-# readme = "README.md"
+readme = "README.md"
 packages = [
-    #  { include = "nua_agent", from = "src" }
-    { include = "nua_agent" }
+    { include = "nua_agent", from = "src" },
 ]
 
 [tool.poetry.scripts]
