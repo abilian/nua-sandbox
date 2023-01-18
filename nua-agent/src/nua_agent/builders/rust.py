@@ -1,6 +1,6 @@
+from .. import sh
 from .base import Builder
 from .common import found_app
-from .. import sh
 
 
 class RustBuilder(Builder):

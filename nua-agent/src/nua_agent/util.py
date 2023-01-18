@@ -1,5 +1,6 @@
-import typer
 import importlib.metadata
+
+import typer
 
 
 def get_version() -> str:

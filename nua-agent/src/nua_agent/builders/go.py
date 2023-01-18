@@ -6,7 +6,7 @@ from subprocess import call
 from click import secho as echo
 
 from .base import Builder
-from .common import found_app, check_requirements
+from .common import check_requirements, found_app
 
 
 class GoBuilder(Builder):

@@ -1,6 +1,6 @@
-from .base import Builder
-from .common import found_app, check_requirements
 from .. import sh
+from .base import Builder
+from .common import check_requirements, found_app
 
 
 class NodeBuilder(Builder):

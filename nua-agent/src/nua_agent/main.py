@@ -19,9 +19,9 @@ from typing import Optional
 
 import typer
 
-from .builders.base import Builder
-from .builders import find_builder
 from . import system
+from .builders import find_builder
+from .builders.base import Builder
 from .util import print_version
 
 app = typer.Typer()
