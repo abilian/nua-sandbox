@@ -19,8 +19,9 @@ from typing import Optional
 
 import typer
 
-from . import setup
-from .build import find_builder
+from .builders.base import Builder
+from .builders import find_builder
+from . import system
 from .util import print_version
 
 app = typer.Typer()
@@ -29,26 +30,24 @@ app = typer.Typer()
 @app.command()
 def pre_build():
     """Setup build image."""
-    setup.configure_apt()
-    setup.install_build_packages()
+    builder: Builder = find_builder()
+    system.configure_apt()
+    system.install_packages(builder.packages)
+    system.clear_apt_cache()
 
 
 @app.command()
 def fetch_source():
     """Fetch application source."""
-    setup.fetch_app_source()
-
-
-@app.command()
-def fetch_source():
-    """Fetch application source."""
-    setup.fetch_app_source()
+    builder: Builder = find_builder()
+    builder.fetch_app_source()
 
 
 @app.command()
 def build():
+    """Build the application."""
     builder = find_builder()
-    # TODO:
+    builder.build()
 
 
 #

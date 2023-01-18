@@ -1,6 +1,9 @@
 import os
+from pathlib import Path
 from shutil import copy
 
+import click
+from devtools import debug
 from invoke import task, Context
 
 NUA_AGENT_WHL = "nua-agent/dist/nua_agent-0.1-py3-none-any.whl"
@@ -10,24 +13,23 @@ SUB_REPOS = [
     "nua-dev",
 ]
 
-APPS = [
-    "hedgedoc",
-    "demo-flask",
-]
+APPS = sorted(
+    p.name for p in Path("apps").iterdir() if p.is_dir() and (p / "nua-config.toml").exists()
+)
 
 
 #
 # Specific tasks
 #
 @task
-def build_all(c: Context) -> None:
+def build_all(c: Context, no_cache=False) -> None:
     """Build everyting in order."""
-    build_base(c)
+    build_base(c, no_cache=no_cache)
     build_apps(c)
 
 
 @task
-def build_base(c):
+def build_base(c, no_cache=False):
     """Build base image only."""
     with c.cd("nua-agent"):
         c.run("poetry build")
@@ -36,16 +38,23 @@ def build_base(c):
     copy(NUA_AGENT_WHL, "base-image/dist/")
 
     with c.cd("base-image"):
-        c.run("docker build -t nua-base .")
+        if no_cache:
+            c.run("docker build --no-cache -t nua-base .", echo=True)
+        else:
+            c.run("docker build -t nua-base .", echo=True)
 
 
 @task
 def build_apps(c):
     """Build apps only."""
     for app in APPS:
-        print("Building app:", app, "\n")
+        msg = f"Building app: {app}"
+        print()
+        click.secho(msg, fg="green")
+        click.secho("="*len(msg), fg="green")
+        print()
         with c.cd(f"apps/{app}"):
-            c.run("nua-dev build")
+            c.run("nua-dev build", echo=True)
             # c.run(f"docker build -t nua-{app} .")
 
 
@@ -70,7 +79,7 @@ def lint(c):
 @task
 def format(c):  # noqa: A001
     """Format the whole project."""
-    run_in_subrepos(c, "make format")
+    run_in_subrepos(c, "black src && isort src")
 
 
 @task
@@ -138,4 +147,4 @@ def run_in_subrepos(c, cmd):
     for sub_repo in SUB_REPOS:
         h1(f"Running '{cmd}' in subrepos: {sub_repo}")
         with c.cd(sub_repo):
-            c.run(cmd)
+            c.run(cmd, echo=True)

@@ -80,7 +80,7 @@ clean:
 	rm -rf */.mypy_cache */.pytest_cache */.ruff_cache
 	rm -f .coverage */.coverage
 	rm -rf dist nua-*/dist
-	rm -rf apps/*/*/build_dir apps/*/_nua-config.json
+	rm -rf apps/*/*/build_dir apps/*/_nua-config.json apps/*/Dockerfile.nua
 	# Remove more cruft
 	rm -rf *.egg-info *.egg .eggs .cache .mypy_cache .pyre \
 		.pytest_cache .pytest .DS_Store  docs/_build docs/cache docs/tmp \

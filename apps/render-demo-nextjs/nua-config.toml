@@ -1,0 +1,13 @@
+[metadata]
+id = "render-demo-nextjs"
+title = "Demo NextJS"
+version = "0.1"
+release = 1
+license = "MIT"
+src-url = "https://github.com/render-examples/nextjs-hello-world/archive/refs/heads/master.tar.gz"
+
+[build]
+build-packages = []
+
+[run]
+start-command = "yarn start"

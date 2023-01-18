@@ -1,8 +1,7 @@
-import json
 import os
 
-from nua_agent.config import read_config
-from nua_agent.sh import shell
+from .config import read_config
+from .sh import shell
 
 os.environ["DEBIAN_FRONTEND"] = "noninteractive"
 
@@ -41,14 +40,6 @@ def configure_apt():
     )
 
 
-def install_build_packages():
-    config = json.load(open("_nua-config.json"))
-    metadata = config["metadata"]
-    packages = metadata.get("build_packages", [])
-    if packages:
-        install_packages(packages)
-
-
 def install_packages(packages):
     print()
     print("Will install packages: ", packages)
@@ -69,17 +60,9 @@ def install_nodejs():
     shell("/usr/bin/npm install -g yarn")
 
 
-def fetch_app_source(strip_components=1):
-    # Was:
-    # RUN curl -sL https://github.com/hedgedoc/server/archive/${VERSION}.tar.gz \
-    #    | tar -xz --strip-components 1 -f -
-    #
-    # TODO: rewrite in pure Python?
-    # Cf. download_extract() in nua/lib/actions.py
-    config = read_config()
-    metadata = config["metadata"]
-    src_url = metadata["src-url"]
-    shell(f"curl -sL {src_url} | tar xz --strip-components={strip_components} -f -")
+def clear_apt_cache():
+    shell("apt-get clean")
+    shell("rm -rf /var/lib/apt/lists/*")
 
 
 def echo(text: str, filename: str) -> None:

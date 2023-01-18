@@ -7,4 +7,6 @@ __all__ = ["mkdir", "makedirs", "cp", "shell"]
 
 def shell(cmd):
     print(cmd)
-    os.system(cmd)
+    status = os.system(cmd)
+    if status != 0:
+        raise RuntimeError("Command failed: " + cmd)

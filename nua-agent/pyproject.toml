@@ -13,7 +13,7 @@ packages = [
 ]
 
 [tool.poetry.scripts]
-nua-agent = "nua_agent.cli:app"
+nua-agent = "nua_agent.main:app"
 
 
 [tool.poetry.dependencies]

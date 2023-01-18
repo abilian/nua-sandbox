@@ -1,0 +1,13 @@
+[metadata]
+id = "render-demo-rocket"
+title = "Demo for Rust + Rocket"
+version = "0.1"
+release = 1
+license = "MIT"
+src-url = "https://github.com/render-examples/rocket-rust-hello-world/archive/refs/heads/master.tar.gz"
+
+[build]
+build-packages = []
+
+[run]
+start-command = "cargo run --release"

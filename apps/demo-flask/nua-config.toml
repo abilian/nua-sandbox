@@ -14,10 +14,10 @@ build-packages = [
     "build-essential",
     "python3-dev",
     "libsqlite3-dev",
-    "netcat",
-    "libicu-dev",
-    "libssl-dev",
-    "git",
+#    "netcat",
+#    "libicu-dev",
+#    "libssl-dev",
+#    "git",
 ]
 
 

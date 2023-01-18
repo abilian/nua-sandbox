@@ -19,19 +19,19 @@ node = ">=14.13.1,<17"
 
 meta-packages = ["psycopg2"]
 
-packages = [
-    "fontconfig",
-    "fonts-noto"
-]
-
 build-packages = [
     "build-essential",
-    "python3-dev",
-    "libsqlite3-dev",
-    "netcat",
-    "libicu-dev",
-    "libssl-dev",
-    "git",
+#    "python3-dev",
+#    "libsqlite3-dev",
+#    "netcat",
+#    "libicu-dev",
+#    "libssl-dev",
+#    "git",
+]
+
+run-packages = [
+    "fontconfig",
+    "fonts-noto"
 ]
 
 
@@ -49,7 +49,7 @@ random_str = true
 
 [run]
 # parameters passed as a dict to docker run
-auto_remove = false
+auto-remove = false
 
 [run.env]
 # IMPORTANT:to be set at the actual domain deployed:

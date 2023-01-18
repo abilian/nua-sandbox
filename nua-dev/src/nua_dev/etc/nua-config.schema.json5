@@ -3,7 +3,7 @@
   "type": "object",
   "required": [
     "metadata",
-    "build",
+//    "build",
 //    "assign",
 //    "resource",
 //    "volume",
@@ -315,10 +315,9 @@
         }
       },
       "required": [
-        "author",
         "id",
-        "license",
-        "title"
+        "title",
+        "license"
       ]
     },
     "port": {
@@ -354,85 +353,13 @@
     "run": {
       "type": "object",
       "properties": {
-        "auto_remove": {
+        "auto-remove": {
           "type": "boolean"
         },
         "env": {
-          "type": "object",
-          "properties": {
-            "CMD_ALLOW_ANONYMOUS": {
-              "type": "string"
-            },
-            "CMD_ALLOW_ANONYMOUS_EDITS": {
-              "type": "string"
-            },
-            "CMD_ALLOW_EMAIL_REGISTER": {
-              "type": "string"
-            },
-            "CMD_DB_DATABASE": {
-              "type": "string"
-            },
-            "CMD_DB_DIALECT": {
-              "type": "string"
-            },
-            "CMD_DB_PORT": {
-              "type": "string"
-            },
-            "CMD_DB_USERNAME": {
-              "type": "string"
-            },
-            "CMD_DOMAIN": {
-              "type": "string"
-            },
-            "CMD_EMAIL": {
-              "type": "string"
-            },
-            "CMD_HSTS_ENABLE": {
-              "type": "string"
-            },
-            "CMD_PROTOCOL_USESSL": {
-              "type": "string"
-            },
-            "CMD_URL_ADDPORT": {
-              "type": "string"
-            },
-            "DEBUG": {
-              "type": "string"
-            },
-            "NODE_ENV": {
-              "type": "string"
-            },
-            "TZ": {
-              "type": "string"
-            },
-            "UPLOADS_MODE": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "CMD_ALLOW_ANONYMOUS",
-            "CMD_ALLOW_ANONYMOUS_EDITS",
-            "CMD_ALLOW_EMAIL_REGISTER",
-            "CMD_DB_DATABASE",
-            "CMD_DB_DIALECT",
-            "CMD_DB_PORT",
-            "CMD_DB_USERNAME",
-            "CMD_DOMAIN",
-            "CMD_EMAIL",
-            "CMD_HSTS_ENABLE",
-            "CMD_PROTOCOL_USESSL",
-            "CMD_URL_ADDPORT",
-            "DEBUG",
-            "NODE_ENV",
-            "TZ",
-            "UPLOADS_MODE"
-          ]
+          "type": "object"
         }
-      },
-      "required": [
-        "auto_remove",
-        "env"
-      ]
+      }
     }
   }
 }

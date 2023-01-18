@@ -1,0 +1,13 @@
+[metadata]
+id = "render-demo-express"
+title = "Demo ExpressJS"
+version = "0.1"
+release = 1
+license = "MIT"
+src-url = "https://github.com/render-examples/express-hello-world/archive/refs/heads/main.tar.gz"
+
+[build]
+build-packages = []
+
+[run]
+start-command = "node app.js"
