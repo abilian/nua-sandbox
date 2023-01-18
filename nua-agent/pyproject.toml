@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "nua-agent"
+version = "0.1"
+description = "Nua agent - CLI and code that runs in the containers / VMs"
+authors = [
+    "Stefane Fermigier <sf@abilian.com>",
+    "Jerome Dumonteil <jd@abilian.com>",
+]
+license = "MIT"
+# readme = "README.md"
+packages = [
+    #  { include = "nua_agent", from = "src" }
+    { include = "nua_agent" }
+]
+
+[tool.poetry.scripts]
+nua-agent = "nua_agent.cli:app"
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+setuptools = "*"
+jinja2 = "^3.1.2"
+
+[tool.poetry.group.dev.dependencies]
+abilian-devtools = "*"
+nox = "*"
+
+# types-setuptools = "*"
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:.*distutils package:DeprecationWarning",
+    "ignore::DeprecationWarning",
+]
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "nua-sandbox"
+version = "0.1.0"
+description = ""
+authors = ["Stefane Fermigier <sf@abilian.com>"]
+readme = "README.md"
+packages = [{include = "nua_sandbox"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.group.dev.dependencies]
+invoke = "^2.0.0"
+abilian-devtools = "^0.4.0"
+devtools = "^0.10.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

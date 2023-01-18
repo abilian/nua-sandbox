@@ -1,0 +1,63 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+
+_build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Unit test / coverage reports
+.nox/
+.tox/
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# pyenv
+.python-version
+
+# dotenv
+.env
+
+# virtualenv
+.venv
+venv/
+ENV/
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Stuff not ready yet
+old-apps/
+
+# Secret
+.envrc

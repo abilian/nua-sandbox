@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "nua-tool"
+version = "0.1"
+description = "Nua Dev - cli / code that runs on the development machine"
+authors = [
+    "Stefane Fermigier <sf@abilian.com>",
+    "Jerome Dumonteil <jd@abilian.com>",
+]
+license = "MIT"
+# readme = "README.md"
+packages = [
+    { include = "nua_dev" }
+]
+
+[tool.poetry.scripts]
+nua-dev = "nua_dev.cli:app"
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+setuptools = "*"
+jinja2 = "^3.1.2"
+
+[tool.poetry.group.dev.dependencies]
+abilian-devtools = "*"
+nox = "*"
+
+# types-setuptools = "*"
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:.*distutils package:DeprecationWarning",
+    "ignore::DeprecationWarning",
+]
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
