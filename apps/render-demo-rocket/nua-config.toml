@@ -11,3 +11,5 @@ build-packages = []
 
 [run]
 start-command = "cargo run --release"
+
+# Warning: doesn't compile (original sample project is probably too old)
