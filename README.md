@@ -22,9 +22,21 @@ DON'T USE. Useful concepts will be merged into the main `Nua` project.
 - Many apps are not building (yet). Sometimes it's not our fault.
 - Debian (actually, Ubuntu) is used as the base image. This causes some issues (TBD).
 
+## Developer experience
+
+To work specifically on trying to build a specific app, you can run (from the root of *this* project):
+
+```bash
+invoke build-all --only <app-name>
+```
+
+(This will rebuild the base image each time, so any changes to `nua-agent` will be taken into account.)
+
 ## What's missing
 
-No work on runtime/orchestrator (yet?).
+No work (yet) on a runtime/orchestrator alternative.
+
+We have to check, at some points, that the images produced are actually working in `nua-orchestrator`.
 
 ## TODO
 

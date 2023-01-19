@@ -5,3 +5,8 @@ version = "0.1"
 release = 1
 license = "MIT"
 src-url = "https://github.com/railwayapp-templates/flask/archive/refs/heads/main.tar.gz"
+
+#
+# Warning: doesn't work currently because we need to put app in a virtualenv
+# (to prevent conflcit between nua-agent's jinja2 and the app's jinja2)
+#

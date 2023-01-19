@@ -8,8 +8,8 @@ src-url = "https://github.com/railwayapp-templates/django/archive/refs/heads/mai
 
 [build]
 build-packages = [
-    # Used to build psycopg2
+    # Needed to build psycopg2
+    "gcc",
     "python3-dev",
     "libpq-dev",
-    "gcc",
 ]
