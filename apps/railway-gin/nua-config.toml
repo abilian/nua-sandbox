@@ -1,0 +1,10 @@
+[metadata]
+id = "railway-gin"
+title = "Demo for Go + Gin"
+version = "0.1"
+release = 1
+license = "MIT"
+src-url = "https://github.com/railwayapp-templates/gin/archive/refs/heads/main.tar.gz"
+
+[run]
+start-command = "go run main.go"

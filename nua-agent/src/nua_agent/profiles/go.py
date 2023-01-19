@@ -1,11 +1,17 @@
+from pathlib import Path
+
+from .. import sh
 from .base import BaseProfile
 
 
 class GoProfile(BaseProfile):
     """Build a Go application using Go."""
 
+    label = "Go"
+    builder_packages = ["golang-go"]
+
     def accept(self):
-        return False
+        return Path("go.mod").exists()
         # return (
         #     (
         #         exists(join(self.app_path, "Godeps"))
@@ -14,6 +20,10 @@ class GoProfile(BaseProfile):
         #     and found_app("Go")
         #     and check_requirements(["go"])
         # )
+
+    def build(self):
+        sh.shell("go get")
+        sh.shell("go build -o out")
 
     # def _build(self):
     #     go_path = join(ENV_ROOT, self.app)

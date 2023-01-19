@@ -5,3 +5,7 @@ version = "0.1"
 release = 1
 license = "MIT"
 src-url = "https://github.com/railwayapp-templates/rocket/archive/refs/heads/main.tar.gz"
+
+[run]
+start-command = "cargo run --release"
+
