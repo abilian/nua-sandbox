@@ -46,6 +46,12 @@ def configure_apt():
 
 
 def install_packages(packages):
+    if not packages:
+        print()
+        print("No packages to install.")
+        print()
+        return
+
     print()
     print("Will install packages: ", packages)
     print()

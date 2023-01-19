@@ -1,0 +1,15 @@
+[metadata]
+id = "railway-django"
+title = "Demo for Django"
+version = "0.1"
+release = 1
+license = "MIT"
+src-url = "https://github.com/railwayapp-templates/django/archive/refs/heads/main.tar.gz"
+
+[build]
+build-packages = [
+    # Used to build psycopg2
+    "python3-dev",
+    "libpq-dev",
+    "gcc",
+]

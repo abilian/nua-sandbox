@@ -1,5 +1,4 @@
-"""
-Manages the application lifecycle.
+"""Manages the application lifecycle.
 
 Build:
 
@@ -12,7 +11,6 @@ Run (TODO):
 - start
 - stop
 - ?
-
 """
 from __future__ import annotations
 

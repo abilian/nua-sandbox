@@ -3,7 +3,7 @@ from pathlib import Path
 from shutil import copy
 
 import click
-from invoke import task, Context
+from invoke import Context, task
 
 NUA_AGENT_WHL = "nua-agent/dist/nua_agent-0.1-py3-none-any.whl"
 
@@ -13,7 +13,9 @@ SUB_REPOS = [
 ]
 
 APPS = sorted(
-    p.name for p in Path("apps").iterdir() if p.is_dir() and (p / "nua-config.toml").exists()
+    p.name
+    for p in Path("apps").iterdir()
+    if p.is_dir() and (p / "nua-config.toml").exists()
 )
 
 
@@ -21,10 +23,10 @@ APPS = sorted(
 # Specific tasks
 #
 @task
-def build_all(c: Context, no_cache=False) -> None:
+def build_all(c: Context, no_cache=False, only="") -> None:
     """Build everyting in order."""
     build_base(c, no_cache=no_cache)
-    build_apps(c)
+    build_apps(c, only=only)
 
 
 @task
@@ -44,13 +46,17 @@ def build_base(c, no_cache=False):
 
 
 @task
-def build_apps(c):
+def build_apps(c, only=""):
     """Build apps only."""
-    for app in APPS:
+    if only:
+        apps = [s.strip() for s in only.split(",")]
+    else:
+        apps = APPS
+    for app in apps:
         msg = f"Building app: {app}"
         print()
         click.secho(msg, fg="green")
-        click.secho("="*len(msg), fg="green")
+        click.secho("=" * len(msg), fg="green")
         print()
         with c.cd(f"apps/{app}"):
             c.run("nua-dev build", echo=True)

@@ -17,11 +17,11 @@ class BaseProfile:
         return self.config["metadata"]["id"]
 
     def get_system_packages(self) -> list[str]:
-        metadata = self.config["metadata"]
+        build_info = self.config.get("build", {})
 
         packages = set()
-        packages.update(metadata.get("build-packages", []))
-        packages.update(metadata.get("run-packages", []))
+        packages.update(build_info.get("build-packages", []))
+        packages.update(build_info.get("run-packages", []))
         packages.update(self.builder_packages)
 
         return list(packages)
@@ -31,15 +31,18 @@ class BaseProfile:
         pass
 
     def accept(self) -> bool:
-        """Implemented in subclasses"""
+        """Implemented in subclasses."""
         raise NotImplementedError
 
     def build(self):
-        """Implemented in subclasses"""
+        """Implemented in subclasses."""
         raise NotImplementedError
 
     def _pre_build(self):
-        """Pre-build check. Not used yet."""
+        """Pre-build check.
+
+        Not used yet.
+        """
         raise NotImplementedError
 
     # def update_settings(self, settings):

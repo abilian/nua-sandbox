@@ -1,0 +1,7 @@
+[metadata]
+id = "railway-flask"
+title = "Demo for Flask"
+version = "0.1"
+release = 1
+license = "MIT"
+src-url = "https://github.com/railwayapp-templates/flask/archive/refs/heads/main.tar.gz"
