@@ -16,12 +16,14 @@ from __future__ import annotations
 
 from typing import Optional
 
+import snoop
 import typer
 
 from . import system
 from .builder import Builder
 from .util import print_version
 
+snoop.install()
 app = typer.Typer()
 
 
