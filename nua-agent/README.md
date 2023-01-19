@@ -1,8 +1,8 @@
 # About
 
-This is code this is running in the containers.
+This is code that runs in the containers.
 
 - At buildtime (currently)
-- At runtime (in the future)
+- At runtime (in the future?)
 
 It is injected in the base image (see [../base-image/](../base-image/)).

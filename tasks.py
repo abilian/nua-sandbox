@@ -3,7 +3,6 @@ from pathlib import Path
 from shutil import copy
 
 import click
-from devtools import debug
 from invoke import task, Context
 
 NUA_AGENT_WHL = "nua-agent/dist/nua_agent-0.1-py3-none-any.whl"

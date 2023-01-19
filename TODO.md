@@ -20,7 +20,7 @@
 
 - [ ] Runtime support via `nua-agent`
   - [ ] Should we split `nua-agent` into a build-time and a run-time part?
-- [ ] Alternatives build systems (hand-crafted Dockerfiles, Nix/Guix, etc.)
+- [ ] Alternatives build systems (hand-crafted Dockerfiles, Nix/Guix, https://buildpacks.io/, https://modus-continens.com/, https://nixpacks.com/, etc.)
 - [ ] Alternative backends (e.g. SlapOS)
 - [ ] Support for `docker-compose` (or similar)
 - [ ] Optimise for layer caching (when using Docker)

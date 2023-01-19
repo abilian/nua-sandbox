@@ -8,9 +8,9 @@ End-users will use the `nua` CLI.
 
 ## What it does
 
-- Validate the `nua-config.toml` file using a JSONSchema.
+- Validates the `nua-config.toml` file using a JSONSchema.
 - Does some basic variable expansion.
-- Generate a `Dockerfile.nua`. (Actually, it's the same Dockerfile for alls projects, at least for now.)
+- Generates a `Dockerfile.nua`. (Actually, it's the same Dockerfile for alls projects, at least for now.)
 - Calls the `docker build` command with the generated `Dockerfile.nua`.
 
 ## Usage
