@@ -4,11 +4,11 @@ version = "1.9.6"
 release = 11
 title = "Hedgedoc"
 author = "Hedgedoc developers"
-tagline = "Hedgedoc"
-website = "https://nua.rocks/"
+tagline = "The best platform to write and share markdown"
+website = "https://hedgedoc.org/"
 tags = ["Markdown", "Documentation", "Collaboration"]
 license = "AGPL-3.0"
-# profile = ["node"]
+# profile = ["node"] <- autodetected
 src-url = "https://github.com/hedgedoc/hedgedoc/releases/download/{version}/hedgedoc-{version}.tar.gz"
 
 [profile]
@@ -16,7 +16,6 @@ src-url = "https://github.com/hedgedoc/hedgedoc/releases/download/{version}/hedg
 node = ">=14.13.1,<17"
 
 [build]
-
 meta-packages = ["psycopg2"]
 
 build-packages = [

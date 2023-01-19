@@ -1,16 +1,15 @@
 from .. import sh
-from .base import Builder
+from .base import BaseProfile
 from .common import found_app
 
 
-class PythonBuilder(Builder):
+class PythonProfile(BaseProfile):
     """Build a Python application."""
 
+    label = "Python / Pip"
+
     def accept(self):
-        if self._check_files(["setup.py", "requirements.txt", "pyproject.toml"]):
-            found_app("Python")
-            return True
-        return False
+        return self._check_files(["setup.py", "requirements.txt", "pyproject.toml"])
 
     def build(self):
         if self._check_files(["requirements.txt"]):

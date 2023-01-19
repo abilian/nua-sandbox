@@ -7,5 +7,6 @@ __all__ = ["shell", "cp"]
 
 
 def shell(cmd):
+    # TODO: better use subprocess
     print(cmd)
     os.system(cmd)

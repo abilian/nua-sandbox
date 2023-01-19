@@ -1,37 +1,23 @@
-import click
-import typer
+from .base import BaseProfile
+from .clojure import ClojureProfile
+from .go import GoProfile
+from .gradle import GradleProfile
+from .maven import MavenProfile
+from .node import NodeProfile
+from .python import PythonProfile
+from .ruby import RubyProfile
+from .rust import RustProfile
 
-from .base import Builder
-from .clojure import ClojureBuilder
-from .go import GoBuilder
-from .gradle import GradleBuilder
-from .maven import MavenBuilder
-from .node import NodeBuilder
-from .python import PythonBuilder
-from .ruby import RubyBuilder
-from .rust import RustBuilder
-
-BUILDER_CLASSES = [
-    PythonBuilder,
-    RubyBuilder,
-    NodeBuilder,
-    MavenBuilder,
-    GradleBuilder,
-    GoBuilder,
-    ClojureBuilder,
-    RustBuilder,
+PROFILE_CLASSES: list[type[BaseProfile]] = [
+    PythonProfile,
+    RubyProfile,
+    NodeProfile,
+    MavenProfile,
+    GradleProfile,
+    GoProfile,
+    ClojureProfile,
+    RustProfile,
 ]
-
-
-def find_builder() -> Builder | None:
-    for builder_cls in BUILDER_CLASSES:
-        builder = builder_cls()
-        if builder.accept():
-            click.secho(f"Will build with builder: {builder_cls.__name__}", fg="green")
-            return builder
-
-    click.secho("No builder found.", fg="red")
-    raise typer.Exit(1)
 
 
 # def do_deploy(app, deltas=None, newrev=None):

@@ -21,28 +21,32 @@ class Builder:
 
     def parse_config(self) -> None:
         typer.echo("Parsing config...")
-        config = tomli.load(open("nua-config.toml", "rb"))
+        self.config = tomli.load(open("nua-config.toml", "rb"))
 
+        self.expand_src_url()
+        self.validate_config()
+        self.write_config()
+
+    def expand_src_url(self):
         # Hack
-        src_url = config["metadata"].get("src-url")
+        src_url = self.config["metadata"].get("src-url")
         if src_url and "{" in src_url:
-            src_url = str.format(src_url, **config["metadata"])
-            config["metadata"]["src-url"] = src_url
+            src_url = str.format(src_url, **self.config["metadata"])
+            self.config["metadata"]["src-url"] = src_url
 
-        # Validate
+    def validate_config(self):
         schema_file = Path(__file__).parent / "etc" / "nua-config.schema.json5"
         schema = json5.load(schema_file.open("rb"))
         try:
-            jsonschema.validate(config, schema)
+            jsonschema.validate(self.config, schema)
         except jsonschema.exceptions.ValidationError as e:
             typer.echo(f"Error parsing nua-config.toml: {e.message}")
             raise typer.Exit(1)
 
+    def write_config(self):
         # Write as JSON. From now on, we only use JSON.
         with Path("_nua-config.json").open("w") as fd:
-            json.dump(config, fd, indent=2)
-
-        self.config = config
+            json.dump(self.config, fd, indent=2)
 
     def build(self):
         app_id = self.config["metadata"]["id"]

@@ -11,6 +11,7 @@ Run (TODO):
 
 - start
 - stop
+- ?
 
 """
 from __future__ import annotations
@@ -20,33 +21,32 @@ from typing import Optional
 import typer
 
 from . import system
-from .builders import find_builder
-from .builders.base import Builder
+from .builder import Builder
 from .util import print_version
 
 app = typer.Typer()
 
 
 @app.command()
-def pre_build():
-    """Setup build image."""
-    builder: Builder = find_builder()
-    system.configure_apt()
-    system.install_packages(builder.packages)
-    system.clear_apt_cache()
+def fetch_source():
+    """Fetch application source."""
+    builder = Builder()
+    builder.fetch_app_source()
 
 
 @app.command()
-def fetch_source():
-    """Fetch application source."""
-    builder: Builder = find_builder()
-    builder.fetch_app_source()
+def pre_build():
+    """Setup build image."""
+    builder = Builder()
+    system.configure_apt()
+    builder.install_system_packages()
+    system.clear_apt_cache()
 
 
 @app.command()
 def build():
     """Build the application."""
-    builder = find_builder()
+    builder = Builder()
     builder.build()
 
 

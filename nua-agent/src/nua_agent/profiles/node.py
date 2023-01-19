@@ -1,20 +1,25 @@
-from .. import sh
-from .base import Builder
-from .common import check_requirements, found_app
+from .. import sh, system
+from .base import BaseProfile
+from .common import check_requirements
 
 
-class NodeBuilder(Builder):
+class NodeProfile(BaseProfile):
     """Build a Noejs app."""
 
+    label = "Node.js / NPM or Yarn"
+
     def accept(self):
-        if not self._check_files(["package.json"]):
-            return False
-        found_app("Node")
+        return self._check_files(["package.json"])
+
+    def _pre_build(self):
         return (
             check_requirements(["nodejs", "npm"])
             or check_requirements(["node", "npm"])
             or check_requirements(["nodeenv"])
         )
+
+    def install_extra_packages(self):
+        system.install_nodejs()
 
     def build(self):
         if self._check_files(["package-lock.json"]):

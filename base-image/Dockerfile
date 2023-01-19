@@ -10,5 +10,5 @@ RUN apt-get -y update && \
 
 # Install the Nua Agent and dependencies (mannually)
 COPY dist/ /nua/dist/
-RUN pip install /nua/dist/*.whl setuptools typer jinja2
+RUN pip install /nua/dist/*.whl setuptools typer jinja2 snoop
 RUN nua-agent version

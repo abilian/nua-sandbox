@@ -1,27 +1,22 @@
 from pathlib import Path
 
-from ..config import read_config
-from ..sh import shell
 from ..types import JSON
 
 
-class Builder:
+class BaseProfile:
     config: JSON
 
     builder_packages: list[str] = []
+    label: str = ""
 
-    def __init__(self, config: JSON = None):
-        if config:
-            self.config = config
-        else:
-            self.config = read_config()
+    def __init__(self, config: JSON):
+        self.config = config
 
     @property
     def app_id(self):
         return self.config["metadata"]["id"]
 
-    @property
-    def packages(self) -> list[str]:
+    def get_system_packages(self) -> list[str]:
         metadata = self.config["metadata"]
 
         packages = set()
@@ -31,21 +26,24 @@ class Builder:
 
         return list(packages)
 
+    def install_extra_packages(self):
+        """Implemented in subclasses, if needed."""
+        pass
+
     def accept(self) -> bool:
+        """Implemented in subclasses"""
         raise NotImplementedError
 
     def build(self):
+        """Implemented in subclasses"""
         raise NotImplementedError
 
-    def update_settings(self, settings):
-        pass
+    def _pre_build(self):
+        """Pre-build check. Not used yet."""
+        raise NotImplementedError
 
-    def fetch_app_source(self, strip_components=1):
-        # TODO: rewrite in pure Python?
-        # Cf. download_extract() in nua/lib/actions.py
-        metadata = self.config["metadata"]
-        src_url = metadata["src-url"]
-        shell(f"curl -sL {src_url} | tar xz --strip-components={strip_components} -f -")
+    # def update_settings(self, settings):
+    #     pass
 
     def _check_files(self, files: list[str]) -> bool:
         """Return True if one of the files exists."""

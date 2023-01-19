@@ -1,10 +1,10 @@
 import os
 
-from .config import read_config
 from .sh import shell
 
 os.environ["DEBIAN_FRONTEND"] = "noninteractive"
 
+# Not used. Remove soon.
 PACKAGES = [
     # Stuff
     "apt-utils",
@@ -21,6 +21,7 @@ PACKAGES = [
 ]
 
 
+# TODO: move this to the base image(s) so that it takes effect earlier.
 def configure_apt():
     echo(
         "Acquire::http {No-Cache=True;};",
@@ -48,12 +49,14 @@ def install_packages(packages):
     cmd = f"apt-get update -q"
     shell(cmd)
 
-    cmd = f"apt-get install -y {' '.join(packages)}"
+    # '--no-install-recommends' probably not needed.
+    cmd = f"apt-get install -y --no-install-recommends {' '.join(packages)}"
     shell(cmd)
 
 
-def install_nodejs():
-    cmd = "curl -sL https://deb.nodesource.com/setup_18.x | bash -"
+def install_nodejs(version="14.x"):
+    # TODO: don't use curl (?)
+    cmd = f"curl -sL https://deb.nodesource.com/setup_{version} | bash -"
     shell(cmd)
 
     shell("apt-get install -y nodejs")
