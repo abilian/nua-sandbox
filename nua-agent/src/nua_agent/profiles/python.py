@@ -1,6 +1,7 @@
 from .. import sh
 from .base import BaseProfile
-from .common import found_app
+
+# TODO: we should probably install the app in a virtualenv.
 
 
 class PythonProfile(BaseProfile):

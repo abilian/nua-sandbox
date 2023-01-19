@@ -23,6 +23,10 @@ PACKAGES = [
 
 # TODO: move this to the base image(s) so that it takes effect earlier.
 def configure_apt():
+    def echo(text: str, filename: str) -> None:
+        with open(filename, "w") as fd:
+            fd.write(text)
+
     echo(
         "Acquire::http {No-Cache=True;};",
         "/etc/apt/apt.conf.d/no-cache",
@@ -46,7 +50,7 @@ def install_packages(packages):
     print("Will install packages: ", packages)
     print()
 
-    cmd = f"apt-get update -q"
+    cmd = "apt-get update -q"
     shell(cmd)
 
     # '--no-install-recommends' probably not needed.
@@ -66,8 +70,3 @@ def install_nodejs(version="14.x"):
 def clear_apt_cache():
     shell("apt-get clean")
     shell("rm -rf /var/lib/apt/lists/*")
-
-
-def echo(text: str, filename: str) -> None:
-    with open(filename, "w") as fd:
-        fd.write(text)
