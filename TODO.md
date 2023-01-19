@@ -26,3 +26,4 @@
 - [ ] Optimise for layer caching (when using Docker)
 - [ ] Reproducible builds.
 - [ ] SBOM and software supply chain.
+- [ ] Plugins: the system should be extensible. For the build subsystem, this should probably (at least in the current architecture) done by adding support for plugins at the `nua-agent` level. This means that the plugins to use should be specified (in a specific section) in the `nua-config.toml` file and be injected early in the build process (this seems a bit tricky so more thoughts are needed).
