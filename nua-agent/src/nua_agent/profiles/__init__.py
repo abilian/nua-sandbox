@@ -4,6 +4,7 @@ from .go import GoProfile
 from .gradle import GradleProfile
 from .maven import MavenProfile
 from .node import NodeProfile
+from .php import PhpProfile
 from .python import PythonProfile
 from .ruby import RubyProfile
 from .rust import RustProfile
@@ -12,6 +13,7 @@ PROFILE_CLASSES: list[type[BaseProfile]] = [
     PythonProfile,
     RubyProfile,
     NodeProfile,
+    PhpProfile,
     MavenProfile,
     GradleProfile,
     GoProfile,

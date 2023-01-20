@@ -1,0 +1,15 @@
+[metadata]
+id = "railway-laravel"
+title = "Demo for Laravel"
+version = "0.1"
+release = 1
+license = "MIT"
+src-url = "https://github.com/railwayapp-templates/laravel/archive/refs/heads/main.tar.gz
+
+[build]
+#
+# Doesn't work: recognized as a Nodejs project
+# TODO: we need to support projects with front-end and back-end
+#
+# So maybe we should be more excelict and not use autodetection? Like this?
+profiles = ["php", "node"]
