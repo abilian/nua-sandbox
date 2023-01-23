@@ -60,7 +60,6 @@ def build_apps(c, only=""):
         print()
         with c.cd(f"apps/{app}"):
             c.run("nua-dev build", echo=True)
-            # c.run(f"docker build -t nua-{app} .")
 
 
 #

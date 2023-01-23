@@ -9,5 +9,7 @@ ADD _nua-config.json .
 
 # fetch-source is run first so that builder detection can work
 RUN nua-agent fetch-source
+
 RUN nua-agent pre-build
 RUN nua-agent build
+RUN nua-agent post-build

@@ -20,6 +20,7 @@ nua-agent = "nua_agent.main:app"
 python = "^3.10"
 setuptools = "*"
 jinja2 = "^3.1.2"
+typer = "*"
 
 [tool.poetry.group.dev.dependencies]
 abilian-devtools = "*"

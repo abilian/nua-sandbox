@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "nua-tool"
+name = "nua-dev"
 version = "0.1"
-description = "Nua Dev - cli / code that runs on the development machine"
+description = "Nua Dev - cli / code that runs on the development / build machine"
 authors = [
     "Stefane Fermigier <sf@abilian.com>",
     "Jerome Dumonteil <jd@abilian.com>",
