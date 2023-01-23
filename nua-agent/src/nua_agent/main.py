@@ -19,7 +19,7 @@ from typing import Optional
 import snoop
 import typer
 
-from . import system
+from . import sh, system
 from .builder import Builder
 from .util import print_version
 
@@ -48,6 +48,12 @@ def build():
     """Build the application."""
     builder = Builder()
     builder.build()
+
+
+@app.command()
+def post_build():
+    sh.rm("/root/.cache", recursive=True)
+    sh.rm("/var/lib/apt", recursive=True)
 
 
 #

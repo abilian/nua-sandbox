@@ -1,13 +1,19 @@
+import os
+import re
+import tarfile
+import tempfile
 from pathlib import Path
+from urllib.request import urlopen, urlretrieve
 
 import click
 import typer
 
-from . import system
+from . import sh, system
 from .config import read_config
 from .profiles import PROFILE_CLASSES, BaseProfile
 from .sh import shell
 from .types import JSON
+from .unarchiver import unarchive
 
 
 class Builder:
@@ -34,7 +40,21 @@ class Builder:
         # Cf. download_extract() in nua/lib/actions.py
         metadata = self.config["metadata"]
         src_url = metadata["src-url"]
-        shell(f"curl -sL {src_url} | tar xz --strip-components={strip_components} -f -")
+        print(f"Fetching: {src_url}")
+
+        # shell(f"curl -sL {src_url} | tar xz --strip-components={strip_components} -f -")
+
+        with tempfile.TemporaryDirectory() as tmp:
+            self.download_src(src_url, tmp)
+            archive = Path(tmp) / Path(src_url).name
+            unarchive(archive, ".")
+
+    def download_src(self, url: str, tmp: str) -> None:
+        name = Path(url).name
+        if not any(name.endswith(suf) for suf in (".zip", ".tar", ".tar.gz", ".tgz")):
+            raise ValueError(f"Unknown archive format for '{name}'")
+        target = Path(tmp) / name
+        urlretrieve(url, target)
 
     def build(self):
         self.profile.build()
