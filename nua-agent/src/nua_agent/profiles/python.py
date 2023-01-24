@@ -1,5 +1,3 @@
-import os
-
 from .. import sh
 from .base import BaseProfile
 
@@ -11,14 +9,19 @@ class PythonProfile(BaseProfile):
 
     label = "Python / Pip"
 
+    builder_packages = [
+        "python3.10-venv",
+    ]
+
     def accept(self):
         return self._check_files(["setup.py", "requirements.txt", "pyproject.toml"])
 
     def build(self):
+        sh.shell("python3 -m venv --symlinks /nua/venv")
         if self._check_files(["requirements.txt"]):
-            sh.shell("pip install -r requirements.txt")
+            sh.shell("/nua/venv/bin/pip install -r requirements.txt")
         else:
-            sh.shell("pip install .")
+            sh.shell("/nua/venv/bin/pip install .")
 
     # def _build(self):
     #     virtualenv_path = join(ENV_ROOT, self.app_id)

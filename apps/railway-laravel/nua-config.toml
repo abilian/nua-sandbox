@@ -4,7 +4,7 @@ title = "Demo for Laravel"
 version = "0.1"
 release = 1
 license = "MIT"
-src-url = "https://github.com/railwayapp-templates/laravel/archive/refs/heads/main.tar.gz
+src-url = "https://github.com/railwayapp-templates/laravel/archive/refs/heads/main.tar.gz"
 
 [build]
 #

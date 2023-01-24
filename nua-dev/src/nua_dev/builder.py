@@ -7,6 +7,7 @@ import json5
 import jsonschema
 import tomli
 import typer
+from tomli import TOMLDecodeError
 
 from . import sh
 from .sh import shell
@@ -21,7 +22,11 @@ class Builder:
 
     def parse_config(self) -> None:
         typer.echo("Parsing config...")
-        self.config = tomli.load(open("nua-config.toml", "rb"))
+        try:
+            self.config = tomli.load(open("nua-config.toml", "rb"))
+        except TOMLDecodeError as e:
+            typer.echo(f"Error parsing nua-config.toml: {e}")
+            raise typer.Exit(1)
 
         self.expand_src_url()
         self.validate_config()

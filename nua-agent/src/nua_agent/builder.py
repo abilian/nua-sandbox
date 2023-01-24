@@ -1,17 +1,13 @@
-import os
-import re
-import tarfile
 import tempfile
 from pathlib import Path
-from urllib.request import urlopen, urlretrieve
+from urllib.request import urlretrieve
 
 import click
 import typer
 
-from . import sh, system
+from . import system
 from .config import read_config
 from .profiles import PROFILE_CLASSES, BaseProfile
-from .sh import shell
 from .types import JSON
 from .unarchiver import unarchive
 

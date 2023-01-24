@@ -1,7 +1,8 @@
 # TODO
 
 ## Short term
- 
+
+- [x] ZIP support
 - [ ] Implement and test all the build profiles.
 - [ ] Make sure all the applications build (and add more).
 - [ ] Work on the log messages so that it's easier to understand what's going on.
@@ -14,8 +15,8 @@
 - [ ] Import useful metadata from other systems (heroku, render, etc.).
 - [ ] Formalize specification
   - [ ] Of the build profiles (config + support files).
-  - [ ] Of the runtime images. 
- 
+  - [ ] Of the runtime images.
+
 ## Longer term
 
 - [ ] Runtime support via `nua-agent`
