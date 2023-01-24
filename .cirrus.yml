@@ -1,0 +1,13 @@
+poetry_task:
+    container:
+        image: python:slim
+    setup_script:
+        - apt-get update -y
+        - apt-get install -y --no-install-recommends make
+        - pip install -U pip setuptools wheel poetry
+    install_script:
+        - poetry install
+        - npm install
+    test_script:
+        - poetry run make lint
+        - poetry run make test
