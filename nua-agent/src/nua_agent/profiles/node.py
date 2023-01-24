@@ -1,4 +1,5 @@
-from .. import sh, system
+from .. import sh
+from ..system import install_nodejs
 from .base import BaseProfile
 from .common import check_requirements
 
@@ -8,18 +9,24 @@ class NodeProfile(BaseProfile):
 
     label = "Node.js / NPM or Yarn"
 
+    builder_packages = [
+        "git",
+    ]
+
     def accept(self):
         return self._check_files(["package.json"])
 
-    def _pre_build(self):
+    def check(self) -> bool:
         return (
             check_requirements(["nodejs", "npm"])
             or check_requirements(["node", "npm"])
             or check_requirements(["nodeenv"])
         )
 
-    def install_extra_packages(self):
-        system.install_nodejs()
+    def prepare(self):
+        node_version = self.config.get("node_version", "14.x")
+        install_nodejs(node_version)
+        sh.shell("ln -sf /usr/bin/yarnpkg /usr/bin/yarn")
 
     def build(self):
         if self._check_files(["package-lock.json"]):

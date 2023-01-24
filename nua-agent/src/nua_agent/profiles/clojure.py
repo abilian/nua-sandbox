@@ -14,7 +14,7 @@ class ClojureProfile(BaseProfile):
     def accept(self):
         return self._check_files(["project.clj"])
 
-    def _pre_build(self):
+    def check(self):
         return check_requirements(["java", "lein"])
 
     def build(self):

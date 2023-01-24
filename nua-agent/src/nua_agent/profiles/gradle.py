@@ -15,7 +15,7 @@ class GradleProfile(BaseProfile):
     def accept(self):
         return self._check_files(["build.gradle"])
 
-    def _pre_build(self):
+    def check(self):
         return check_requirements(["java", "gradle"])
 
     def build(self):

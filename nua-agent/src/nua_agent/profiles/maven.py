@@ -15,7 +15,7 @@ class MavenProfile(BaseProfile):
     def accept(self):
         return self._check_files(["pom.xml"])
 
-    def _pre_build(self):
+    def check(self):
         return check_requirements(["java", "mvn"])
 
     def build(self):

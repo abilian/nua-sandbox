@@ -31,6 +31,9 @@ class Builder:
         # Warning: profile detection can only happen after the source code has been fetched.
         return self._get_profile()
 
+    #
+    # Lifecycle methods (called from CLI i.e. `main.py`)
+    #
     def fetch_app_source(self, strip_components=1):
         # TODO: rewrite in pure Python and deal with all the cases (zip, git...)
         # Cf. download_extract() in nua/lib/actions.py
@@ -45,19 +48,25 @@ class Builder:
             archive = Path(tmp) / Path(src_url).name
             unarchive(archive, ".")
 
+    def prepare(self):
+        system.install_packages(self._get_system_packages())
+        self.profile.prepare()
+
+    def build_app(self):
+        self.profile.build()
+
+    def cleanup(self):
+        self.profile.cleanup()
+
+    #
+    # Helpers methods
+    #
     def download_src(self, url: str, tmp: str) -> None:
         name = Path(url).name
         if not any(name.endswith(suf) for suf in (".zip", ".tar", ".tar.gz", ".tgz")):
             raise ValueError(f"Unknown archive format for '{name}'")
         target = Path(tmp) / name
         urlretrieve(url, target)
-
-    def build(self):
-        self.profile.build()
-
-    def install_system_packages(self):
-        system.install_packages(self._get_system_packages())
-        self.profile.install_extra_packages()
 
     def _get_system_packages(self) -> list[str]:
         return self.profile.get_system_packages()

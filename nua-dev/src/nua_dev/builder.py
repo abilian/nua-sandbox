@@ -10,7 +10,6 @@ import typer
 from tomli import TOMLDecodeError
 
 from . import sh
-from .sh import shell
 from .types import JSON
 
 
@@ -19,6 +18,11 @@ class Builder:
 
     def __init__(self) -> None:
         self.parse_config()
+
+    def build(self):
+        app_id = self.config["metadata"]["id"]
+        sh.cp(Path(__file__).parent / "etc" / "Dockerfile", "Dockerfile.nua")
+        sh.shell(f"docker build -f Dockerfile.nua -t nua-{app_id} .")
 
     def parse_config(self) -> None:
         typer.echo("Parsing config...")
@@ -52,8 +56,3 @@ class Builder:
         # Write as JSON. From now on, we only use JSON.
         with Path("_nua-config.json").open("w") as fd:
             json.dump(self.config, fd, indent=2)
-
-    def build(self):
-        app_id = self.config["metadata"]["id"]
-        sh.cp(Path(__file__).parent / "etc" / "Dockerfile", "Dockerfile.nua")
-        shell(f"docker build -f Dockerfile.nua -t nua-{app_id} .")

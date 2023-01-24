@@ -22,27 +22,27 @@ PACKAGES = [
 
 
 # TODO: move this to the base image(s) so that it takes effect earlier.
-def configure_apt():
-    def echo(text: str, filename: str) -> None:
-        with open(filename, "w") as fd:
-            fd.write(text)
-
-    echo(
-        "Acquire::http {No-Cache=True;};",
-        "/etc/apt/apt.conf.d/no-cache",
-    )
-    echo(
-        'APT::Install-Recommends "0"; APT::Install-Suggests "0";',
-        "/etc/apt/apt.conf.d/01norecommend",
-    )
-    echo(
-        'Dir::Cache { srcpkgcache ""; pkgcache ""; }',
-        "/etc/apt/apt.conf.d/02nocache",
-    )
-    echo(
-        'Acquire::GzipIndexes "true"; Acquire::CompressionTypes::Order:: "gz";',
-        "/etc/apt/apt.conf.d/02compress-indexes",
-    )
+# def configure_apt():
+#     def echo(text: str, filename: str) -> None:
+#         with open(filename, "w") as fd:
+#             fd.write(text)
+#
+#     echo(
+#         "Acquire::http {No-Cache=True;};",
+#         "/etc/apt/apt.conf.d/no-cache",
+#     )
+#     echo(
+#         'APT::Install-Recommends "0"; APT::Install-Suggests "0";',
+#         "/etc/apt/apt.conf.d/01norecommend",
+#     )
+#     echo(
+#         'Dir::Cache { srcpkgcache ""; pkgcache ""; }',
+#         "/etc/apt/apt.conf.d/02nocache",
+#     )
+#     echo(
+#         'Acquire::GzipIndexes "true"; Acquire::CompressionTypes::Order:: "gz";',
+#         "/etc/apt/apt.conf.d/02compress-indexes",
+#     )
 
 
 def install_packages(packages):

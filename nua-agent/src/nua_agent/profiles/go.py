@@ -2,6 +2,7 @@ from pathlib import Path
 
 from .. import sh
 from .base import BaseProfile
+from .common import check_requirements
 
 
 class GoProfile(BaseProfile):
@@ -12,14 +13,17 @@ class GoProfile(BaseProfile):
 
     def accept(self):
         return Path("go.mod").exists()
+        # Was:
         # return (
         #     (
         #         exists(join(self.app_path, "Godeps"))
         #         or len(glob(join(self.app_path, "*.go")))
         #     )
         #     and found_app("Go")
-        #     and check_requirements(["go"])
         # )
+
+    def check(self):
+        return check_requirements(["go"])
 
     def build(self):
         sh.shell("go get")

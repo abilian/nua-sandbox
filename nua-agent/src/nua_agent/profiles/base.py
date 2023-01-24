@@ -16,6 +16,38 @@ class BaseProfile:
     def app_id(self):
         return self.config["metadata"]["id"]
 
+    #
+    # Lifecycle methods (called from `../builder.py`)
+    #
+    def accept(self) -> bool:
+        """Must be implemented in subclasses."""
+        raise NotImplementedError
+
+    def check(self) -> bool:
+        """Check if the environment is ready."""
+        return True
+
+    def prepare(self):
+        """Prepare the build: additional specific steps, if needed.
+
+        Does nothing by default.
+        """
+        pass
+
+    def build(self):
+        """Must be implemented in subclasses."""
+        raise NotImplementedError
+
+    def cleanup(self):
+        """Cleanup after the build.
+
+        Does nothing by default.
+        """
+        pass
+
+    #
+    # Helpers
+    #
     def get_system_packages(self) -> list[str]:
         build_info = self.config.get("build", {})
 
@@ -25,25 +57,6 @@ class BaseProfile:
         packages.update(self.builder_packages)
 
         return list(packages)
-
-    def install_extra_packages(self):
-        """Implemented in subclasses, if needed."""
-        pass
-
-    def accept(self) -> bool:
-        """Implemented in subclasses."""
-        raise NotImplementedError
-
-    def build(self):
-        """Implemented in subclasses."""
-        raise NotImplementedError
-
-    def _pre_build(self):
-        """Pre-build check.
-
-        Not used yet.
-        """
-        raise NotImplementedError
 
     # def update_settings(self, settings):
     #     pass

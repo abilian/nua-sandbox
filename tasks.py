@@ -15,7 +15,7 @@ SUB_REPOS = [
 APPS = sorted(
     p.name
     for p in Path("apps").iterdir()
-    if p.is_dir() and (p / "nua-config.toml").exists()
+    if p.is_dir() and (p / "nua-config.toml").exists() and not (p / "SKIP").exists()
 )
 
 
@@ -46,12 +46,16 @@ def build_base(c, no_cache=False):
 
 
 @task
-def build_apps(c, only=""):
+def build_apps(c, only="", skip=""):
     """Build apps only."""
     if only:
-        apps = [s.strip() for s in only.split(",")]
+        apps = [a.strip() for a in only.split(",")]
     else:
         apps = APPS
+    apps = [a for a in apps if a not in skip.split(",")]
+
+    print("Going to build apps:", ", ".join(apps))
+
     for app in apps:
         msg = f"Building app: {app}"
         print()

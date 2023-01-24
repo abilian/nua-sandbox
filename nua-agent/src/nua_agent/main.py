@@ -27,33 +27,59 @@ snoop.install()
 app = typer.Typer()
 
 
+#
+# Build lifecycle
+#
 @app.command()
-def fetch_source():
-    """Fetch application source."""
+def build_image():
+    """Build the application image."""
     builder = Builder()
     builder.fetch_app_source()
 
-
-@app.command()
-def pre_build():
-    """Setup build image."""
-    builder = Builder()
-    system.configure_apt()
-    builder.install_system_packages()
+    # Prepare the build environment
+    # system.configure_apt()
+    builder.prepare()
     system.clear_apt_cache()
 
+    # Build the app
+    builder.build_app()
 
-@app.command()
-def build():
-    """Build the application."""
-    builder = Builder()
-    builder.build()
-
-
-@app.command()
-def post_build():
+    # Cleanup
     sh.rm("/root/.cache", recursive=True)
     sh.rm("/var/lib/apt", recursive=True)
+    builder.cleanup()
+
+
+# @app.command()
+# def fetch_source():
+#     """Fetch application source."""
+#     builder = Builder()
+#     builder.fetch_app_source()
+#
+#
+# @app.command()
+# def prepare():
+#     """Setup build image."""
+#     builder = Builder()
+#     system.configure_apt()
+#     builder.prepare()
+#     system.clear_apt_cache()
+#
+#
+# @app.command()
+# def build():
+#     """Build the application."""
+#     builder = Builder()
+#     builder.build()
+#
+#
+# @app.command()
+# def cleanup():
+#     """Cleanup temp build arterfacts."""
+#     builder = Builder()
+#     sh.rm("/root/.cache", recursive=True)
+#     sh.rm("/var/lib/apt", recursive=True)
+#     builder.cleanup()
 
 
 #

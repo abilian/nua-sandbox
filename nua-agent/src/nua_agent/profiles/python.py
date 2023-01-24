@@ -1,5 +1,6 @@
 from .. import sh
 from .base import BaseProfile
+from .common import check_requirements
 
 # TODO: we should probably install the app in a virtualenv.
 
@@ -16,8 +17,14 @@ class PythonProfile(BaseProfile):
     def accept(self):
         return self._check_files(["setup.py", "requirements.txt", "pyproject.toml"])
 
+    def check(self):
+        return check_requirements(["python3"])
+
     def build(self):
+        # TODO: maybe the virtualenv should be prepared before ?
         sh.shell("python3 -m venv --symlinks /nua/venv")
+        sh.shell("/nua/venv/bin/pip install -U pip setuptools wheel")
+
         if self._check_files(["requirements.txt"]):
             sh.shell("/nua/venv/bin/pip install -r requirements.txt")
         else:

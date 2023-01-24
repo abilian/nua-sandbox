@@ -15,7 +15,7 @@ class RustProfile(BaseProfile):
     def accept(self):
         return self._check_files(["Cargo.toml"])
 
-    def _pre_build(self):
+    def check(self):
         return check_requirements(["cargo"])
 
     def build(self):

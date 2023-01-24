@@ -14,7 +14,7 @@ class RubyProfile(BaseProfile):
     def accept(self):
         return self._check_files(["Gemfile"])
 
-    def _pre_build(self):
+    def check(self):
         return check_requirements(["ruby", "bundle"])
 
     def build(self):

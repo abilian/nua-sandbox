@@ -9,4 +9,6 @@ __all__ = ["shell", "cp"]
 def shell(cmd):
     # TODO: better use subprocess
     print(cmd)
-    os.system(cmd)
+    status = os.system(cmd)
+    if status != 0:
+        raise RuntimeError(f"Command failed: {cmd!r}")

@@ -8,4 +8,3 @@ src-url = "https://github.com/railwayapp-templates/rocket/archive/refs/heads/mai
 
 [run]
 start-command = "cargo run --release"
-
