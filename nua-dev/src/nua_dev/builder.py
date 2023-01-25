@@ -8,6 +8,7 @@ import jsonschema
 import tomli
 import typer
 from tomli import TOMLDecodeError
+from typer.colors import RED
 
 from . import sh
 from .types import JSON
@@ -29,7 +30,7 @@ class Builder:
         try:
             self.config = tomli.load(open("nua-config.toml", "rb"))
         except TOMLDecodeError as e:
-            typer.echo(f"Error parsing nua-config.toml: {e}")
+            typer.secho(f"Error parsing nua-config.toml: {e}", fg=RED)
             raise typer.Exit(1)
 
         self.expand_src_url()
@@ -49,7 +50,7 @@ class Builder:
         try:
             jsonschema.validate(self.config, schema)
         except jsonschema.exceptions.ValidationError as e:
-            typer.echo(f"Error parsing nua-config.toml: {e.message}")
+            typer.secho(f"Error parsing nua-config.toml: {e.message}", fg=RED)
             raise typer.Exit(1)
 
     def write_config(self):

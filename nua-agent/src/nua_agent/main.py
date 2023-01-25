@@ -2,14 +2,12 @@
 
 Build:
 
-- pre-build
-- fetch-source
-- build
+- `nua-agent build` builds the application.
 
 Run (TODO):
 
-- start
-- stop
+- start?
+- stop?
 - ?
 """
 from __future__ import annotations
@@ -18,6 +16,7 @@ from typing import Optional
 
 import snoop
 import typer
+from typer.colors import RED
 
 from . import sh, system
 from .builder import Builder
@@ -34,21 +33,25 @@ app = typer.Typer()
 def build_image():
     """Build the application image."""
     builder = Builder()
-    builder.fetch_app_source()
 
-    # Prepare the build environment
-    # system.configure_apt()
-    builder.prepare()
-    system.clear_apt_cache()
+    try:
+        builder.fetch_app_source()
 
-    # Build the app
-    builder.build_app()
+        # Prepare the build environment
+        # system.configure_apt()
+        builder.prepare()
+        system.clear_apt_cache()
 
-    # Cleanup
-    sh.rm("/root/.cache", recursive=True)
-    sh.rm("/var/lib/apt", recursive=True)
-    builder.cleanup()
+        # Build the app
+        builder.build_app()
 
+        # Cleanup
+        sh.rm("/root/.cache", recursive=True)
+        sh.rm("/var/lib/apt", recursive=True)
+        builder.cleanup()
+    except Exception as e:
+        typer.secho(e, fg=RED)
+        raise typer.Exit(1)
 
 # @app.command()
 # def fetch_source():

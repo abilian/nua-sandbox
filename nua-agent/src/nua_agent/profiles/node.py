@@ -30,6 +30,11 @@ class NodeProfile(BaseProfile):
         sh.shell("ln -sf /usr/bin/yarnpkg /usr/bin/yarn")
 
     def build(self):
+        print("yarn version:")
+        sh.shell("yarn --version")
+        print("npm version:")
+        sh.shell("npm --version")
+
         if self._check_files(["package-lock.json"]):
             sh.shell("npm install")
         elif self._check_files(["yarn.lock"]):

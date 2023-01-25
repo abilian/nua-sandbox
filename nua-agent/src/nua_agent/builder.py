@@ -1,9 +1,11 @@
 import tempfile
 from pathlib import Path
+from urllib.error import HTTPError
 from urllib.request import urlretrieve
 
 import click
 import typer
+from typer.colors import RED
 
 from . import system, sh
 from .config import read_config
@@ -44,7 +46,11 @@ class Builder:
         # shell(f"curl -sL {src_url} | tar xz --strip-components={strip_components} -f -")
 
         with tempfile.TemporaryDirectory() as tmp:
-            self.download_src(src_url, tmp)
+            try:
+                self.download_src(src_url, tmp)
+            except HTTPError as e:
+                typer.secho(f"Error while downloading {src_url}: {e}", fg=RED)
+                raise typer.Exit(1)
             archive = Path(tmp) / Path(src_url).name
             unarchive(archive, ".")
 
@@ -89,5 +95,5 @@ class Builder:
                 click.secho(f"-----> {kind} app detected.", fg="green")
                 return profile
 
-        click.secho("No profile found.", fg="red")
+        click.secho("No profile found.", fg=RED)
         raise typer.Exit(1)

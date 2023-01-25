@@ -4,6 +4,7 @@ import importlib.metadata
 from typing import Optional
 
 import typer
+from typer.colors import RED
 
 from .builder import Builder
 
@@ -14,7 +15,11 @@ app = typer.Typer()
 def build():
     """Build image."""
     builder = Builder()
-    builder.build()
+    try:
+        builder.build()
+    except Exception as e:
+        typer.secho(e, fg=RED)
+        raise typer.Exit(1)
 
 
 #
