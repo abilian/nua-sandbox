@@ -71,7 +71,7 @@ def get_repo_info(from_github: str) -> dict[str, Any]:
 
     license = repo.get_license().license.spdx_id
 
-    ctx["id"] = repo.name
+    ctx["id"] = repo.name.lower()
     ctx["name"] = repo.name
     ctx["description"] = repo.description
     ctx["version"] = version
