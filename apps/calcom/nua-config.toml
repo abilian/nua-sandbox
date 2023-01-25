@@ -1,0 +1,17 @@
+[metadata]
+id = "cal.com"
+version = "1.9.6"
+release = 11
+title = "Cal.com"
+author = "Cal.com developers"
+tagline = ""
+website = "https://cal.com/"
+tags = ["Scheduling"]
+license = "AGPL-3.0"
+src-url = "https://github.com/calcom/cal.com/archive/refs/heads/main.tar.gz"
+
+[build]
+node-version = "16.x"
+
+# Not needed (autodetected)
+build-script = "build.sh"

@@ -5,6 +5,6 @@
 FROM nua-base
 
 WORKDIR /nua/build
-ADD _nua-config.json .
+COPY ./ ./
 
 RUN nua-agent build-image

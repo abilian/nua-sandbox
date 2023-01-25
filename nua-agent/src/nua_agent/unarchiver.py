@@ -39,6 +39,7 @@ class ZipUnarchiver(Unarchiver):
     accepted_suffixes = [".zip"]
 
     def extract(self, src: str, dest_dir: str) -> None:
+        # FIXME: doesn't set the right permissions
         with ZipFile(src) as archive:
             root = Path(archive.infolist()[0].filename)
             for member in archive.infolist():

@@ -5,7 +5,7 @@ from urllib.request import urlretrieve
 import click
 import typer
 
-from . import system
+from . import system, sh
 from .config import read_config
 from .profiles import PROFILE_CLASSES, BaseProfile
 from .types import JSON
@@ -53,7 +53,10 @@ class Builder:
         self.profile.prepare()
 
     def build_app(self):
-        self.profile.build()
+        if Path("build.sh").exists():
+            sh.shell("bash build.sh")
+        else:
+            self.profile.build()
 
     def cleanup(self):
         self.profile.cleanup()

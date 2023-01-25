@@ -24,7 +24,8 @@ class NodeProfile(BaseProfile):
         )
 
     def prepare(self):
-        node_version = self.config.get("node_version", "14.x")
+        build_config = self.config.get("build", {})
+        node_version = build_config.get("node-version", "14.x")
         install_nodejs(node_version)
         sh.shell("ln -sf /usr/bin/yarnpkg /usr/bin/yarn")
 

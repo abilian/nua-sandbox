@@ -251,6 +251,9 @@
               "type": "string"
             }
           ]
+        },
+        "node-version": {
+          "type": "string"
         }
       }
     },
@@ -337,17 +340,6 @@
       },
       "required": [
         "web"
-      ]
-    },
-    "profile": {
-      "type": "object",
-      "properties": {
-        "node": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "node"
       ]
     },
     "run": {

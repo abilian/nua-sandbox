@@ -1,16 +1,21 @@
 # TODO
 
-## Short term
+## Done
 
 - [x] ZIP support
+- [x] Implement and test all the build profiles (moslty done for now)
+- [x] Make sure all the applications build (mostly done for now)
+
+## Short term
+
 - [ ] Support multiple Python / Node / PHP / Ruby / etc. versions
-- [ ] Implement and test all the build profiles.
-- [ ] Make sure all the applications build (and add more).
 - [ ] Work on the log messages so that it's easier to understand what's going on.
   - [ ] Logging: divert build logs to 1 file per build.
   - [ ] Add hooks to deal with special cases at build time (e.g. `build.py`).
-- [ ] Look at ways to reduce image size (e.g. split build image / run image).
-    - [ ] Remove dependency on `curl`.
+- [ ] Look at ways to reduce image size
+  - [ ] Split build image / run image
+  - [ ] Remove dependency on `curl`.
+  - [ ] Remove cruft after build
 - [ ] Run builds in a dedicated directory (e.g. `_build/`) ?
 - [ ] Git support.
 - [ ] Procfile support.
