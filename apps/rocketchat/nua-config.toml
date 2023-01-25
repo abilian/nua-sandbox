@@ -1,0 +1,24 @@
+[metadata]
+id = "rocketchat"
+title = "Rocket.Chat"
+author = "RocketChat Developers"
+license = "MIT"
+tagline = "The Complete Open Source Chat Solution"
+website = "https://rocket.chat"
+tags = [ "chat", "webchat", "slack", "teams" ]
+
+version = "5.4.1"
+src-url = "https://github.com/RocketChat/Rocket.Chat/archive/refs/tags/{version}.tar.gz"
+
+#[addons]
+#sendmail = { }
+#turn = { }
+#
+#[addons.mongodb]
+#oplog = true
+#
+#[run]
+#healthCheckPath = "/"
+#httpPort = 3_000
+#optionalSso = true
+#memoryLimit = 2_147_483_648

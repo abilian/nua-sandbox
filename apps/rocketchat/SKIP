@@ -1,0 +1,5 @@
+This is a meteor app.
+
+We need to figure out how to build meteor apps.
+
+See: https://github.com/RocketChat/Rocket.Chat/blob/develop/apps/meteor/.docker/Dockerfile
