@@ -1,13 +1,21 @@
 from __future__ import annotations
 
 import importlib.metadata
-from typing import Optional
+import os
+from pathlib import Path
+from typing import Any, Optional
 
+import jinja2
+import snoop
 import typer
-from typer.colors import RED
+from github import Github
+from typer.colors import GREEN, RED
+
+from nua_dev.console import panic
 
 from .builder import Builder
 
+snoop.install()
 app = typer.Typer()
 
 
@@ -20,6 +28,64 @@ def build():
     except Exception as e:
         typer.secho(e, fg=RED)
         raise typer.Exit(1)
+
+
+@app.command()
+def init(from_github: str = "", dir: Optional[Path] = None):
+    """Initialize a new project."""
+    if not from_github:
+        panic("Please specify a GitHub repository.")
+
+    ctx = get_repo_info(from_github)
+    with (Path(__file__).parent / "etc" / "nua-config.toml.j2").open() as fd:
+        environment = jinja2.Environment()
+        template = environment.from_string(fd.read())
+        config_toml = template.render(project=ctx)
+
+    if dir:
+        os.chdir(dir)
+    Path(ctx["id"]).mkdir(exist_ok=True)
+    with (Path(ctx["id"]) / "nua-config.toml").open("w") as fd:
+        fd.write(config_toml)
+
+
+def get_repo_info(from_github: str) -> dict[str, Any]:
+    typer.secho(f"Initializing from GitHub: {from_github}", fg=GREEN)
+
+    gh_token = os.getenv("GH_TOKEN")
+    if not gh_token:
+        panic("Please specify a GitHub repository.")
+
+    gh = Github(gh_token)
+    ctx = {}
+    repo = gh.get_repo(from_github)
+    tags = list(repo.get_tags())
+    if tags:
+        tag = tags[0].name
+        if tag.startswith("v"):
+            version = tag[1:]
+        else:
+            version = tag
+    else:
+        tag = version = "???"
+
+    license = repo.get_license().license.spdx_id
+
+    ctx["id"] = repo.name
+    ctx["name"] = repo.name
+    ctx["description"] = repo.description
+    ctx["version"] = version
+    if tag.startswith("v"):
+        ctx["src_url"] = f"{repo.html_url}/archive/v{{version}}.tar.gz"
+    else:
+        ctx["src_url"] = f"{repo.html_url}/archive/{{version}}.tar.gz"
+    ctx["license"] = license
+    ctx["website"] = repo.homepage
+    return ctx
+
+    # pp(repo.description, repo.homepage, repo.html_url)
+    # pp(list(repo.get_tags()))
+    # pp(repo.get_license().content)
 
 
 #

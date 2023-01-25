@@ -24,6 +24,8 @@ tomli = "*"
 # jinja2 = "^3.1.2"
 jsonschema = "^4.17.3"
 json5 = "^0.9.11"
+pygithub = "^1.57"
+
 
 [tool.poetry.group.dev.dependencies]
 abilian-devtools = "*"
@@ -44,4 +46,3 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.ruff]
-
