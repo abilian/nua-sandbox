@@ -84,9 +84,9 @@ class Builder:
         if self._profile:
             return self._profile
 
-        print("src content:")
-        print([str(p) for p in Path(".").glob("*")])
-        print()
+        # print("src content:")
+        # print([str(p) for p in Path(".").glob("*")])
+        # print()
 
         for profile_cls in PROFILE_CLASSES:
             profile = profile_cls(self.config)
