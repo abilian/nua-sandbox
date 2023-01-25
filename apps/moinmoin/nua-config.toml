@@ -1,0 +1,19 @@
+[metadata]
+id = "moinmoin"
+version = "2.0-pre"
+title = "Moinmoin"
+author = "Moinmoin authors"
+tagline = "An advanced, easy to use and extensible Wiki engine with a large community of users"
+website = "https://moinmo.in/"
+tags = ["wiki", "collaboration", "notes", "documents"]
+license = "GPLv2+"
+profile = ["generic"]
+
+src-url = "https://github.com/moinwiki/moin/archive/refs/heads/master.zip"
+#src-git = "https://github.com/moinwiki/moin.git"
+
+[build]
+#[build]
+##src_url = "https://github.com/moinwiki/moin/archive/refs/heads/master.tar.gz"
+# Doesn't work.
+# before-build = "/nua/build/bin/pip install setuptools-scm"

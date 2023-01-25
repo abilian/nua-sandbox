@@ -59,6 +59,10 @@ class Builder:
         self.profile.prepare()
 
     def build_app(self):
+        build_config = self.config.get("build", {})
+        if "before-build" in build_config:
+            sh.shell(build_config["before-build"])
+
         if Path("build.sh").exists():
             sh.shell("bash build.sh")
         else:
