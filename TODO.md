@@ -8,6 +8,8 @@
 
 ## Short term
 
+- [ ] 'src-url': should it go in '[metadata]' or in '[build]'?
+- [ ] Check and update checksums
 - [ ] Support multiple Python / Node / PHP / Ruby / etc. versions
 - [ ] Work on the log messages so that it's easier to understand what's going on.
   - [ ] Logging: divert build logs to 1 file per build.
