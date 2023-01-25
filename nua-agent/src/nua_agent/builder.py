@@ -7,7 +7,7 @@ import click
 import typer
 from typer.colors import RED
 
-from . import system, sh
+from . import sh, system
 from .config import read_config
 from .profiles import PROFILE_CLASSES, BaseProfile
 from .types import JSON

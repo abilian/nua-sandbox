@@ -53,6 +53,7 @@ def build_image():
         typer.secho(e, fg=RED)
         raise typer.Exit(1)
 
+
 # @app.command()
 # def fetch_source():
 #     """Fetch application source."""
