@@ -1,0 +1,14 @@
+[metadata]
+id = "limesurvey"
+title = "LimeSurvey"
+author = "LimeSurvey authors"
+description = "The most popular FOSS online survey tool on the web."
+website = "https://www.limesurvey.org"
+version = "5.6.1+230123"
+release = 1
+license = "GPLv2+"
+
+src-url = "https://github.com/LimeSurvey/LimeSurvey/archive/{version}.tar.gz"
+
+[build]
+build-packages = []
