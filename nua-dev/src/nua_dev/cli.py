@@ -54,7 +54,10 @@ def get_repo_info(from_github: str) -> dict[str, Any]:
 
     gh_token = os.getenv("GH_TOKEN")
     if not gh_token:
-        panic("Please specify a GitHub repository.")
+        panic(
+            "Please provide your GitHub access token as "
+            + "the GH_TOKEN environment variable."
+        )
 
     gh = Github(gh_token)
     ctx = {}
@@ -84,10 +87,6 @@ def get_repo_info(from_github: str) -> dict[str, Any]:
     ctx["license"] = license
     ctx["website"] = repo.homepage
     return ctx
-
-    # pp(repo.description, repo.homepage, repo.html_url)
-    # pp(list(repo.get_tags()))
-    # pp(repo.get_license().content)
 
 
 #
