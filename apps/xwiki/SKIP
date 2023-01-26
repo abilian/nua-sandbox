@@ -1,0 +1,3 @@
+Fails w/ error:
+
+[ERROR] Failed to execute goal on project xwiki-platform-tika-parsers: Could not resolve dependencies for project org.xwiki.platform:xwiki-platform-tika-parsers:jar:14.10.3: Could not find artifact de.l3s.boilerpipe:boilerpipe:jar:1.2.0-xwiki in central (https://repo.maven.apache.org/maven2)

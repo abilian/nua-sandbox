@@ -1,0 +1,3 @@
+Fails w/ error:
+
+[ERROR] Failed to execute goal org.codehaus.mojo:buildnumber-maven-plugin:1.4:create (default) on project nuxeo-ecm: Cannot get the branch information from the scm repository :

@@ -1,0 +1,14 @@
+[metadata]
+id = "nuxeo"
+title = "nuxeo"
+author = "nuxeo authors"
+description = "Content management platform to build modern business applications"
+website = "http://www.nuxeo.com"
+version = "11.5.154"
+release = 1
+license = "???"
+
+src-url = "https://github.com/nuxeo/nuxeo/archive/v{version}.tar.gz"
+
+[build]
+build-packages = []

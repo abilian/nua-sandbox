@@ -1,0 +1,14 @@
+[metadata]
+id = "xwiki"
+title = "XWiki"
+author = "WWiki authors"
+description = "The XWiki platform"
+website = "http://platform.xwiki.org/"
+version = "14.10.3"
+release = 1
+license = "LGPL-2.1"
+
+src-url = "https://github.com/xwiki/xwiki-platform/archive/refs/tags/xwiki-platform-{version}.tar.gz"
+
+[build]
+build-packages = []
