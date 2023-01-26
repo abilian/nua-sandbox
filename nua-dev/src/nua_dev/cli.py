@@ -3,16 +3,16 @@ from __future__ import annotations
 import importlib.metadata
 import os
 from pathlib import Path
-from typing import Any, Optional
+from typing import Optional
 
 import jinja2
 import snoop
 import typer
-from github import Github, UnknownObjectException
-from typer.colors import GREEN, RED
+from typer.colors import RED
 
+from nua_dev import upstream
+from nua_dev.backports import chdir
 from nua_dev.console import panic
-
 from .builder import Builder
 
 snoop.install()
@@ -20,10 +20,20 @@ app = typer.Typer()
 
 
 @app.command()
-def build():
-    """Build image."""
-    builder = Builder()
+def build(targets: list[Path]):
+    """Build image(s)."""
+    if not targets:
+        _build()
+        return
+
+    for target in targets:
+        with chdir(target):
+            _build()
+
+
+def _build():
     try:
+        builder = Builder()
         builder.build()
     except Exception as e:
         typer.secho(e, fg=RED)
@@ -36,7 +46,7 @@ def init(from_github: str = "", dir: Optional[Path] = None):
     if not from_github:
         panic("Please specify a GitHub repository.")
 
-    ctx = get_repo_info(from_github)
+    ctx = upstream.GitHub(from_github).get_repo_info()
     with (Path(__file__).parent / "etc" / "nua-config.toml.j2").open() as fd:
         environment = jinja2.Environment()
         template = environment.from_string(fd.read())
@@ -47,49 +57,6 @@ def init(from_github: str = "", dir: Optional[Path] = None):
     Path(ctx["id"]).mkdir(exist_ok=True)
     with (Path(ctx["id"]) / "nua-config.toml").open("w") as fd:
         fd.write(config_toml)
-
-
-def get_repo_info(from_github: str) -> dict[str, Any]:
-    typer.secho(f"Initializing from GitHub: {from_github}", fg=GREEN)
-
-    gh_token = os.getenv("GH_TOKEN")
-    if not gh_token:
-        panic(
-            "Please provide your GitHub access token as "
-            + "the GH_TOKEN environment variable."
-        )
-
-    gh = Github(gh_token)
-    ctx = {}
-    repo = gh.get_repo(from_github)
-    tags = list(repo.get_tags())
-    if tags:
-        tag = tags[0].name
-        if tag.startswith("v"):
-            version = tag[1:]
-        else:
-            version = tag
-    else:
-        tag = version = "???"
-
-    try:
-        license = repo.get_license().license.spdx_id
-    except UnknownObjectException:
-        license = "???"
-
-    ctx["id"] = repo.name.lower()
-    ctx["name"] = repo.name
-    ctx["description"] = repo.description
-    ctx["version"] = version
-    if tag == "???":
-        ctx["src_url"] = f"{repo.html_url}/archive/refs/heads/main.tar.gz"
-    elif tag.startswith("v"):
-        ctx["src_url"] = f"{repo.html_url}/archive/v{{version}}.tar.gz"
-    else:
-        ctx["src_url"] = f"{repo.html_url}/archive/{{version}}.tar.gz"
-    ctx["license"] = license
-    ctx["website"] = repo.homepage
-    return ctx
 
 
 #
@@ -136,8 +103,8 @@ def _usage():
 
 @app.callback(invoke_without_command=True)
 def main(
-    ctx: typer.Context,
-    version: Optional[bool] = OPTS["version"],
+        ctx: typer.Context,
+        version: Optional[bool] = OPTS["version"],
 ):
     """Nua dev toolbox."""
     if ctx.invoked_subcommand is None:
