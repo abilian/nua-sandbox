@@ -7,6 +7,10 @@ class PhpProfile(BaseProfile):
 
     label = "PHP / Composer"
 
+    builder_packages = [
+        "composer",
+    ]
+
     def accept(self):
         return self._check_files(["composer.json"])
 

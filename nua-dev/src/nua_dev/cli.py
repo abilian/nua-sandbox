@@ -75,7 +75,9 @@ def get_repo_info(from_github: str) -> dict[str, Any]:
     ctx["name"] = repo.name
     ctx["description"] = repo.description
     ctx["version"] = version
-    if tag.startswith("v"):
+    if tag == "???":
+        ctx["src_url"] = f"{repo.html_url}/archive/refs/heads/main.tar.gz"
+    elif tag.startswith("v"):
         ctx["src_url"] = f"{repo.html_url}/archive/v{{version}}.tar.gz"
     else:
         ctx["src_url"] = f"{repo.html_url}/archive/{{version}}.tar.gz"

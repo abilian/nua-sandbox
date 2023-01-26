@@ -76,8 +76,9 @@ class Builder:
     #
     def download_src(self, url: str, tmp: str) -> None:
         name = Path(url).name
-        if not any(name.endswith(suf) for suf in (".zip", ".tar", ".tar.gz", ".tgz")):
-            raise ValueError(f"Unknown archive format for '{name}'")
+        # # FIXME: this decision should be delegated to the unarchivers
+        # if not any(name.endswith(suf) for suf in (".zip", ".tar", ".tar.gz", ".tgz")):
+        #     raise ValueError(f"Unknown archive format for '{name}'")
         target = Path(tmp) / name
         urlretrieve(url, target)
 
