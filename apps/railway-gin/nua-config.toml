@@ -1,6 +1,7 @@
 [metadata]
 id = "railway-gin"
 title = "Demo for Go + Gin"
+author = "Railway"
 version = "0.1"
 release = 1
 license = "MIT"

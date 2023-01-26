@@ -1,6 +1,7 @@
 [metadata]
 id = "railway-laravel"
 title = "Demo for Laravel"
+author = "Railway"
 version = "0.1"
 release = 1
 license = "MIT"

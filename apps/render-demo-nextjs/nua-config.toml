@@ -1,6 +1,7 @@
 [metadata]
 id = "render-demo-nextjs"
 title = "Demo NextJS"
+author = "Render"
 version = "0.1"
 release = 1
 license = "MIT"

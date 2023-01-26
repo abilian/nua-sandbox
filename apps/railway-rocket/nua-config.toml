@@ -1,6 +1,7 @@
 [metadata]
 id = "railway-rocket"
 title = "Demo for Rust + Rocket"
+author = "Railway"
 version = "0.1"
 release = 1
 license = "MIT"

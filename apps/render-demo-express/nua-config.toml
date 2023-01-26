@@ -1,6 +1,7 @@
 [metadata]
 id = "render-demo-express"
 title = "Demo ExpressJS"
+author = "Render"
 version = "0.1"
 release = 1
 license = "MIT"

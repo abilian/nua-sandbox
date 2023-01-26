@@ -1,6 +1,7 @@
 [metadata]
 id = "railway-django"
 title = "Demo for Django"
+author = "Railway"
 version = "0.1"
 release = 1
 license = "MIT"

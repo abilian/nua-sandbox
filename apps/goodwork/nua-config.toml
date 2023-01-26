@@ -7,7 +7,7 @@ title = "goodwork"
 author = "goodwork authors"
 description = "Self hosted project management and collaboration tool  built with Laravel & VueJS"
 website = ""
-version = "???"
+version = "unknown"
 release = 1
 license = "MIT"
 

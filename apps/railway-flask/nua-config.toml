@@ -1,6 +1,7 @@
 [metadata]
 id = "railway-flask"
 title = "Demo for Flask"
+author = "Railway"
 version = "0.1"
 release = 1
 license = "MIT"

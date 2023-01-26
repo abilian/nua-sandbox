@@ -1,6 +1,7 @@
 [metadata]
 id = "status-page"
 title = "Status Page"
+author = "Status Page authors"
 description = "Open Source Statuspage Software"
 version = "2.0.16"
 release = 1
