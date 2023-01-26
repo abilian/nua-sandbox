@@ -18,6 +18,9 @@ Source code:
 
 Build / Run:
 
+- [ ] Support Ruby apps
+- [ ] Support "multi-language" apps (ex: Ruby + Node)
+- [ ] Support "old-school PHP" apps (i.e. w/o Composer)
 - [ ] Support multiple Python / Node / PHP / Ruby / etc. versions
 
 DX:
