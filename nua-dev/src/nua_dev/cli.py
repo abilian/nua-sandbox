@@ -8,7 +8,7 @@ from typing import Any, Optional
 import jinja2
 import snoop
 import typer
-from github import Github
+from github import Github, UnknownObjectException
 from typer.colors import GREEN, RED
 
 from nua_dev.console import panic
@@ -72,7 +72,10 @@ def get_repo_info(from_github: str) -> dict[str, Any]:
     else:
         tag = version = "???"
 
-    license = repo.get_license().license.spdx_id
+    try:
+        license = repo.get_license().license.spdx_id
+    except UnknownObjectException:
+        license = "???"
 
     ctx["id"] = repo.name.lower()
     ctx["name"] = repo.name
