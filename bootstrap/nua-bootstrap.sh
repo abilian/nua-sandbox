@@ -9,6 +9,7 @@ apt-get update
 apt-get install -y pipx
 pipx install pyinfra
 
-git clone https://github.com/abilian/nua-sandbox.git
-cd nua-sandbox/bootstrap
-pyinfra @localhost nua-bootstrap.py
+rm -rf /tmp/nua-sandbox-git
+git clone https://github.com/abilian/nua-sandbox.git /tmp/nua-sandbox-git
+cd /tmp/nua-sandbox-git/bootstrap
+pyinfra @local nua-bootstrap.py
