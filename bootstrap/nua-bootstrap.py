@@ -170,7 +170,10 @@ def install_orchestrator():
 
     pip.packages(
         name="Install nua-orchestrator & dependencies",
-        packages=[f"{NUA_HOME}/git/nua/nua-lib", f"{NUA_HOME}/git/nua/nua-orchestrator"],
+        packages=[
+            f"{NUA_HOME}/git/nua/nua-lib",
+            f"{NUA_HOME}/git/nua/nua-orchestrator",
+        ],
         virtualenv=VENV,
     )
 
@@ -178,7 +181,6 @@ def install_orchestrator():
         name="Check nua-orchestrator installation",
         commands=[f"{VENV}/bin/nua-orchestrator status"],
     )
-
 
 
 bootstrap()
