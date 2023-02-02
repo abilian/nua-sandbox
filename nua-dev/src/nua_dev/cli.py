@@ -13,6 +13,7 @@ from typer.colors import RED
 from nua_dev import upstream
 from nua_dev.backports import chdir
 from nua_dev.console import panic
+
 from .builder import Builder
 
 snoop.install()
@@ -103,8 +104,8 @@ def _usage():
 
 @app.callback(invoke_without_command=True)
 def main(
-        ctx: typer.Context,
-        version: Optional[bool] = OPTS["version"],
+    ctx: typer.Context,
+    version: Optional[bool] = OPTS["version"],
 ):
     """Nua dev toolbox."""
     if ctx.invoked_subcommand is None:

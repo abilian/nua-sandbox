@@ -10,6 +10,7 @@ NUA_AGENT_WHL = "nua-agent/dist/nua_agent-0.1-py3-none-any.whl"
 SUB_REPOS = [
     "nua-agent",
     "nua-dev",
+    "nua-run",
 ]
 
 APPS = sorted(

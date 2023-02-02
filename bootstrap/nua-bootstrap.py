@@ -4,6 +4,7 @@ USER = "nua"
 GROUP = "nua"
 NUA_HOME = f"/home/{USER}"
 NUA_GIT_URL = "https://github.com/abilian/nua.git"
+NUA_SANDBOX_GIT_URL = "https://github.com/abilian/nua-sandbox.git"
 FOLDERS = (
     ".",
     "tmp",
@@ -182,5 +183,26 @@ def install_orchestrator():
         commands=[f"{VENV}/bin/nua-orchestrator status"],
     )
 
+
+def install_nua_sandbox():
+    git.repo(
+        name="Clone Nua-sandbox source code",
+        src=NUA_SANDBOX_GIT_URL,
+        dest=f"{NUA_HOME}/git/nua-sandbox",
+        branch="main",
+    )
+
+    pip.packages(
+        name="Install nua-run & dependencies",
+        packages=[
+            f"{NUA_HOME}/git/nua-sandbox/nua-run",
+        ],
+        virtualenv=VENV,
+    )
+
+    server.shell(
+        name="Check nua-run installation",
+        commands=[f"{VENV}/bin/nua-run status"],
+    )
 
 bootstrap()

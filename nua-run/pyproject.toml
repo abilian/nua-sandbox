@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "nua-run"
+version = "0.1"
+description = "Nua Run - cli / code for the orchestrator"
+authors = [
+    "Stefane Fermigier <sf@abilian.com>",
+    "Jerome Dumonteil <jd@abilian.com>",
+]
+license = "MIT"
+# readme = "README.md"
+packages = [
+    { include = "nua_run", from = "src" },
+]
+
+[tool.poetry.scripts]
+nua-run = "nua_run.cli:app"
+nua-git = "nua_run.git_cli:app"
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+tomli = "*"
+snoop = "*"
+
+
+# setuptools = "*"
+# jinja2 = "^3.1.2"
+# jsonschema = "^4.17.3"
+# json5 = "^0.9.11"
+
+# Debug
+
+
+[tool.poetry.group.dev.dependencies]
+abilian-devtools = "*"
+nox = "*"
+
+# types-setuptools = "*"
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:.*distutils package:DeprecationWarning",
+    "ignore::DeprecationWarning",
+]
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.ruff]
