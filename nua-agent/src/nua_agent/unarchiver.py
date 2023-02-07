@@ -56,6 +56,6 @@ def unarchive(src: str | Path, dest_dir: str) -> None:
     unarchivers = [TarUnarchiver(), ZipUnarchiver()]
     for unarchiver in unarchivers:
         if unarchiver.accept(src):
-            unarchiver.extract(src, dest_dir)
+            unarchiver.extract(str(src), dest_dir)
             return
     raise ValueError(f"Unknown archive format for '{src}'")

@@ -1,20 +1,22 @@
 from pathlib import Path
+from typing import cast
 
-from ..types import JSON
+from ..types import JsonDict
 
 
 class BaseProfile:
-    config: JSON
+    config: JsonDict
 
     builder_packages: list[str] = []
     label: str = ""
 
-    def __init__(self, config: JSON):
+    def __init__(self, config: JsonDict):
         self.config = config
 
     @property
     def app_id(self):
-        return self.config["metadata"]["id"]
+        metadata = cast(dict, self.config["metadata"])
+        return metadata["id"]
 
     #
     # Lifecycle methods (called from `../builder.py`)
@@ -49,11 +51,12 @@ class BaseProfile:
     # Helpers
     #
     def get_system_packages(self) -> list[str]:
-        build_info = self.config.get("build", {})
+        default_build: JsonDict = {}
+        build_info: JsonDict = cast(JsonDict, self.config.get("build", default_build))
 
-        packages = set()
-        packages.update(build_info.get("build-packages", []))
-        packages.update(build_info.get("run-packages", []))
+        packages: set[str] = set()
+        packages.update(cast(list[str], build_info.get("build-packages", [])))
+        packages.update(cast(list[str], build_info.get("run-packages", [])))
         packages.update(self.builder_packages)
 
         return list(packages)

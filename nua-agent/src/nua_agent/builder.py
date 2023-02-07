@@ -10,19 +10,19 @@ from typer.colors import RED
 from . import sh, system
 from .config import read_config
 from .profiles import PROFILE_CLASSES, BaseProfile
-from .types import JSON
+from .types import JsonDict
 from .unarchiver import unarchive
 
 
 class Builder:
     """Builds an app."""
 
-    config: JSON
+    config: JsonDict
     _profile: BaseProfile | None = None
 
     builder_packages: list[str] = []
 
-    def __init__(self, config: JSON = None):
+    def __init__(self, config: JsonDict | None = None):
         if config:
             self.config = config
         else:
