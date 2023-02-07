@@ -1,28 +1,16 @@
 [tool.poetry]
-name = "nua-sandbox"
+name = "nua-bootstrap"
 version = "0.1.0"
 description = ""
 authors = ["Stefane Fermigier <sf@abilian.com>"]
 readme = "README.md"
-packages = [{include = "nua_sandbox"}]
+packages = [{include = "nua_bootstrap"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+pyinfra = "^2.6.2"
 
-# pyinfra = "^2.6.2"
-
-[tool.poetry.group.dev.dependencies]
-abilian-devtools = "*"
-invoke = "*"
-devtools = "*"
-watchfiles = "*"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-
-[tool.ruff]
-ignore = [
-    "E501",  # line too long
-]
