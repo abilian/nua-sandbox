@@ -1,5 +1,5 @@
-PKG := nua.cli
-SRC := src/nua
+PKG := nua_cli
+SRC := src
 
 .PHONY: all
 all: test lint

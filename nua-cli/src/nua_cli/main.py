@@ -1,17 +1,42 @@
+"""
+TODO:
+
+apps              List apps
+build             Build app but don't deploy it
+backup            Backup/restore app data
+config            Show/manage config for current app
+deploy            Deploy app
+destroy           Destroy app
+help              Display help
+init              Create a new app
+logs              Tail running logs
+ps                Show process count
+restart           Restart an app
+run               Run a command in the app's environment
+scale             Scale processes
+settings          Show server settings
+start             Start an app
+status            Show app status
+stop              Stop an app
+update            Update the Nua CLI
+"""
 from __future__ import annotations
 
-import json
+import subprocess
+from operator import itemgetter
 from typing import Optional
 
+import snoop
 import typer
+from snoop import pp
 
 from .client import Client
 from .common import OPTS, print_version
+from .version import get_version
 
-# Hardcoded for now
-NUA_CMD = "./nua310/bin/nua-orchestrator"
-
+snoop.install()
 app = typer.Typer()
+client = Client()
 
 
 def _usage():
@@ -20,24 +45,100 @@ def _usage():
     raise typer.Exit(0)
 
 
-@app.command()
-def deploy():
-    """Deploy an application."""
-
-
+#
+# Done
+#
 @app.command()
 def apps():
     """List applications."""
-    client = Client()
-    r = client.run(f"{NUA_CMD} list-instances --json")
-    for instance in json.loads(r.stdout):
+    result = client.call("list")
+    for instance in result:
         typer.echo(instance["app_id"])
+
+
+@app.command()
+def settings():
+    """Show server settings."""
+    result = client.call("settings")
+    pp(result)
+
+
+@app.command()
+def status():
+    """Show Nua status."""
+    result = client.call("status")
+
+    print(f"Nua version: {result['version']}")
+
+    registries = result["registries"]
+    print("Configured registries:")
+    for reg in sorted(registries, key=itemgetter("priority")):
+        msg = (
+            f'  priority: {reg["priority"]:>2}   '
+            f'format: {reg["format"]:<16}   '
+            f'url: {reg["url"]}'
+        )
+        print(msg)
 
 
 @app.command()
 def list():
     """List applications (alias for `apps` - which one do we keep?)."""
     apps()
+
+
+@app.command()
+def help():
+    """Show help."""
+    _usage()
+
+
+@app.command()
+def version():
+    """Show version."""
+    typer.echo(f"Nua CLI version: {get_version()}")
+    status = client.call("status")
+    typer.echo(f"Nua Server version: {status['version']}")
+
+
+@app.command()
+def server_log():
+    """Show server logs (TODO: rename as subcommand?) (TODO: not working)."""
+    result = client.call_raw("server_log")
+    print(result)
+    # typer.echo(result)
+
+
+@app.command()
+def backup():
+    """Backup a deployed application."""
+    result = client.call_raw("backup")
+    print(result)
+
+
+#
+# TODO
+#
+@app.command()
+def build(path: str = "."):
+    """Build app but don't deploy it."""
+
+    subprocess.run(["nua-dev", "build", path])
+
+
+@app.command()
+def deploy(imagename: str, domainname: str):
+    """Deploy an application."""
+    deply_config = {
+        "site": [
+            {
+                "domain": domainname,
+                "image": imagename,
+            },
+        ],
+    }
+    result = client.call("deploy", deploy_config=deply_config)
+    pp(result)
 
 
 @app.command()
@@ -56,27 +157,6 @@ def stop():
 
 
 @app.command()
-def help():
-    """Show help."""
-    _usage()
-
-
-@app.command()
-def version():
-    """Show version."""
-    print_version()
-
-
-@app.command()
-def status():
-    """Show Nua status."""
-    client = Client()
-    r = client.run(f"{NUA_CMD} status")
-    msg = f"Ran {r.command!r} on {r.connection.host}, got stdout:\n\n{r.stdout}"
-    print(msg)
-
-
-@app.command()
 def logs():
     """Show application logs."""
 
@@ -89,11 +169,6 @@ def config():
 @app.command()
 def update():
     """Update an application."""
-
-
-@app.command()
-def backup():
-    """Backup a deployed application."""
 
 
 @app.command()
