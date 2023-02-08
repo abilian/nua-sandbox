@@ -93,6 +93,9 @@ update-deps:
 	pip install -U pip setuptools wheel
 	poetry update
 
+watch:
+	watchfiles "rsync -e ssh -avz ./ root@nua-dev.abilian.com:/home/nua/git/nua-sandbox/" nua*
+
 #publish: clean
 #	git push --tags
 #	poetry build

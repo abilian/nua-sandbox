@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.metadata
+import os
 import stat
 import subprocess as sp
 import sys
@@ -13,6 +14,8 @@ import typer
 
 snoop.install()
 app = typer.Typer()
+
+# pp(sys.argv)
 
 
 NUA_ROOT = Path("/home/nua")
@@ -58,7 +61,7 @@ def _run_build(app, newrev):
     typer.secho(f"-----> Deploying app '{app}'", fg="green")
     sp.run("git fetch --quiet", cwd=app_path, env=env, shell=True)
     if newrev:
-        sp.run("git reset --hard {}".format(newrev), cwd=app_path, env=env, shell=True)
+        sp.run(f"git reset --hard {newrev}", cwd=app_path, env=env, shell=True)
     sp.run("git submodule init", cwd=app_path, env=env, shell=True)
     sp.run("git submodule update", cwd=app_path, env=env, shell=True)
 
@@ -97,6 +100,13 @@ def _create_hook(app, hook_path):
         )
     # Make the hook executable by our user
     hook_path.chmod(hook_path.stat().st_mode | stat.S_IXUSR)
+
+
+@app.command()
+def shell():
+    """Start a shell on the Nua server"""
+    print("Starting shell...")
+    os.execl("/bin/bash", "/bin/bash")
 
 
 #
@@ -162,8 +172,4 @@ def main(
 ):
     """nua-git (internal) utilities."""
     if ctx.invoked_subcommand is None:
-        _usage()
-
-
-if __name__ == "__main__":
-    app()
+        os.execl("/bin/bash", "/bin/bash")
