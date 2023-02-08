@@ -80,6 +80,7 @@ def install(c):
 def lint(c):
     """Lint (static check) the whole project."""
     run_in_subrepos(c, "ruff src")
+    run_in_subrepos(c, "mypy src")
 
     # c.run("ruff .")
     # c.run("pre-commit run --all-files")
