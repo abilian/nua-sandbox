@@ -16,6 +16,7 @@ abilian-devtools = "*"
 invoke = "*"
 devtools = "*"
 watchfiles = "*"
+types-jsonschema = "^4.17.0.4"
 
 [build-system]
 requires = ["poetry-core"]

@@ -42,7 +42,7 @@ def git_hook(app_name: str):
         if not app_path.exists():
             typer.secho(f"-----> Creating app '{app:s}'", fg="green")
             app_path.mkdir(parents=True)
-            cmd = ["git", "clone", "--quiet", repo_path, app]
+            cmd = ["git", "clone", "--quiet", str(repo_path), str(app)]
             sp.run(cmd, cwd=APPS_ROOT)
 
         _run_build(app, newrev=newrev)

@@ -30,6 +30,7 @@ pygithub = "^1.57"
 [tool.poetry.group.dev.dependencies]
 abilian-devtools = "*"
 nox = "*"
+types-jsonschema = "*"
 
 # types-setuptools = "*"
 
