@@ -3,6 +3,7 @@ from pathlib import Path
 from shutil import copy
 
 import click
+from abilian_devtools.invoke import import_tasks
 from invoke import Context, task
 
 NUA_AGENT_WHL = "nua-agent/dist/nua_agent-0.1-py3-none-any.whl"
@@ -19,6 +20,8 @@ APPS = sorted(
     if p.is_dir() and (p / "nua-config.toml").exists() and not (p / "SKIP").exists()
 )
 
+
+import_tasks(globals(), ["help"])
 
 #
 # Specific tasks
