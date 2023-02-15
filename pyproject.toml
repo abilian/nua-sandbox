@@ -12,11 +12,11 @@ python = "^3.10"
 # pyinfra = "^2.6.2"
 
 [tool.poetry.group.dev.dependencies]
-abilian-devtools = "*"
-invoke = "*"
-devtools = "*"
-watchfiles = "*"
-types-jsonschema = "^4.17.0.4"
+abilian-devtools = "^0.4.8"
+invoke = "^2.0.0"
+devtools = "^0.10.0"
+watchfiles = "^0.18.1"
+types-jsonschema = "^4.17.0.5"
 
 [build-system]
 requires = ["poetry-core"]

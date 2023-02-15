@@ -24,7 +24,7 @@ DON'T USE. Useful concepts will be merged into the main `Nua` project.
 
 ## Developer experience
 
-To work specifically on trying to build a specific app, you can run (from the root of *this* project):
+To work specifically on trying to build a specific app, you can run (from the root of _this_ project):
 
 ```bash
 invoke build-all --only <app-name>
