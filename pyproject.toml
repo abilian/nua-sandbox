@@ -17,6 +17,7 @@ invoke = "^2.0.0"
 devtools = "^0.10.0"
 watchfiles = "^0.18.1"
 types-jsonschema = "^4.17.0.5"
+docformatter = "^1.5.1"
 
 [build-system]
 requires = ["poetry-core"]
