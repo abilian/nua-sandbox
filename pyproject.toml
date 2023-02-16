@@ -4,10 +4,14 @@ version = "0.1.0"
 description = ""
 authors = ["Stefane Fermigier <sf@abilian.com>"]
 readme = "README.md"
-packages = [{include = "nua_sandbox"}]
+packages = []
 
 [tool.poetry.dependencies]
 python = "^3.10"
+
+nua-agent = { path = "nua-agent", develop = true }
+nua-dev = { path = "nua-dev", develop = true }
+nua-run = { path = "nua-run", develop = true }
 
 # pyinfra = "^2.6.2"
 
