@@ -34,67 +34,44 @@ run-packages = [
 ]
 
 
-[[assign]]
-key = "POSTGRES_PASSWORD"
-random_str = true
-
-[[assign]]
-key = "CMD_DB_HOST"
-resource_host = "database"
-
-[[assign]]
-key = "CMD_DB_PASSWORD"
-random_str = true
-
-[run]
-# parameters passed as a dict to docker run
-auto-remove = false
-
-[run.env]
-# IMPORTANT:to be set at the actual domain deployed:
-CMD_DOMAIN = "localhost"
-
+[env]
+# Generic environment variables
 NODE_ENV = "production"
 DEBUG = "true"
 UPLOADS_MODE = "0700"
-
-# DB_HOST=<hostname or ip>
-# DB_PORT= 5432
-# DB_USER=hedgedoc
-# DB_PASS=<secret password>
-# DB_NAME=hedgedoc
 TZ = "Europe/Paris"
 
-# CMD_URL_PATH # if sub directory
-# CMD_DB_URL = "postgres://hedgedoc:password@database:5432/hedgedoc"
-# CMD_DB_URL = "sqlite:///nua/data/sqlite.db"
-# HSTS_ENABLE defines if HSTS headers should be sent. Set this to true if you use HTTPS.
+# Env variables prefixed with CMD_ are specific to Hedgedoc
+# (which used to be called CodiMD, hence "CMD_")
+
+# IMPORTANT: to be set at the actual domain deployed
+CMD_DOMAIN = { from="", key="domain" }
+CMD_ALLOW_ORIGIN = { key="domain" }
+
+CMD_DB_HOST = { from="database", key="hostname" }
+CMD_DB_DATABASE = { from="database", key="POSTGRES_DB" }
+CMD_DB_USERNAME = { from="database", key="POSTGRES_USER" }
+CMD_DB_PASSWORD = { from="database", key="POSTGRES_PASSWORD" }
+
 CMD_HSTS_ENABLE = "false"
 # URL_ADDPORT defines if generated links should contain the port.
 CMD_URL_ADDPORT = "false"
 CMD_PROTOCOL_USESSL = "false"
-# CMD_ALLOW_ORIGIN=['localhost'] #optional
-# CMD_ALLOW_ORIGIN =
 
 # See https://docs.hedgedoc.org/configuration/#users-and-privileges
 CMD_ALLOW_ANONYMOUS = "true"
 CMD_ALLOW_ANONYMOUS_EDITS = "true"
-# CMD_ALLOW_FREEURL
-# CMD_REQUIRE_FREEURL_AUTHENTICATION
-# CMD_DEFAULT_PERMISSION
 
 CMD_EMAIL = "true"
 CMD_ALLOW_EMAIL_REGISTER = "true"
 
 # postgres:
-# CMD_DB_HOST = ""  # will be replaced by actual local network configuration of docker
 CMD_DB_PORT = "5432"
 CMD_DB_DIALECT = "postgres"
-CMD_DB_USERNAME = "hedgedoc"
-# CMD_DB_PASSWORD = "some_secret"
-CMD_DB_DATABASE = "hedgedoc"
-# CMD_DB_URL = "postgres://username:password@localhost:5432/hedgedoc"
-# Postgres password of the "remote" resource DB:
+
+[docker]
+# parameters passed as a dict to docker run
+auto_remove = false
 
 [port.web]
 container = 3000
@@ -111,49 +88,27 @@ type = "volume"
 # Name of the driver used to create the volume: (for type == "volume")
 # driver = "local"  # default for "volume" type
 # Mount source (e.g. a volume name or a host path):
-source_prefix = "hedgedoc_uploads"
-
+prefix = "hedgedoc_uploads"
 # Container path:
 target = "/hedgedoc/public/uploads"
-# mode (default to 'rw'
-# mode = "rw"
 
 [volume.backup]
 method = "sync"
 destination = "local"
 frequency = "24h"
 
-
 [[resource]]
 # A resource is another container required by the main app container, its
 # configuration is described below, under the key of name of the resource. Several
 # resources can be declared. The resource host will appear in the local network
-# with a hostname equal to the container name. The name of the resource hostname
-# is available in the environment variable NUA_${name_of_the_resource}_HOST, ie in
-# this example: NUA_DATABASE_HOST
+# with a hostname equal to the container name.
 
-# declaration of the required image for the resurce, here the official Postgres
-# Docker image
+# Declaration of the required image for the resurce, here the official Postgres.
 name = "database"
-type = "docker"
-image = "docker.io/library/postgres:14.5"
+type = "postgres"
+version = ">=14, <15"
 
 [resource.backup]
 method = "pg_dumpall"
 destination = "local"
 frequency = "24h"
-
-[resource.run]
-detach = true
-restart_policy.name = "always"
-
-[[resource.volume]]
-# here we declare a mounted volume (ie: managed by Docker daemon)
-# The mount type (bind / volume / tmpfs / npipe). Default: volume :
-type = "volume"
-# Name of the driver used to create the volume: (for type == "volume")
-driver = "local"
-# Mount source (e.g. a volume name or a host path):
-source_prefix = "hedgedoc_postgres"
-# Container path:
-target = "/var/lib/postgresql/data"
