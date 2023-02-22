@@ -7,7 +7,6 @@ poetry_task:
         - pip install -U pip setuptools wheel poetry
     install_script:
         - poetry install
-        - npm install
     test_script:
         - poetry run make lint
         - poetry run make test
