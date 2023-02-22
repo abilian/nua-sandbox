@@ -6,6 +6,7 @@ from .common import check_requirements
 class ClojureProfile(BaseProfile):
     """Build a Clojure application using Leiningen."""
 
+    name = "clojure"
     label = "Clojure / Lein"
     builder_packages = [
         "leiningen",

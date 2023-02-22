@@ -5,8 +5,8 @@ from .base import BaseProfile
 class PhpProfile(BaseProfile):
     """Build a PHP application."""
 
+    name = "php"
     label = "PHP / Composer"
-
     builder_packages = [
         "composer",
     ]

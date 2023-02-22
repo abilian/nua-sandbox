@@ -6,8 +6,8 @@ from .common import check_requirements
 class GradleProfile(BaseProfile):
     """Build a Java application using Gradle."""
 
+    name = "gradle"
     label = "Java / Gradle"
-
     builder_packages = [
         "gradle",
     ]

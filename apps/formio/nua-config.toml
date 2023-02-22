@@ -11,3 +11,6 @@ profile = ["generic"]
 
 src-url = "https://github.com/formio/formio/archive/refs/tags/v{version}.tar.gz"
 src-checksum = ""
+
+[build]
+builder = "node"

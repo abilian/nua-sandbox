@@ -11,8 +11,8 @@ DON'T USE. Useful concepts will be merged into the main `Nua` project.
 
 ## Specific points
 
-- What's called `nua-rutime` in Nua is called `nua-agent` here.
-- Python sup-packages are called `nua_something` instead of `nua.something`.
+- What's called `nua-runtime` in Nua is called `nua-agent` here.
+- Python sub-packages are called `nua_something` instead of `nua.something`.
 - Main entry point for the project in the `tasks.py` file.
   - Run `poetry shell && poetry install` first
   - Then `invoke install`

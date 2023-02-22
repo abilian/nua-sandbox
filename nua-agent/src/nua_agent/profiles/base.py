@@ -7,8 +7,9 @@ from ..types import JsonDict
 class BaseProfile:
     config: JsonDict
 
-    builder_packages: list[str] = []
+    name: str = ""
     label: str = ""
+    builder_packages: list[str] = []
 
     def __init__(self, config: JsonDict):
         self.config = config

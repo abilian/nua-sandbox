@@ -6,8 +6,8 @@ from .common import check_requirements
 class RustProfile(BaseProfile):
     """Build a Rust application."""
 
+    name = "rust"
     label = "Rust / Cargo"
-
     builder_packages = [
         "rust-all",
     ]

@@ -3,15 +3,114 @@
   "type": "object",
   "required": [
     "metadata",
-//    "build",
-//    "assign",
-//    "resource",
-//    "volume",
-//    "healthcheck",
-//    "port",
-//    "profile",
-//    "run"
   ],
+  //
+  "metadata": {
+    "type": "object",
+    "properties": {
+      "author": {
+        "type": "string"
+      },
+      "id": {
+        "type": "string"
+      },
+      "license": {
+        "type": "string"
+      },
+      "release": {
+        "type": "integer"
+      },
+      "src-url": {
+        "type": "string"
+      },
+      "tagline": {
+        "type": "string"
+      },
+      "tags": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "title": {
+        "type": "string"
+      },
+      "version": {
+        "type": "string"
+      },
+      "website": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "title",
+      "license"
+    ]
+  },
+  //
+  "build": {
+    "type": "object",
+    "properties": {
+      "build-packages": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "meta-packages": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "packages": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "node-version": {
+        "type": "string"
+      }
+    }
+  },
+  //
   "properties": {
     "assign": {
       "type": "array",
@@ -26,10 +125,6 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "key",
-            "random_str"
-          ]
         },
         {
           "type": "object",
@@ -41,10 +136,6 @@
               "type": "string"
             }
           },
-          "required": [
-            "key",
-            "resource_host"
-          ]
         },
         {
           "type": "object",
@@ -56,13 +147,10 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "key",
-            "random_str"
-          ]
         }
       ]
     },
+    //
     "resource": {
       "type": "array",
       "items": [
@@ -97,15 +185,10 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "driver",
-                    "source_prefix",
-                    "target",
-                    "type"
-                  ]
                 }
               ]
             },
+            //
             "backup": {
               "type": "object",
               "properties": {
@@ -119,11 +202,6 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "destination",
-                "frequency",
-                "method"
-              ]
             },
             "run": {
               "type": "object",
@@ -149,17 +227,10 @@
               ]
             }
           },
-          "required": [
-            "image",
-            "name",
-            "type",
-            "volume",
-            "backup",
-            "run"
-          ]
         }
       ]
     },
+    //
     "volume": {
       "type": "array",
       "items": [
@@ -188,75 +259,12 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "destination",
-                "frequency",
-                "method"
-              ]
             }
           },
-          "required": [
-            "source_prefix",
-            "target",
-            "type",
-            "backup"
-          ]
         }
       ]
     },
-    "build": {
-      "type": "object",
-      "properties": {
-        "build-packages": {
-          "type": "array",
-          "items": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "string"
-            }
-          ]
-        },
-        "meta-packages": {
-          "type": "array",
-          "items": [
-            {
-              "type": "string"
-            }
-          ]
-        },
-        "packages": {
-          "type": "array",
-          "items": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "string"
-            }
-          ]
-        },
-        "node-version": {
-          "type": "string"
-        }
-      }
-    },
+    //
     "healthcheck": {
       "type": "object",
       "properties": {
@@ -267,62 +275,8 @@
           "type": "integer"
         }
       },
-      "required": [
-        "command",
-        "interval"
-      ]
     },
-    "metadata": {
-      "type": "object",
-      "properties": {
-        "author": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "license": {
-          "type": "string"
-        },
-        "release": {
-          "type": "integer"
-        },
-        "src-url": {
-          "type": "string"
-        },
-        "tagline": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "array",
-          "items": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "string"
-            }
-          ]
-        },
-        "title": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        },
-        "website": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "title",
-        "license"
-      ]
-    },
+    //
     "port": {
       "type": "object",
       "properties": {
@@ -333,15 +287,10 @@
               "type": "integer"
             }
           },
-          "required": [
-            "container"
-          ]
         }
       },
-      "required": [
-        "web"
-      ]
     },
+    //
     "run": {
       "type": "object",
       "properties": {

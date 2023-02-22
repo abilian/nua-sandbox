@@ -8,6 +8,7 @@ from .common import check_requirements
 class GoProfile(BaseProfile):
     """Build a Go application using Go."""
 
+    name = "go"
     label = "Go"
     builder_packages = ["golang-go"]
 

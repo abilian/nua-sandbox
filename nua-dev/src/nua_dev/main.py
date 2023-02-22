@@ -2,16 +2,18 @@ from __future__ import annotations
 
 import importlib.metadata
 import os
+import time
 from pathlib import Path
 from typing import Optional
 
 import jinja2
 import snoop
 import typer
-from typer.colors import RED
+from typer.colors import RED, GREEN
 
 from nua_dev import upstream
 from nua_dev.backports import chdir
+from nua_dev.config import Config
 from nua_dev.console import panic
 
 from .builder import Builder
@@ -33,12 +35,18 @@ def build(targets: list[Path]):
 
 
 def _build():
+    """Build an image from the current directory."""
+    t0 = time.time()
     try:
-        builder = Builder()
+        config = Config().parse_config()
+        builder = Builder(config)
         builder.build()
     except Exception as e:
         typer.secho(e, fg=RED)
         raise typer.Exit(1)
+    finally:
+        t1 = time.time()
+        typer.secho(f"\nBuild took: {t1-t0:.2f}s", fg=GREEN)
 
 
 @app.command()

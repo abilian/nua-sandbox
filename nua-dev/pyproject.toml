@@ -13,7 +13,7 @@ packages = [
 ]
 
 [tool.poetry.scripts]
-nua-dev = "nua_dev.cli:app"
+nua-dev = "nua_dev.main:app"
 
 
 [tool.poetry.dependencies]

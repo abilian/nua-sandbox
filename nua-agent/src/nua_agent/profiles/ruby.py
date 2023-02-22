@@ -6,6 +6,7 @@ from .common import check_requirements
 class RubyProfile(BaseProfile):
     """Build a Ruby application using Bundler."""
 
+    name = "ruby"
     label = "Ruby / Bundler"
     builder_packages = [
         "bundler",

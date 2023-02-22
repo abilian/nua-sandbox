@@ -7,8 +7,8 @@ from .common import check_requirements
 class NodeProfile(BaseProfile):
     """Build a Noejs app."""
 
+    name = "node"
     label = "Node.js / NPM or Yarn"
-
     builder_packages = [
         "git",
     ]

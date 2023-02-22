@@ -6,8 +6,8 @@ from .common import check_requirements
 class MavenProfile(BaseProfile):
     """Build a Java application using Maven."""
 
+    name = "maven"
     label = "Java / Maven"
-
     builder_packages = [
         "maven",
     ]

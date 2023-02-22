@@ -8,8 +8,8 @@ from .common import check_requirements
 class PythonProfile(BaseProfile):
     """Build a Python application."""
 
+    name = "python"
     label = "Python / Pip"
-
     builder_packages = [
         "python3.10-venv",
     ]

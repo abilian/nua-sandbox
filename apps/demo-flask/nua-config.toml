@@ -10,6 +10,7 @@ src-checksum = ""
 
 
 [build]
+builder = "python"
 build-packages = [
     "build-essential",
     "python3-dev",

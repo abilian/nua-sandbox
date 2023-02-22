@@ -3,8 +3,8 @@ from pathlib import Path
 from urllib.error import HTTPError
 from urllib.request import urlretrieve
 
-import click
 import typer
+from click import secho as echo
 from typer.colors import RED
 
 from . import sh, system
@@ -12,6 +12,7 @@ from .config import read_config
 from .profiles import PROFILE_CLASSES, BaseProfile
 from .types import JsonDict
 from .unarchiver import unarchive
+from .util import Fail
 
 
 class Builder:
@@ -41,7 +42,7 @@ class Builder:
         # Cf. download_extract() in nua/lib/actions.py
         metadata = self.config["metadata"]
         src_url = metadata["src-url"]
-        print(f"Fetching: {src_url}")
+        echo(f"Fetching: {src_url}")
 
         # shell(f"curl -sL {src_url} | tar xz --strip-components={strip_components} -f -")
 
@@ -49,8 +50,7 @@ class Builder:
             try:
                 self.download_src(src_url, tmp)
             except HTTPError as e:
-                typer.secho(f"Error while downloading {src_url}: {e}", fg=RED)
-                raise typer.Exit(1)
+                Fail(f"Error while downloading {src_url}: {e}")
             archive = Path(tmp) / Path(src_url).name
             unarchive(archive, ".")
 
@@ -97,8 +97,7 @@ class Builder:
             profile = profile_cls(self.config)
             if profile.accept():
                 kind = profile_cls.label
-                click.secho(f"-----> {kind} app detected.", fg="green")
+                echo(f"-----> {kind} app detected.")
                 return profile
 
-        click.secho("No profile found.", fg=RED)
-        raise typer.Exit(1)
+        raise Fail("No profile found.")

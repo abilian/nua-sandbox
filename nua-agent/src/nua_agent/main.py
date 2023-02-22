@@ -4,7 +4,7 @@ Build:
 
 - `nua-agent build` builds the application.
 
-Run (TODO):
+Run (TODO, but not sure it's needed)
 
 - start?
 - stop?
@@ -12,15 +12,20 @@ Run (TODO):
 """
 from __future__ import annotations
 
+import json
 from typing import Optional
 
 import snoop
 import typer
-from typer.colors import RED
+from typer import secho as echo
+from typer.colors import YELLOW
+
+from nua_agent.profiles import PROFILE_CLASSES
+from nua_agent.system import install_packages
 
 from . import sh, system
 from .builder import Builder
-from .util import print_version
+from .util import Fail, print_version
 
 snoop.install()
 app = typer.Typer()
@@ -30,8 +35,32 @@ app = typer.Typer()
 # Build lifecycle
 #
 @app.command()
-def build_image():
-    """Build the application image."""
+def install_deps():
+    """Install system dependencies."""
+
+    build_config = json.load(open("_nua-build-config.json"))
+    builder_name = build_config.get("builder")
+    if not builder_name:
+        echo("'builder' key not fount in config", fg=YELLOW)
+        echo("(Build will proceed, but not be as efficient)")
+        return
+
+    for profile_cls in PROFILE_CLASSES:
+        if profile_cls.name == builder_name:
+            break
+    else:
+        raise Fail(f"Unknown builder {builder_name}")
+
+    packages = set(profile_cls.builder_packages)
+
+    packages.update(build_config.get("build-packages", []))
+
+    install_packages(packages)
+
+
+@app.command()
+def build_app():
+    """Build the application."""
     builder = Builder()
 
     try:
@@ -45,13 +74,17 @@ def build_image():
         # Build the app
         builder.build_app()
 
-        # Cleanup
-        sh.rm("/root/.cache", recursive=True)
-        sh.rm("/var/lib/apt", recursive=True)
         builder.cleanup()
     except Exception as e:
-        typer.secho(e, fg=RED)
-        raise typer.Exit(1)
+        raise Fail("An exception occurred")
+
+
+@app.command()
+def cleanup():
+    """Clean up."""
+    # Cleanup (or do we put this at the end of the build_app() function?)
+    sh.rm("/root/.cache", recursive=True)
+    sh.rm("/var/lib/apt", recursive=True)
 
 
 # @app.command()
