@@ -2,7 +2,7 @@
 # This dockerfile is used by all Nua packages
 # (except those that supply their own Dockerfile).
 #
-FROM ubuntu:jammy-20221130
+FROM ubuntu:jammy-20230126
 
 ENV DEBIAN_FRONTEND noninteractive
 
