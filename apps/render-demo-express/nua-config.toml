@@ -8,7 +8,7 @@ license = "MIT"
 src-url = "https://github.com/render-examples/express-hello-world/archive/refs/heads/main.tar.gz"
 
 [build]
-build-packages = []
+builder = "node"
 
 [run]
 start-command = "node app.js"

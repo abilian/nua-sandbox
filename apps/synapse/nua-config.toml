@@ -13,6 +13,7 @@ src-url = "https://github.com/matrix-org/synapse/archive/refs/tags/v{version}.ta
 src-checksum = ""
 
 [build]
+builder = "rust"
 build-packages = [
     "rust-all",
 ]

@@ -7,7 +7,7 @@ license = "MIT"
 src-url = "https://github.com/render-examples/rails-6/archive/refs/heads/master.tar.gz"
 
 [build]
-build-packages = []
+builder = "ruby"
 
 [run]
 start-command = "bundle exec puma -C config/puma.rb"

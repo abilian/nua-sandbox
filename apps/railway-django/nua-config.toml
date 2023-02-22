@@ -8,6 +8,7 @@ license = "MIT"
 src-url = "https://github.com/railwayapp-templates/django/archive/refs/heads/main.tar.gz"
 
 [build]
+builder = "python"
 build-packages = [
     # Needed to build psycopg2
     "gcc",

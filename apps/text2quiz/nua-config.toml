@@ -11,5 +11,8 @@ license = "GPL-3.0"
 src-url = "https://github.com/eyssette/text2quiz/archive/refs/heads/main.tar.gz"
 
 [build]
+builder = "node"
 node-version = "16.x"
+# Should it be something like this instead ?
+builder = "node-16"
 build-packages = []

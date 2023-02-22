@@ -11,13 +11,9 @@ license = "AGPL-3.0"
 # profile = ["node"] <- autodetected
 src-url = "https://github.com/hedgedoc/hedgedoc/releases/download/{version}/hedgedoc-{version}.tar.gz"
 
-[profile]
-# use a specific docker image containing nodejs:
-node = ">=14.13.1,<17"
-
 [build]
+builder = "node"
 meta-packages = ["psycopg2"]
-
 build-packages = [
     "build-essential",
 #    "python3-dev",

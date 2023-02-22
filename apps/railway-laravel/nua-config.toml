@@ -8,9 +8,14 @@ license = "MIT"
 src-url = "https://github.com/railwayapp-templates/laravel/archive/refs/heads/main.tar.gz"
 
 [build]
-#
+builder = "php"
+
+# FIXME:
+# builders = ["php", "node"]
+
 # Doesn't work: recognized as a Nodejs project
 # TODO: we need to support projects with front-end and back-end
+#
 #
 # So maybe we should be more excelict and not use autodetection? Like this?
 profiles = ["php", "node"]

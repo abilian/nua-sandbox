@@ -8,7 +8,7 @@ license = "MIT"
 src-url = "https://github.com/render-examples/nextjs-hello-world/archive/refs/heads/master.tar.gz"
 
 [build]
-build-packages = []
+builder = "node"
 
 [run]
 start-command = "yarn start"

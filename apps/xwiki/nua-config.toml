@@ -11,4 +11,5 @@ license = "LGPL-2.1"
 src-url = "https://github.com/xwiki/xwiki-platform/archive/refs/tags/xwiki-platform-{version}.tar.gz"
 
 [build]
+builder = "maven"
 build-packages = []

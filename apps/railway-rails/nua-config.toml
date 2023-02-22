@@ -13,3 +13,6 @@ src-url = "https://github.com/railwayapp-templates/ruby-rails/archive/refs/heads
 # > users on this machine.
 # > Your Ruby version is 3.0.2, but your Gemfile specified 3.1.2
 #
+
+[builder]
+builder = "ruby"

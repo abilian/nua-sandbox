@@ -11,9 +11,11 @@ tags = ["kanban", "planning", "project"]
 
 src-url = "https://github.com/wekan/wekan/archive/refs/tags/v{version}.tar.gz"
 
+[build]
+builder = "node"
+
 # Notes:
 # Technology used: Meteor
-
 
 #[addons]
 #local-storage = { }
