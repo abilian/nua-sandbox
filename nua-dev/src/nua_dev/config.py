@@ -8,10 +8,9 @@ import jsonschema
 import tomli
 import typer
 from tomli import TOMLDecodeError
-from typer.colors import RED
 
-from nua_agent.util import Fail
 from nua_dev.types import JSON
+from nua_dev.util import Fail
 
 
 class Config:
