@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from click import secho as echo
 from abilian_devtools.invoke import import_tasks
+from click import secho as echo
 from invoke import Context, task
 
 NUA_AGENT_WHL = "nua-agent/dist/nua_agent-0.1-py3-none-any.whl"
@@ -49,7 +49,7 @@ def build_all(c: Context, only="", skip=""):
 @task
 def build(c: Context, app):
     """Build one single app."""
-    
+
     msg = f"Building app: {app}"
     print()
     echo(msg, fg="green")

@@ -6,7 +6,7 @@ import typer
 
 
 class Fail(Exception):
-    def __init__(self, msg: str, exception: Exception|None = None):
+    def __init__(self, msg: str, exception: Exception | None = None):
         typer.secho(msg, fg=typer.colors.RED)
         if exception:
             traceback.print_exception(exception)

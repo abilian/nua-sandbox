@@ -3,9 +3,7 @@ from pathlib import Path
 from urllib.error import HTTPError
 from urllib.request import urlretrieve
 
-import typer
 from click import secho as echo
-from typer.colors import RED
 
 from . import sh, system
 from .config import read_config

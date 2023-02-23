@@ -75,7 +75,7 @@ def build_app():
         builder.build_app()
 
         builder.cleanup()
-    except Exception as e:
+    except Exception:
         raise Fail("An exception occurred")
 
 

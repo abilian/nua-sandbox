@@ -3,13 +3,14 @@ from __future__ import annotations
 import importlib.metadata
 import os
 import time
+import traceback
 from pathlib import Path
 from typing import Optional
 
 import jinja2
 import snoop
 import typer
-from typer.colors import RED, GREEN
+from typer.colors import GREEN, RED
 
 from nua_dev import upstream
 from nua_dev.backports import chdir
@@ -43,6 +44,7 @@ def _build():
         builder.build()
     except Exception as e:
         typer.secho(e, fg=RED)
+        traceback.print_exc()
         raise typer.Exit(1)
     finally:
         t1 = time.time()
