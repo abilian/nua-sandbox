@@ -6,7 +6,7 @@ from os import mkdir
 from pathlib import Path
 from typing import Any
 
-from attr import define
+from attr import define, field
 from typer import secho as echo
 from typer.colors import CYAN, GREEN
 
@@ -19,11 +19,11 @@ from .types import JSON
 class Builder:
     config: JSON = None
     # Not used (yet)
-    options: dict[str, Any] = dict
+    options: dict[str, Any] = field(factory=dict)
 
     @property
     def app_id(self) -> str:
-        return self.config["metadata"]["id"]
+        return self.config["metadata"]["id"]  # type: ignore
 
     def build(self):
         self._build_agent()
