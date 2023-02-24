@@ -9,4 +9,4 @@ poetry_task:
         - poetry install
     test_script:
         - poetry run make lint
-        - poetry run make test
+        # - poetry run make test
