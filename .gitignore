@@ -1,10 +1,9 @@
 # Specific to this project
 _nua-config.json
 Dockerfile.nua
-git-apps
 
-# Stuff not ready yet
-old-apps/
+# Old stuff, kept for reference
+_OLD
 
 # ------------------------------------------------------------------------
 
