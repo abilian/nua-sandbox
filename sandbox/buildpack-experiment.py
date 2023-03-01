@@ -33,8 +33,6 @@ def main():
 
         print("\n" + 78 * "=" + "\n")
 
-        break
-
     print("Successful builds:")
     for build in successful_builds:
         print(f" - {build[0]} with {build[1]}")
