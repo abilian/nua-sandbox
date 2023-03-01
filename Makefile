@@ -110,6 +110,9 @@ update-deps:
 watch:
 	watchfiles "rsync -e ssh -avz ./ root@nua-dev.abilian.com:/home/nua/git/nua-sandbox/" nua*
 
+watch2:
+	watchfiles "rsync -e ssh -avz ./ c17.abilian.com:nua-sandbox/" nua* sandbox
+
 # TODO: release
 #release: clean
 #	git push --tags

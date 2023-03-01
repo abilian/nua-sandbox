@@ -16,10 +16,14 @@ from nua_dev.util import Fail
 class Config:
     config: JSON
 
-    def parse_config(self) -> JSON:
-        typer.echo("Parsing config...")
+    def parse_config(self, path: Path | str = ".") -> JSON:
+        if isinstance(path, str):
+            path = Path(path)
+        typer.echo(f"Parsing config in {path}...")
+        if path.is_dir():
+            path = path / "nua-config.toml"
         try:
-            self.config = tomli.load(open("nua-config.toml", "rb"))
+            self.config = tomli.load(path.open("rb"))
         except TOMLDecodeError as e:
             raise Fail(f"Error parsing nua-config.toml: {e}")
 
