@@ -80,7 +80,7 @@ def _version_callback(value: bool) -> None:
 
 
 def print_version():
-    version = importlib.metadata.version("nua_agent")
+    version = importlib.metadata.version("nua_dev")
     typer.echo(f"Nua Dev version: {version}")
 
 
