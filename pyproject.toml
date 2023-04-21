@@ -8,13 +8,11 @@ packages = []
 
 [tool.poetry.dependencies]
 python = "^3.10"
-
 nua-agent = { path = "nua-agent", develop = true }
 nua-dev = { path = "nua-dev", develop = true }
 nua-run = { path = "nua-run", develop = true }
 
 # pyinfra = "^2.6.2"
-
 [tool.poetry.group.dev.dependencies]
 abilian-devtools = "^0.4.8"
 invoke = "^2.0.0"
@@ -27,8 +25,7 @@ docformatter = "^1.5.1"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-
 [tool.ruff]
 ignore = [
-    "E501",  # line too long
+    "E501", # line too long
 ]

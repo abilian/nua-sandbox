@@ -21,10 +21,12 @@ python = "^3.10"
 tomli = "*"
 
 # setuptools = "*"
-# jinja2 = "^3.1.2"
+jinja2 = "^3.1.2"
 jsonschema = "^4.17.3"
 json5 = "^0.9.11"
 pygithub = "^1.57"
+snoop = "^0.4.3"
+typer = "^0.7.0"
 
 
 [tool.poetry.group.dev.dependencies]
