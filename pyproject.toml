@@ -12,14 +12,13 @@ nua-agent = { path = "nua-agent", develop = true }
 nua-dev = { path = "nua-dev", develop = true }
 nua-run = { path = "nua-run", develop = true }
 
-# pyinfra = "^2.6.2"
 [tool.poetry.group.dev.dependencies]
 abilian-devtools = "^0.4.8"
 invoke = "^2.0.0"
 devtools = "^0.10.0"
 watchfiles = "^0.18.1"
 types-jsonschema = "^4.17.0.5"
-docformatter = "^1.5.1"
+docformatter = "^1.6.3"
 
 [build-system]
 requires = ["poetry-core"]

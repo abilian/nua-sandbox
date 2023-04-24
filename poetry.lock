@@ -720,14 +720,14 @@ files = [
 
 [[package]]
 name = "docformatter"
-version = "1.6.0"
+version = "1.6.3"
 description = "Formats docstrings to follow PEP 257"
 category = "dev"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "docformatter-1.6.0-py3-none-any.whl", hash = "sha256:dfad58437b560708eb74ccaccba5c91a0f98f534ed51b7af02aa35225e9eb6c2"},
-    {file = "docformatter-1.6.0.tar.gz", hash = "sha256:2346dcc239b73bc4b62d1035e240d1338d154fb047a7e492f0168a93744222e2"},
+    {file = "docformatter-1.6.3-py3-none-any.whl", hash = "sha256:7d971222d86678e3d699a3e9fdf5dd5b04a027b55642f4628c50180577c63a23"},
+    {file = "docformatter-1.6.3.tar.gz", hash = "sha256:c1377c5a3d01b3f3c325158c6de904d3d6167eb3a0eeeff8d9e66a678177d337"},
 ]
 
 [package.dependencies]
@@ -2530,6 +2530,21 @@ files = [
 pbr = ">=2.0.0,<2.1.0 || >2.1.0"
 
 [[package]]
+name = "tabulate"
+version = "0.9.0"
+description = "Pretty-print tabular data"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "tabulate-0.9.0-py3-none-any.whl", hash = "sha256:024ca478df22e9340661486f85298cff5f6dcdba14f3813e8830015b9ed1948f"},
+    {file = "tabulate-0.9.0.tar.gz", hash = "sha256:0095b12bf5966de529c0feb1fa08671671b3368eec77d7ef7ab114be2c068b3c"},
+]
+
+[package.extras]
+widechars = ["wcwidth"]
+
+[[package]]
 name = "toml"
 version = "0.10.2"
 description = "Python Library for Tom's Obvious, Minimal Language"
@@ -2805,4 +2820,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "1f26006bc0066c7386dbca071607706281881e914346da05fe1a9d7283084e77"
+content-hash = "6f1d186312b08a8dab838a70a8a2714476be2bbc3ec0bd26ecf58ef352ca8a67"
