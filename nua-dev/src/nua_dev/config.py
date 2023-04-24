@@ -6,11 +6,13 @@ from pathlib import Path
 import json5
 import jsonschema
 import tomli
-import typer
 from tomli import TOMLDecodeError
 
 from nua_dev.types import JSON
-from nua_dev.util import Fail
+
+
+class ConfigParseError(Exception):
+    pass
 
 
 class Config:
@@ -19,13 +21,13 @@ class Config:
     def parse_config(self, path: Path | str = ".") -> JSON:
         if isinstance(path, str):
             path = Path(path)
-        typer.echo(f"Parsing config in {path}...")
+        print(f"Parsing config in {path}...")
         if path.is_dir():
             path /= "nua-config.toml"
         try:
             self.config = tomli.load(path.open("rb"))
         except TOMLDecodeError as e:
-            raise Fail(f"Error parsing nua-config.toml: {e}")
+            raise ConfigParseError(f"Error parsing nua-config.toml: {e}")
 
         self.add_defaults()
 
@@ -55,7 +57,7 @@ class Config:
         try:
             jsonschema.validate(self.config, schema)
         except jsonschema.exceptions.ValidationError as e:
-            raise Fail(f"Error parsing nua-config.toml: {e.message}")
+            raise ConfigParseError(f"Error parsing nua-config.toml: {e.message}")
 
     def write_config(self):
         # Write as JSON. From now on, we only use JSON.

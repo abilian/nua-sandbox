@@ -37,14 +37,10 @@ class BuildRunner:
         args = [(app, cmd) for app in apps for cmd in BUILD_METHODS]
 
         with mp.Pool(self.pool_size) as pool:
-            results = pool.starmap(self.try_build, args)
-        return results
+            return pool.starmap(self.try_build, args)
 
     def get_apps(self):
-        app_dirs = sorted(
-            p for p in Path(self.cwd).rglob("**") if self.is_nua_project(p)
-        )
-        return app_dirs
+        return sorted(p for p in Path(self.cwd).rglob("**") if self.is_nua_project(p))
 
     def report_results(self, results):
         results.sort()
@@ -59,7 +55,7 @@ class BuildRunner:
                 headers.append(result.command)
             table.append(line)
 
-        print(tabulate(table, headers=["App"] + headers))
+        print(tabulate(table, headers=["App", *headers]))
 
     def try_build(self, path: Path, command: str) -> BuildResult:
         self.log(f"Starting build of {path} with {command}", 1)

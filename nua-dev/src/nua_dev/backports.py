@@ -19,7 +19,7 @@ class chdir(AbstractContextManager):  # noqa: N801
             print(f"Ignoring error in chdir() enter:\n{e}")
         os.chdir(self.path)
 
-    def __exit__(self, *excinfo):
+    def __exit__(self, *_excinfo):
         try:
             os.chdir(self._old_cwd.pop())
         except (OSError, IndexError) as e:

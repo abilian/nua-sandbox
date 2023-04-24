@@ -13,28 +13,28 @@ packages = [
 ]
 
 [tool.poetry.scripts]
-nua-dev = "nua_dev.main:app"
+nua-dev = "nua_dev.cli:main"
 nua-build-all = "nua_dev.tools.build_all:main"
 
 
 [tool.poetry.dependencies]
 python = "^3.10"
-tomli = "*"
+tomli = "^2.0.1"
 
 # setuptools = "*"
 jinja2 = "^3.1.2"
 jsonschema = "^4.17.3"
 json5 = "^0.9.11"
-pygithub = "^1.57"
+pygithub = "^1.58.1"
 snoop = "^0.4.3"
 tabulate = "^0.9.0"
 cleez = "^0.1.4"
 
 
 [tool.poetry.group.dev.dependencies]
-abilian-devtools = "*"
-nox = "*"
-types-jsonschema = "*"
+abilian-devtools = "^0.4.18"
+nox = "^2023.4.22"
+types-jsonschema = "^4.17.0.7"
 
 # types-setuptools = "*"
 types-tabulate = "^0.9.0.2"
@@ -50,5 +50,73 @@ filterwarnings = [
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+# ---------------------------------------------------------------------------
 
 [tool.ruff]
+select = [
+    "F",
+    "E",
+    "C90",
+    "I",
+    "UP",
+    "N",
+    "YTT",
+    "B",
+    "A",
+    "C4",
+    "ICN",
+    "Q",
+    "S",
+    "BLE",
+    "RET",
+    "SIM",
+    "TID",
+    "RUF",
+    "PLC", "PLE", "PLR", "PLW",
+]
+# Add later: "ANN", "ERA"...
+
+exclude = [
+    "src/cleez/testing.py",
+#    ".tox",
+#    ".nox",
+#    "tests",
+#    "sandbox",
+#    "doc",
+#    "scripts",
+#    "tmp",
+]
+
+ignore = [
+    "S101",  # Use of `assert` detected
+    "SIM108", # Use ternary operator
+    "A001",  # Shadowing of built-in
+    "A002",  # Argument `input` is shadowing a python builtin
+    "I001",  # Ruff not agreeing with isort
+    "B904",
+    "BLE001",
+    "S701",
+    "S605",
+    "S603",
+]
+
+
+[tool.pyright]
+exclude = [
+    '.tox',
+    '.nox',
+    'tests',
+    'sandbox',
+    'doc',
+    'scripts',
+    'tmp',
+]
+include = ["src"]
+
+# pyright has issues with modules imported from a root __init__.py
+reportPrivateImportUsage = false
+
+# Temp
+reportGeneralTypeIssues = false
+reportMissingImports = false
+reportOptionalSubscript = false

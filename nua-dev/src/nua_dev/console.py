@@ -1,7 +1,7 @@
 import typer
-from typer.colors import RED
+from cleez.colors import red
 
 
 def panic(msg):
-    typer.secho(msg, fg=RED)
+    print(red(msg))
     raise typer.Exit(1)
