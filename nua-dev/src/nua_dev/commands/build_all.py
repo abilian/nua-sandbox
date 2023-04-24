@@ -81,6 +81,7 @@ class BuildResult:
     path: str
     command: str
     success: bool
+    duration: float
 
 
 @dataclass(frozen=True)
@@ -114,13 +115,15 @@ class BuildRunner:
             line = [k]
             headers = []
             for result in g:
-                line.append("✅" if result.success else "❌")
+                mark = {True: "✅", False: "❌"}[result.success]
+                line.append(f"{mark} ({result.duration:.2f}s)")
                 headers.append(result.command)
             table.append(line)
 
         print(tabulate(table, headers=["App", *headers]))
 
     def try_build(self, path: Path, command: str) -> BuildResult:
+        t0 = now()
         self.log(f"Starting build of {path} with {command}", 1)
         match command:
             case "nua-build":
@@ -138,7 +141,8 @@ class BuildRunner:
             status = False
             self.log(f"Build of {path} with {command} failed", 1, red)
 
-        return BuildResult(str(path), command, status)
+        t1 = now()
+        return BuildResult(str(path), command, status, t1 - t0)
 
     def is_nua_project(self, path):
         if not path.is_dir():

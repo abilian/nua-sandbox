@@ -1,0 +1,18 @@
+[metadata]
+id = "railway-fastapi"
+title = "Demo for Fastapi"
+author = "Railway"
+website = "https://github.com/railwayapp-templates/fastapi/"
+version = "???"
+release = 1
+license = "MIT"
+
+src-url = "https://github.com/railwayapp-templates/fastapi/archive/refs/heads/main.tar.gz"
+
+[build]
+builder = "python"
+
+build-packages = []
+
+[run]
+start-command = "gunicorn app:app"

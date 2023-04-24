@@ -1,0 +1,18 @@
+[metadata]
+id = "railway-starlette"
+title = "Starlette demo from Railway"
+author = "Railway"
+description = "None"
+website = "https://github.com/railwayapp-templates/starlette/"
+version = "???"
+release = 1
+license = "MIT"
+
+src-url = "https://github.com/railwayapp-templates/starlette/archive/refs/heads/main.tar.gz"
+
+[build]
+builder = "python"
+
+build-packages = []
+
+[run]

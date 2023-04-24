@@ -2,6 +2,7 @@
 id = "railway-flask"
 title = "Demo for Flask"
 author = "Railway"
+website = "https://github.com/railwayapp-templates/flask/"
 version = "0.1"
 release = 1
 license = "MIT"
@@ -14,3 +15,6 @@ src-url = "https://github.com/railwayapp-templates/flask/archive/refs/heads/main
 
 [build]
 builder = "python"
+
+[run]
+start-command = "gunicorn app:app"

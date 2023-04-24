@@ -2,6 +2,7 @@
 id = "railway-django"
 title = "Demo for Django"
 author = "Railway"
+website = "https://github.com/railwayapp-templates/django/"
 version = "0.1"
 release = 1
 license = "MIT"
@@ -15,3 +16,6 @@ build-packages = [
     "python3-dev",
     "libpq-dev",
 ]
+
+[run]
+start-command = "gunicorn app:app"

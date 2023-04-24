@@ -24,10 +24,11 @@ class InitCommand(Command):
             panic("Please specify a GitHub repository.")
 
         ctx = upstream.GitHub(from_github).get_repo_info()
-        with (Path(__file__).parent / "etc" / "nua-config.toml.j2").open() as fd:
-            environment = jinja2.Environment()
-            template = environment.from_string(fd.read())
-            config_toml = template.render(project=ctx)
+        template_file = Path(__file__).parent.parent / "etc" / "nua-config.toml.j2"
+        template_str = template_file.read_text()
+        environment = jinja2.Environment()
+        template = environment.from_string(template_str)
+        config_toml = template.render(project=ctx)
 
         if dir:
             os.chdir(dir)

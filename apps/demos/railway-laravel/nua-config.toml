@@ -2,6 +2,7 @@
 id = "railway-laravel"
 title = "Demo for Laravel"
 author = "Railway"
+website = "https://github.com/railwayapp-templates/laravel/"
 version = "0.1"
 release = 1
 license = "MIT"

@@ -2,11 +2,14 @@
 id = "railway-gin"
 title = "Demo for Go + Gin"
 author = "Railway"
+website = "https://github.com/railwayapp-templates/gin/"
 version = "0.1"
 release = 1
 license = "MIT"
 src-url = "https://github.com/railwayapp-templates/gin/archive/refs/heads/main.tar.gz"
 
-[run]
+[buikd]
 builder = "go"
+
+[run]
 start-command = "go run main.go"
