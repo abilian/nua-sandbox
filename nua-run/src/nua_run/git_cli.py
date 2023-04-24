@@ -30,7 +30,6 @@ NUA_GIT_SCRIPT = NUA_ROOT / "venv" / "bin" / "nua-git"
 @app.command()
 def git_hook(app_name: str):
     """Post-receive git hook."""
-
     app = sanitize_app_name(app_name)
     repo_path = GIT_ROOT / app
     app_path = APPS_ROOT / app
@@ -51,7 +50,6 @@ def git_hook(app_name: str):
 
 def _run_build(app, newrev):
     """Build an app by resetting the work directory."""
-
     app_path = APPS_ROOT / app
 
     env = {"GIT_WORK_DIR": app_path}
@@ -71,7 +69,6 @@ def _run_build(app, newrev):
 @app.command()
 def git_receive_pack(app_name: str):
     """Handle git pushes for an app."""
-
     app = sanitize_app_name(app_name)
     hook_path = GIT_ROOT / app / "hooks" / "post-receive"
 
@@ -114,7 +111,6 @@ def shell():
 #
 def sanitize_app_name(app: str) -> str:
     """Sanitize the app name and build matching path."""
-
     app = (
         "".join(c for c in app if c.isalnum() or c in (".", "_", "-"))
         .rstrip()
