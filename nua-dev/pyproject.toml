@@ -14,6 +14,7 @@ packages = [
 
 [tool.poetry.scripts]
 nua-dev = "nua_dev.main:app"
+nua-build-all = "nua_dev.tools.build_all:main"
 
 
 [tool.poetry.dependencies]
@@ -26,7 +27,8 @@ jsonschema = "^4.17.3"
 json5 = "^0.9.11"
 pygithub = "^1.57"
 snoop = "^0.4.3"
-typer = "^0.7.0"
+tabulate = "^0.9.0"
+cleez = "^0.1.4"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -35,6 +37,7 @@ nox = "*"
 types-jsonschema = "*"
 
 # types-setuptools = "*"
+types-tabulate = "^0.9.0.2"
 
 [tool.pytest.ini_options]
 filterwarnings = [

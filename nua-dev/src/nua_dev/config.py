@@ -21,7 +21,7 @@ class Config:
             path = Path(path)
         typer.echo(f"Parsing config in {path}...")
         if path.is_dir():
-            path = path / "nua-config.toml"
+            path /= "nua-config.toml"
         try:
             self.config = tomli.load(path.open("rb"))
         except TOMLDecodeError as e:
