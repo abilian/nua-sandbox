@@ -1,16 +1,79 @@
-import argparse
 import multiprocessing as mp
 import subprocess
-import time
 from dataclasses import dataclass
 from itertools import groupby
 from pathlib import Path
+from time import time as now
 
+from cleez import Argument, Command, Option
 from cleez.colors import green, red
 from tabulate import tabulate
 
 POOL_SIZE = 8
 BUILD_METHODS = ["nua-build", "nua-dev"]
+
+
+class BuildAllCommand(Command):
+    name = "build-all"
+
+    arguments = [
+        Argument(
+            "directory",
+            nargs="?",
+            action="store",
+            default=".",
+            help="Where to find the apps",
+        ),
+        Option(
+            "-v",
+            "--verbosity",
+            default=0,
+            action="count",
+            help="Increase output verbosity",
+        ),
+        Option(
+            "-p",
+            "--pool-size",
+            action="store",
+            type=int,
+            default=POOL_SIZE,
+            help="Pool size",
+        ),
+        Option(
+            "-d",
+            "--cwd",
+            action="store",
+            default="",
+            help="Change working directory",
+        ),
+        Option("-t", "--time", action="store_true", help="Print timing info"),
+        Option("-b", "--bench", action="store_true", help="Run benchmarks"),
+    ]
+
+    def run(self, directory, verbosity, pool_size, cwd, time, bench):
+        t0 = now()
+
+        cwd = cwd or directory
+
+        if bench:
+            for pool_size in range(1, 33):
+                t0 = now()
+                build_runner = BuildRunner(
+                    pool_size=pool_size, report=False, verbosity=verbosity
+                )
+                build_runner.run()
+                t1 = now()
+                print(f"CPUs: {pool_size} -> Time: {t1 - t0:.2f} seconds")
+
+        else:
+            build_runner = BuildRunner(
+                pool_size=pool_size, cwd=cwd, verbosity=verbosity
+            )
+            build_runner.run()
+
+            if time:
+                t1 = now()
+                print(f"Time: {t1 - t0:.2f} seconds")
 
 
 @dataclass(frozen=True, order=True)
@@ -93,67 +156,3 @@ class BuildRunner:
             if color:
                 msg = color(msg)
             print(msg)
-
-
-def main():
-    t0 = time.time()
-
-    parser = argparse.ArgumentParser()
-
-    # Arguments
-    parser.add_argument(
-        "directory",
-        nargs="?",
-        action="store",
-        default=".",
-        help="Where to find the apps",
-    )
-
-    # Options
-    parser.add_argument(
-        "-v", "--verbosity", default=0, action="count", help="Increase output verbosity"
-    )
-    parser.add_argument(
-        "-p",
-        "--pool-size",
-        action="store",
-        type=int,
-        default=POOL_SIZE,
-        help="Pool size",
-    )
-    parser.add_argument(
-        "-d",
-        "--cwd",
-        action="store",
-        default="",
-        help="Change working directory",
-    )
-    parser.add_argument("-t", "--time", action="store_true", help="Print timing info")
-    parser.add_argument("-b", "--bench", action="store_true", help="Run benchmarks")
-
-    args = parser.parse_args()
-    cwd = args.cwd or args.directory
-
-    if args.bench:
-        for pool_size in range(1, 33):
-            t0 = time.time()
-            build_runner = BuildRunner(
-                pool_size=pool_size, report=False, verbosity=args.verbosity
-            )
-            build_runner.run()
-            t1 = time.time()
-            print(f"CPUs: {pool_size} -> Time: {t1 - t0:.2f} seconds")
-
-    else:
-        build_runner = BuildRunner(
-            pool_size=args.pool_size, cwd=cwd, verbosity=args.verbosity
-        )
-        build_runner.run()
-
-        if args.time:
-            t1 = time.time()
-            print(f"Time: {t1 - t0:.2f} seconds")
-
-
-if __name__ == "__main__":
-    main()

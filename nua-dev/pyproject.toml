@@ -95,6 +95,7 @@ ignore = [
     "I001",  # Ruff not agreeing with isort
     "B904",
     "BLE001",
+    "PLR0913",
     "S101",
     "S603",
     "S605",
