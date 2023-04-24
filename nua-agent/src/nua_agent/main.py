@@ -37,7 +37,6 @@ app = typer.Typer()
 @app.command()
 def install_deps():
     """Install system dependencies."""
-
     build_config = json.load(open("_nua-build-config.json"))
     builder_name = build_config.get("builder")
     if not builder_name:

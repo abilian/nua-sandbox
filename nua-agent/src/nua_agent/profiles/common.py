@@ -10,7 +10,6 @@ def found_app(kind):
 
 def check_requirements(binaries) -> bool:
     """Checks if all the binaries exist and are executable."""
-
     echo(f"-----> Checking requirements: {binaries}", fg="green")
     requirements = list(map(which, binaries))
     echo(str(requirements))
