@@ -11,6 +11,8 @@ from nua_dev.console import panic
 
 
 class InitCommand(Command):
+    """Initialize a new project, possibly from an existing GitHub repository."""
+
     name = "init"
 
     arguments = [
@@ -33,5 +35,4 @@ class InitCommand(Command):
         if dir:
             os.chdir(dir)
         Path(ctx["id"]).mkdir(exist_ok=True)
-        with (Path(ctx["id"]) / "nua-config.toml").open("w") as fd:
-            fd.write(config_toml)
+        (Path(ctx["id"]) / "nua-config.toml").write_text(config_toml)
