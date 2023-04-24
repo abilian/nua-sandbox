@@ -1,0 +1,14 @@
+[metadata]
+id = "render-demo-flask"
+title = "Demo Flask"
+author = "Render"
+version = "0.1"
+release = 1
+license = "MIT"
+src-url = "https://github.com/render-examples/flask-hello-world/archive/refs/heads/main.tar.gz"
+
+[build]
+builder = "python"
+
+[run]
+start-command = "gunicorn app:app"

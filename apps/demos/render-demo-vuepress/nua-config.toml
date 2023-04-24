@@ -1,0 +1,14 @@
+[metadata]
+id = "render-demo-vuepress"
+title = "Demo Vuepress"
+author = "Render"
+version = "0.1"
+release = 1
+license = "MIT"
+src-url = "https://github.com/render-examples/vuepress/archive/refs/heads/master.tar.gz"
+
+[build]
+builder = "node"
+
+[run]
+# This is a static app. No need to start anything.
