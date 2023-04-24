@@ -11,5 +11,39 @@ license = "MIT"
 src-url = "https://github.com/electerious/Ackee/archive/v{version}.tar.gz"
 
 [build]
-builder = "node"
+# builder = "node"
+builder = "node-16"
 build-packages = []
+
+[run]
+start = "yarn start"
+
+[env]
+# Generic environment variables
+NODE_ENV = "production"
+DEBUG = "true"
+TZ = "Europe/Paris"
+
+ACKEE_USERNAME = "ackee"
+ACKEE_PASSWORD = { random = 'true', length = 16, display = 'true' }
+ACKEE_ALLOW_ORIGIN = { key = "domain" }
+DB_HOST = { from = "database", key = "hostname" }
+DB_USER = { from = "database", key = "MONGO_INITDB_ROOT_USERNAME" }
+DB_PWD = { from = "database", key = "MONGO_INITDB_ROOT_PASSWORD" }
+DB_PORT = 27017
+# ACKEE_MONGODB = "mongodb://{DB_HOST}:{DB_PORT}/ackee"
+ACKEE_MONGODB = "mongodb://{DB_USER}:{DB_PWD}@{DB_HOST}:{DB_PORT}/"
+
+[port.web]
+container = 3000
+
+[[resource]]
+# A resource is another container required by the main app container, its
+# configuration is described below, under the key of name of the resource. Several
+# resources can be declared. The resource host will appear in the local network
+# with a hostname equal to the container name.
+
+# Declaration of the required image for the resource, here MongoDB.
+name = "database"
+type = "mongo"
+version = ">=5, <6"
