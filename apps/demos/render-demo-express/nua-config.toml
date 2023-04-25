@@ -9,7 +9,7 @@ license = "MIT"
 src-url = "https://github.com/render-examples/express-hello-world/archive/refs/heads/main.tar.gz"
 
 [build]
-builder = "node"
+builder = "node-16"
 
 [run]
 start-command = "node app.js"

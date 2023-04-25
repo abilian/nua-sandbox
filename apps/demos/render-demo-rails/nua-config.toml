@@ -1,6 +1,7 @@
 [metadata]
 id = "render-demo-rails"
 title = "Demo for Rails 6"
+author = "Render"
 version = "0.1"
 release = 1
 license = "MIT"

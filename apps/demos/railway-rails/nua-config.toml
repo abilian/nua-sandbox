@@ -1,6 +1,7 @@
 [metadata]
 id = "railway-rails"
 title = "Demo for Ruby on Rails"
+author = "Railway"
 version = "0.1"
 release = 1
 license = "MIT"
