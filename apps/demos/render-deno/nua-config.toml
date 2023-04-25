@@ -1,0 +1,18 @@
+[metadata]
+id = "render-deno"
+title = "Deno demo by Render"
+author = "Render"
+description = "Example web server using Deno"
+website = "https://github.com/render-examples/deno/"
+version = "???"
+release = 1
+license = "???"
+
+src-url = "https://github.com/render-examples/deno/archive/refs/heads/main.tar.gz"
+
+[build]
+builder = "deno"
+test = "deno check index.ts"
+
+[run]
+start-command = "deno run --allow-net --allow-env index.ts"
