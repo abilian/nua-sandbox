@@ -2,6 +2,7 @@
 id = "railway-rails"
 title = "Demo for Ruby on Rails"
 author = "Railway"
+website = "https://github.com/railwayapp-templates/ruby-rails/"
 version = "0.1"
 release = 1
 license = "MIT"
@@ -17,3 +18,4 @@ src-url = "https://github.com/railwayapp-templates/ruby-rails/archive/refs/heads
 
 [build]
 builder = "ruby-32"
+build-command = "bundle install"

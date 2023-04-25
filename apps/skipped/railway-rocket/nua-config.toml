@@ -1,3 +1,7 @@
+#
+# Skipped for now because it takes 10 times longer to build than the other apps.
+#
+
 [metadata]
 id = "railway-rocket"
 title = "Demo for Rust + Rocket"

@@ -12,6 +12,7 @@ src-url = "https://github.com/CleverCloud/Go-example/archive/refs/heads/main.tar
 
 [build]
 builder = "go"
+build-command = "go build"
 
 [run]
 start-command = "go run main.go"

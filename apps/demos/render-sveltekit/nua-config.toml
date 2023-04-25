@@ -4,14 +4,14 @@ title = "sveltekit"
 author = "Render"
 description = "Deploy SvelteKit to Render using the Node.js adapter"
 website = "https://github.com/render-examples/sveltekit/"
-version = "???"
+version = "0.1"
 release = 1
 license = "???"
 
 src-url = "https://github.com/render-examples/sveltekit/archive/refs/heads/main.tar.gz"
 
 [build]
-builder = "nodejs"
+builder = "node-16"
 build-command = "npm install && npm run build"
 
 [run]

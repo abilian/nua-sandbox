@@ -10,6 +10,7 @@ src-url = "https://github.com/railwayapp-templates/gin/archive/refs/heads/main.t
 
 [buikd]
 builder = "go"
+build-command = "go build"
 
 [run]
 start-command = "go run main.go"

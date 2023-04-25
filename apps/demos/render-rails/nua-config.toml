@@ -2,6 +2,7 @@
 id = "render-rails"
 title = "Demo for Rails 6"
 author = "Render"
+website = "https://github.com/render-examples/rails-6/"
 version = "0.1"
 release = 1
 license = "MIT"
@@ -9,6 +10,7 @@ src-url = "https://github.com/render-examples/rails-6/archive/refs/heads/master.
 
 [build]
 builder = "ruby-32"
+build-command = "./bin/render-build.sh"
 
 [run]
 start-command = "bundle exec puma -C config/puma.rb"
