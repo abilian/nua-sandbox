@@ -1,46 +1,44 @@
-from .. import sh
-from ..system import install_nodejs
 from .base import BaseProfile
-from .common import check_requirements
 
 
-class NodeProfile(BaseProfile):
-    """Build a Nodejs app."""
+class DenoProfile(BaseProfile):
+    """Build a Deno app."""
 
-    name = "node"
-    label = "Node.js / NPM or Yarn"
+    name = "deno"
+    label = "Deno"
     builder_packages = [
         "git",
     ]
 
     def accept(self):
-        return self._check_files(["package.json"])
+        # No way to autodetect
+        return False
 
     def check(self) -> bool:
-        return (
-            check_requirements(["nodejs", "npm"])
-            or check_requirements(["node", "npm"])
-            or check_requirements(["nodeenv"])
-        )
+        return True
 
     def prepare(self):
-        build_config = self.config.get("build", {})
-        node_version = build_config.get("node-version", "14.x")
-        install_nodejs(node_version)
-        sh.shell("ln -sf /usr/bin/yarnpkg /usr/bin/yarn")
+        pass
+
+        # build_config = self.config.get("build", {})
+        # node_version = build_config.get("node-version", "14.x")
+        # install_nodejs(node_version)
+        # sh.shell("ln -sf /usr/bin/yarnpkg /usr/bin/yarn")
 
     def build(self):
-        print("yarn version:")
-        sh.shell("yarn --version")
-        print("npm version:")
-        sh.shell("npm --version")
+        pass
 
-        if self._check_files(["package-lock.json"]):
-            sh.shell("npm install")
-        elif self._check_files(["yarn.lock"]):
-            sh.shell("yarn install --production=true --pure-lockfile")
-        else:
-            sh.shell("npm install")
+        # print("yarn version:")
+        # sh.shell("yarn --version")
+        # print("npm version:")
+        # sh.shell("npm --version")
+        #
+        # if self._check_files(["package-lock.json"]):
+        #     sh.shell("npm install")
+        # elif self._check_files(["yarn.lock"]):
+        #     sh.shell("yarn install --production=true --pure-lockfile")
+        # else:
+        #     sh.shell("npm install")
 
         # virtual = join(ENV_ROOT, self.app)
         # virtualenv_path = join(ENV_ROOT, self.app)

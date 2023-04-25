@@ -13,17 +13,17 @@ packages = [
 ]
 
 [tool.poetry.scripts]
-nua-agent = "nua_agent.main:app"
+nua-agent = "nua_agent.cli:main"
 
 
 [tool.poetry.dependencies]
 python = "^3.10"
 setuptools = "*"
 jinja2 = "^3.1.2"
-typer = "*"
+cleez = "^0.1.8"
 
 [tool.poetry.group.dev.dependencies]
-abilian-devtools = "*"
+abilian-devtools = "^0.5.0"
 nox = "*"
 
 # types-setuptools = "*"
