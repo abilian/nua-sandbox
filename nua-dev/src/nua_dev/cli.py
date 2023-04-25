@@ -9,9 +9,13 @@ import importlib.metadata
 from cleez import CLI
 
 
-def main():
+def get_cli() -> CLI:
     version = importlib.metadata.version("nua-dev")
     cli = CLI(name="nua-dev", version=version)
-
     cli.scan("nua_dev.commands")
+    return cli
+
+
+def main():
+    cli = get_cli()
     cli.run()
