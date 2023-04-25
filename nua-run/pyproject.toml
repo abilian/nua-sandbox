@@ -24,7 +24,7 @@ snoop = "*"
 
 
 [tool.poetry.group.dev.dependencies]
-abilian-devtools = "*"
+abilian-devtools = "^0.5.1"
 nox = "*"
 
 # types-setuptools = "*"
