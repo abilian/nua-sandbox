@@ -51,29 +51,35 @@ class BuildAllCommand(Command):
     ]
 
     def run(self, directory, verbosity, pool_size, cwd, time, bench):
-        t0 = now()
-
         cwd = cwd or directory
 
         if bench:
-            for pool_size in range(1, 33):
-                t0 = now()
-                build_runner = BuildRunner(
-                    pool_size=pool_size, report=False, verbosity=verbosity
-                )
-                build_runner.run()
-                t1 = now()
-                print(f"CPUs: {pool_size} -> Time: {t1 - t0:.2f} seconds")
-
+            self.run_bench(verbosity, cwd)
         else:
+            self.run_build(verbosity, pool_size, cwd, time)
+
+    def run_build(self, verbosity, pool_size, cwd, time):
+        t0 = now()
+
+        build_runner = BuildRunner(
+            pool_size=pool_size, cwd=cwd, verbosity=verbosity
+        )
+        build_runner.run()
+
+        if time:
+            t1 = now()
+            print(f"Time: {t1 - t0:.2f} seconds")
+
+    def run_bench(self, verbosity, cwd):
+        for pool_size in range(1, 33):
+            t0 = now()
             build_runner = BuildRunner(
-                pool_size=pool_size, cwd=cwd, verbosity=verbosity
+                cwd=cwd,
+                pool_size=pool_size, report=False, verbosity=verbosity
             )
             build_runner.run()
-
-            if time:
-                t1 = now()
-                print(f"Time: {t1 - t0:.2f} seconds")
+            t1 = now()
+            print(f"CPUs: {pool_size} -> Time: {t1 - t0:.2f} seconds")
 
 
 @dataclass(frozen=True, order=True)
