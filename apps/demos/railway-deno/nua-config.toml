@@ -13,8 +13,9 @@ src-url = "https://github.com/railwayapp-templates/deno/archive/refs/heads/main.
 [build]
 builder = "deno"
 
-build-packages = []
+# This currently fails (type error)
+test = "deno check index.ts"
 
 [run]
-# Doesn't work with Deno 1.32.4
-start-command = "deno --allow-net --allow-env src/index.ts"
+# This currently fails (type error)
+start-command = "deno run --allow-net --allow-env src/index.ts"

@@ -1,5 +1,5 @@
 [metadata]
-id = "render-demo-rocket"
+id = "render-rocket"
 title = "Demo for Rust + Rocket"
 author = "Render"
 version = "0.1"

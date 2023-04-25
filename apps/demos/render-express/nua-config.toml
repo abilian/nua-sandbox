@@ -1,5 +1,5 @@
 [metadata]
-id = "render-demo-express"
+id = "render-express"
 title = "Demo ExpressJS"
 author = "Render"
 website = "https://github.com/render-examples/express-hello-world/"
