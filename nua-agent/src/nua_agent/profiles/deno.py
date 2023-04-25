@@ -1,3 +1,5 @@
+from nua_agent import sh
+
 from .base import BaseProfile
 
 
@@ -6,8 +8,10 @@ class DenoProfile(BaseProfile):
 
     name = "deno"
     label = "Deno"
+
     builder_packages = [
-        "git",
+        "rust-all",
+        # "git",
     ]
 
     def accept(self):
@@ -18,12 +22,7 @@ class DenoProfile(BaseProfile):
         return True
 
     def prepare(self):
-        pass
-
-        # build_config = self.config.get("build", {})
-        # node_version = build_config.get("node-version", "14.x")
-        # install_nodejs(node_version)
-        # sh.shell("ln -sf /usr/bin/yarnpkg /usr/bin/yarn")
+        sh.shell("cargo install deno --locked")
 
     def build(self):
         pass

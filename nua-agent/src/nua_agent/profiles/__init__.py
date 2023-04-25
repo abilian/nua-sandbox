@@ -1,3 +1,5 @@
+from nua_agent.profiles.deno import DenoProfile
+
 from .base import BaseProfile
 from .clojure import ClojureProfile
 from .go import GoProfile
@@ -19,6 +21,7 @@ PROFILE_CLASSES: list[type[BaseProfile]] = [
     GoProfile,
     ClojureProfile,
     RustProfile,
+    DenoProfile,
 ]
 
 
