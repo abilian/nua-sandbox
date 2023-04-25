@@ -13,7 +13,7 @@ nua-dev = { path = "nua-dev", develop = true }
 nua-run = { path = "nua-run", develop = true }
 
 [tool.poetry.group.dev.dependencies]
-abilian-devtools = "^0.4.8"
+abilian-devtools = "^0.5.1"
 invoke = "^2.0.0"
 devtools = "^0.10.0"
 watchfiles = "^0.18.1"
