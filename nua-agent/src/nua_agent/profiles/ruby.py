@@ -1,5 +1,3 @@
-from nua_agent.backports import chdir
-
 from .. import sh
 from .base import BaseProfile
 from .common import check_requirements

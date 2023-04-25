@@ -27,6 +27,10 @@ def install_nodejs(version="14.x"):
     shell("/usr/bin/npm install -g yarn")
 
 
+def install_deno():
+    shell("curl -fsSL https://deno.land/x/install/install.sh | sh")
+
+
 def clear_apt_cache():
     shell("apt-get clean")
     shell("rm -rf /var/lib/apt/lists/*")

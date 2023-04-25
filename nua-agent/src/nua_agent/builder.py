@@ -1,5 +1,6 @@
 import tempfile
 from pathlib import Path
+from typing import cast
 from urllib.error import HTTPError
 from urllib.request import urlretrieve
 
@@ -84,13 +85,14 @@ class Builder:
         return self.profile.get_system_packages()
 
     def _get_profile(self) -> BaseProfile:
-        if self._profile:
-            return self._profile
+        build_config = cast(JsonDict, self.config["build"])
+        if builder_name := cast(str, build_config.get("builder", "")):
+            if "-" in builder_name:
+                builder_name = builder_name.split("-")[0]
+            return self._get_builder(builder_name)
+        return self._detect_profile()
 
-        # print("src content:")
-        # print([str(p) for p in Path(".").glob("*")])
-        # print()
-
+    def _detect_profile(self) -> BaseProfile:
         for profile_cls in PROFILE_CLASSES:
             profile = profile_cls(self.config)
             if profile.accept():
@@ -98,4 +100,10 @@ class Builder:
                 echo(f"-----> {kind} app detected.")
                 return profile
 
-        raise Fail("No profile found.")
+        raise Fail("No profile accepts to build this app.")
+
+    def _get_builder(self, builder_name: str) -> BaseProfile:
+        for profile_cls in PROFILE_CLASSES:
+            if profile_cls.name == builder_name:
+                return profile_cls(self.config)
+        raise Fail(f"Unknown builder: {builder_name}")
