@@ -16,4 +16,4 @@ src-url = "https://github.com/railwayapp-templates/ruby-rails/archive/refs/heads
 #
 
 [build]
-builder = "ruby"
+builder = "ruby-32"

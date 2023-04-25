@@ -11,9 +11,10 @@ license = "MIT"
 src-url = "https://github.com/railwayapp-templates/deno/archive/refs/heads/main.tar.gz"
 
 [build]
-builder = "node"
+builder = "deno"
 
 build-packages = []
 
 [run]
+# Doesn't work with Deno 1.32.4
 start-command = "deno --allow-net --allow-env src/index.ts"
