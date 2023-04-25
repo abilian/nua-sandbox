@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 import jinja2
-from cleez import Argument, Command
+from cleez import Command, Option
 
 from nua_dev import upstream
 from nua_dev.console import panic
@@ -16,8 +16,8 @@ class InitCommand(Command):
     name = "init"
 
     arguments = [
-        Argument("--from-github", help="GitHub repository to use as a template"),
-        Argument("--dir", help="Directory to create the project in"),
+        Option("--from-github", help="GitHub repository to use as a template"),
+        Option("--dir", help="Directory to create the project in"),
     ]
 
     def run(self, from_github: str = "", dir: Path | None = None):
