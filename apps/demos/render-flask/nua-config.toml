@@ -2,10 +2,11 @@
 id = "render-flask"
 title = "Demo Flask"
 author = "Render"
+website = "https://github.com/render-examples/flask-hello-world/"
 version = "0.1"
 release = 1
 license = "MIT"
-src-url = "https://github.com/render-examples/flask-hello-world/archive/refs/heads/main.tar.gz"
+src-url = "https://github.com/render-examples/flask-hello-world/archive/refs/heads/master.zip"
 
 [build]
 builder = "python"

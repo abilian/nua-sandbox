@@ -2,10 +2,11 @@
 id = "render-nextjs"
 title = "Demo NextJS"
 author = "Render"
+website = "https://github.com/render-examples/nextjs-hello-world/"
 version = "0.1"
 release = 1
 license = "MIT"
-src-url = "https://github.com/render-examples/nextjs-hello-world/archive/refs/heads/master.tar.gz"
+src-url = "https://github.com/render-examples/nextjs-hello-world/archive/refs/heads/master.zip"
 
 [build]
 builder = "node-16"

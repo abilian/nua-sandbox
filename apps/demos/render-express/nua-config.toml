@@ -6,7 +6,7 @@ website = "https://github.com/render-examples/express-hello-world/"
 version = "0.1"
 release = 1
 license = "MIT"
-src-url = "https://github.com/render-examples/express-hello-world/archive/refs/heads/main.tar.gz"
+src-url = "https://github.com/render-examples/express-hello-world/archive/refs/heads/main.zip"
 
 [build]
 builder = "node-16"

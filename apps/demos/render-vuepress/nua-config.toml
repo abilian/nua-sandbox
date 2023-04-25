@@ -5,7 +5,7 @@ author = "Render"
 version = "0.1"
 release = 1
 license = "MIT"
-src-url = "https://github.com/render-examples/vuepress/archive/refs/heads/master.tar.gz"
+src-url = "https://github.com/render-examples/vuepress/archive/refs/heads/master.zip"
 
 [build]
 builder = "node"
