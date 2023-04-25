@@ -1,7 +1,9 @@
-import typer
 from cleez.colors import red
 
 
-def panic(msg):
-    print(red(msg))
-    raise typer.Exit(1)
+class Abort(SystemExit):
+    def __init__(self, msg: str) -> None:
+        super().__init__(msg)
+        self.msg = msg
+        print(red(msg))
+        raise SystemExit(1)

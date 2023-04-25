@@ -3,22 +3,21 @@ from __future__ import annotations
 import os
 from typing import Any
 
-import typer
+from cleez.colors import blue
 from github import Github, UnknownObjectException
-from typer.colors import GREEN
 
-from nua_dev.console import panic
+from nua_dev.console import Abort
 
 
 class GitHub:
     def __init__(self, repo_id) -> None:
         self.repo_id = repo_id
 
-        typer.secho(f"Initializing from GitHub: {self.repo_id}", fg=GREEN)
+        print(blue(f"Initializing from GitHub: {self.repo_id}"))
 
         gh_token = os.getenv("GH_TOKEN")
         if not gh_token:
-            panic(
+            raise Abort(
                 "Please provide your GitHub access token as "
                 + "the GH_TOKEN environment variable."
             )

@@ -7,8 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from attr import define, field
-from typer import secho as echo
-from typer.colors import CYAN, GREEN
+from cleez.colors import blue
 
 from . import sh
 from .backports import chdir
@@ -31,15 +30,15 @@ class Builder:
 
         build_dir = tempfile.mkdtemp(prefix=temp_dir_prefix)
 
-        echo(f"\nBuilding in {build_dir}", fg=GREEN)
+        print(blue(f"\nBuilding in {build_dir}"))
         with chdir(build_dir):
             self.setup_build_dir()
             sh.shell(f"docker build -t nua-{self.app_id} .")
 
-        echo("\nCleaning up build dir", fg=GREEN)
+        print(blue("\nCleaning up build dir"))
 
     def setup_build_dir(self):
-        echo("Setting up build dir", fg=CYAN)
+        print(blue("Setting up build dir"))
         etc_dir = Path(__file__).parent / "etc"
         for file in etc_dir.glob("build_files/*"):
             sh.cp(file, ".")
@@ -55,7 +54,7 @@ class Builder:
         return Path(nua_dev.__file__).parent.parent.parent.parent / "nua-agent"
 
     def _build_agent(self):
-        echo("\nBuilding wheel for agent", fg=GREEN)
+        print(blue("\nBuilding wheel for agent"))
         with chdir(self.agent_root):
             sh.shell("poetry build")
 

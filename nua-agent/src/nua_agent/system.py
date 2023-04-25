@@ -1,7 +1,6 @@
 import os
 
-from click import secho
-from typer.colors import GREEN
+from cleez.colors import blue, green
 
 from .sh import shell
 
@@ -10,10 +9,10 @@ os.environ["DEBIAN_FRONTEND"] = "noninteractive"
 
 def install_packages(packages):
     if not packages:
-        secho("\nNo packages to install.", fg=GREEN)
+        print(green("\nNo packages to install."))
         return
 
-    secho(f"\nWill install packages: {packages}", fg=GREEN)
+    print(blue(f"\nWill install packages: {packages}"))
 
     cmd = f"apt-get install -qq -y {' '.join(packages)}"
     shell(cmd)
