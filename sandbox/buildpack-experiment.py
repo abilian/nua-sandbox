@@ -45,8 +45,8 @@ def main():
 
 
 def build_app(app_dir: Path):
-    config = Config().parse_config(app_dir)
-    app_name = config["metadata"]["id"]
+    config = Config.from_file(app_dir)
+    app_name = config.app_id
 
     builder = Builder(config)
 

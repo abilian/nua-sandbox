@@ -6,7 +6,10 @@ from __future__ import annotations
 
 import importlib.metadata
 
+import snoop
 from cleez import CLI
+
+snoop.install()
 
 
 def get_cli() -> CLI:

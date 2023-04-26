@@ -1,16 +1,23 @@
+import argparse
 import multiprocessing as mp
 import subprocess
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from itertools import groupby
 from pathlib import Path
 from time import time as now
 
 from cleez import Argument, Command, Option
+from cleez.actions import COUNT, STORE, STORE_TRUE
 from cleez.colors import green, red
 from tabulate import tabulate
 
 POOL_SIZE = 8
 BUILD_METHODS = ["nua-build", "nua-dev"]
+
+
+class SplitArgs(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        setattr(namespace, self.dest, values.split(","))
 
 
 class BuildAllCommand(Command):
@@ -20,7 +27,7 @@ class BuildAllCommand(Command):
         Argument(
             "directory",
             nargs="?",
-            action="store",
+            action=STORE,
             default=".",
             help="Where to find the apps",
         ),
@@ -28,7 +35,7 @@ class BuildAllCommand(Command):
             "-v",
             "--verbosity",
             default=0,
-            action="count",
+            action=COUNT,
             help="Increase output verbosity",
         ),
         Option(
@@ -42,27 +49,38 @@ class BuildAllCommand(Command):
         Option(
             "-d",
             "--cwd",
-            action="store",
+            action=STORE,
             default="",
             help="Change working directory",
         ),
-        Option("-t", "--time", action="store_true", help="Print timing info"),
-        Option("-b", "--bench", action="store_true", help="Run benchmarks"),
+        Option(
+            "-B",
+            "--build-methods",
+            action=SplitArgs,
+            help="Build method(s) to use (comma-separated)",
+        ),
+        Option("-t", "--time", action=STORE_TRUE, help="Print timing info"),
+        Option("-b", "--bench", action=STORE_TRUE, help="Run benchmarks"),
     ]
 
-    def run(self, directory, verbosity, pool_size, cwd, time, bench):
+    def run(
+        self, _args, directory, build_methods, verbosity, pool_size, cwd, time, bench
+    ):
         cwd = cwd or directory
 
         if bench:
             self.run_bench(verbosity, cwd)
         else:
-            self.run_build(verbosity, pool_size, cwd, time)
+            self.run_build(build_methods, verbosity, pool_size, cwd, time)
 
-    def run_build(self, verbosity, pool_size, cwd, time):
+    def run_build(self, build_methods, verbosity, pool_size, cwd, time):
         t0 = now()
 
         build_runner = BuildRunner(
-            pool_size=pool_size, cwd=cwd, verbosity=verbosity
+            build_methods=build_methods,
+            pool_size=pool_size,
+            cwd=cwd,
+            verbosity=verbosity,
         )
         build_runner.run()
 
@@ -74,8 +92,7 @@ class BuildAllCommand(Command):
         for pool_size in range(1, 33):
             t0 = now()
             build_runner = BuildRunner(
-                cwd=cwd,
-                pool_size=pool_size, report=False, verbosity=verbosity
+                cwd=cwd, pool_size=pool_size, report=False, verbosity=verbosity
             )
             build_runner.run()
             t1 = now()
@@ -92,19 +109,26 @@ class BuildResult:
 
 @dataclass(frozen=True)
 class BuildRunner:
+    cwd: str = "."
+    build_methods: list[str] = field(default_factory=lambda: BUILD_METHODS)
     pool_size: int = POOL_SIZE
     report: bool = True
-    cwd: str = "."
     verbosity: int = 0
 
     def run(self):
+        self.validate()
         results = self.build_all()
         if self.report:
             self.report_results(results)
 
+    def validate(self):
+        for bm in self.build_methods:
+            if bm not in BUILD_METHODS:
+                raise ValueError(f"Invalid build method: {bm}")
+
     def build_all(self) -> list[BuildResult]:
         apps = self.get_apps()
-        args = [(app, cmd) for app in apps for cmd in BUILD_METHODS]
+        args = [(app, method) for app in apps for method in self.build_methods]
 
         with mp.Pool(self.pool_size) as pool:
             return pool.starmap(self.try_build, args)
@@ -128,27 +152,28 @@ class BuildRunner:
 
         print(tabulate(table, headers=["App", *headers]))
 
-    def try_build(self, path: Path, command: str) -> BuildResult:
+    def try_build(self, path: Path, method: str) -> BuildResult:
         t0 = now()
-        self.log(f"Starting build of {path} with {command}", 1)
-        match command:
+        self.log(f"Starting build of {path} with {method}", 1)
+
+        match method:
             case "nua-build":
                 args = ["nua-build", str(path)]
             case "nua-dev":
                 args = ["nua-dev", "build", str(path)]
             case _:
-                raise ValueError(f"Unknown command: {command}")
+                raise ValueError(f"Unknown command: {method}")
 
         try:
             subprocess.run(args, capture_output=True, check=True)
             status = True
-            self.log(f"Build of {path} with {command} succeeded", 1, green)
+            self.log(f"Build of {path} with {method} succeeded", 1, green)
         except subprocess.CalledProcessError:
             status = False
-            self.log(f"Build of {path} with {command} failed", 1, red)
+            self.log(f"Build of {path} with {method} failed", 1, red)
 
         t1 = now()
-        return BuildResult(str(path), command, status, t1 - t0)
+        return BuildResult(str(path), method, status, t1 - t0)
 
     def is_nua_project(self, path):
         if not path.is_dir():

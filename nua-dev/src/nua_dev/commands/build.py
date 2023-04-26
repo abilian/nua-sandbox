@@ -33,7 +33,7 @@ class BuildCommand(Command):
         """Build an image from the current directory."""
         t0 = time.time()
         try:
-            config = Config().parse_config()
+            config = Config.from_file(".")
         except ConfigParseError as e:
             print(red(e))
             raise SystemExit(1)

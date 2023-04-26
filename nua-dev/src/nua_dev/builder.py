@@ -11,18 +11,19 @@ from cleez.colors import blue
 
 from . import sh
 from .backports import chdir
-from .types import JSON
+from .config import Config
 
 
 @define
 class Builder:
-    config: JSON = None
+    config: Config
+
     # Not used (yet)
     options: dict[str, Any] = field(factory=dict)
 
     @property
     def app_id(self) -> str:
-        return self.config["metadata"]["id"]  # type: ignore
+        return self.config.app_id
 
     def build(self):
         self._build_agent()
@@ -61,8 +62,9 @@ class Builder:
     def write_config(self):
         # Write as JSON. From now on, we only use JSON.
         with Path("_nua-config.json").open("w") as fd:
-            json.dump(self.config, fd, indent=2)
+            self.config.dump_to(fd)
 
-        build_config = self.config["build"]
+        # TODO
+        build_config = self.config.build
         with Path("_nua-build-config.json").open("w") as fd:
             json.dump(build_config, fd, indent=2)
