@@ -4,8 +4,6 @@ from typing import cast
 from urllib.error import HTTPError
 from urllib.request import urlretrieve
 
-from click import secho as echo
-
 from . import sh, system
 from .config import read_config
 from .profiles import PROFILE_CLASSES, BaseProfile
@@ -41,7 +39,7 @@ class Builder:
         # Cf. download_extract() in nua/lib/actions.py
         metadata = self.config["metadata"]
         src_url = metadata["src-url"]
-        echo(f"Fetching: {src_url}")
+        print(f"Fetching: {src_url}")
 
         # shell(f"curl -sL {src_url} | tar xz --strip-components={strip_components} -f -")
 
@@ -59,6 +57,7 @@ class Builder:
 
     def build_app(self):
         build_config = self.config.get("build", {})
+
         if "before-build" in build_config:
             sh.shell(build_config["before-build"])
 
@@ -66,6 +65,21 @@ class Builder:
             sh.shell("bash build.sh")
         else:
             self.profile.build()
+
+        if test := build_config.get("test"):
+            print("Running smoke test(s)...")
+            match build_config["test"]:
+                case str(line):
+                    test_str = line
+                case [*lines]:
+                    test_str = "\n".join(lines)
+                case _:
+                    raise ValueError(f"Invalid test: {test}")
+            try:
+                sh.shell(test_str)
+            except RuntimeError:
+                print(f"Test {test} failed.")
+                raise Fail("Test failed.")
 
     def cleanup(self):
         self.profile.cleanup()
@@ -97,7 +111,7 @@ class Builder:
             profile = profile_cls(self.config)
             if profile.accept():
                 kind = profile_cls.label
-                echo(f"-----> {kind} app detected.")
+                print(f"-----> {kind} app detected.")
                 return profile
 
         raise Fail("No profile accepts to build this app.")
@@ -106,4 +120,5 @@ class Builder:
         for profile_cls in PROFILE_CLASSES:
             if profile_cls.name == builder_name:
                 return profile_cls(self.config)
+
         raise Fail(f"Unknown builder: {builder_name}")

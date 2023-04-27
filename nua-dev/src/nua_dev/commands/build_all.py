@@ -67,6 +67,7 @@ class BuildAllCommand(Command):
         self, _args, directory, build_methods, verbosity, pool_size, cwd, time, bench
     ):
         cwd = cwd or directory
+        build_methods = build_methods or BUILD_METHODS
 
         if bench:
             self.run_bench(verbosity, cwd)
@@ -158,7 +159,7 @@ class BuildRunner:
 
         match method:
             case "nua-build":
-                args = ["nua-build", str(path)]
+                args = ["nua-build", "--no-save", str(path)]
             case "nua-dev":
                 args = ["nua-dev", "build", str(path)]
             case _:
