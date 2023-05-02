@@ -10,7 +10,7 @@ import tomli
 from attr import define
 from tomli import TOMLDecodeError
 
-from nua_dev.types import JSON
+from .types import JSON
 
 
 class ConfigParseError(Exception):
@@ -26,7 +26,14 @@ class Config:
         if isinstance(path, str):
             path = Path(path)
         if path.is_dir():
-            path /= "nua-config.toml"
+            if (path / "nua-config.toml").exists():
+                path /= "nua-config.toml"
+            elif (path / "nua" / "nua-config.toml").exists():
+                path = path / "nua" / "nua-config.toml"
+            else:
+                raise ConfigParseError(
+                    f"Could not find nua-config.json or nua/nua-config.toml in {path}"
+                )
 
         try:
             config = tomli.load(path.open("rb"))
