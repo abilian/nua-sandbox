@@ -20,11 +20,12 @@ from cleez import CLI, Command
 from cleez.actions import VERSION
 from cleez.colors import yellow
 
-from . import sh, system
+from . import system
 from .builder import Builder
 from .profiles import PROFILE_CLASSES
 from .system import install_packages
-from .util import Fail
+from .utils import sh
+from .utils.exceptions import Fail
 
 snoop.install()
 

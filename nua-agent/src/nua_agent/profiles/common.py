@@ -1,17 +1,17 @@
 from shutil import which
 
-from click import secho as echo
+from cleez.colors import green
 
 
 def found_app(kind):
     """Helper function to output app detected."""
-    echo(f"-----> {kind} app detected.", fg="green")
+    print(green(f"-----> {kind} app detected."))
 
 
 def check_requirements(binaries) -> bool:
     """Checks if all the binaries exist and are executable."""
-    echo(f"-----> Checking requirements: {binaries}", fg="green")
+    print(green(f"-----> Checking requirements: {binaries}"))
     requirements = list(map(which, binaries))
-    echo(str(requirements))
+    print(str(requirements))
 
     return None not in requirements

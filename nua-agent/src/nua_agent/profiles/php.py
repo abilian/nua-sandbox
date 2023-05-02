@@ -1,4 +1,4 @@
-from .. import sh
+from ..utils import sh
 from .base import BaseProfile
 
 

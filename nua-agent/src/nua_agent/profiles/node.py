@@ -1,5 +1,5 @@
-from .. import sh
 from ..system import install_nodejs
+from ..utils import sh
 from .base import BaseProfile
 from .common import check_requirements
 

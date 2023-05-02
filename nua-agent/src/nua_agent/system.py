@@ -2,7 +2,7 @@ import os
 
 from cleez.colors import blue, green
 
-from .sh import shell
+from .utils.sh import shell
 
 os.environ["DEBIAN_FRONTEND"] = "noninteractive"
 

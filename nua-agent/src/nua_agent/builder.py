@@ -4,12 +4,13 @@ from typing import cast
 from urllib.error import HTTPError
 from urllib.request import urlretrieve
 
-from . import sh, system
+from . import system
 from .config import read_config
 from .profiles import PROFILE_CLASSES, BaseProfile
 from .types import JsonDict
 from .unarchiver import unarchive
-from .util import Fail
+from .utils import sh
+from .utils.exceptions import Fail
 
 
 class Builder:
