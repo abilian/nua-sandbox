@@ -166,6 +166,6 @@ def main(
     ctx: typer.Context,
     version: Optional[bool] = OPTS["version"],
 ):
-    """nua-git (internal) utilities."""
+    """Nua-git (internal) utilities."""
     if ctx.invoked_subcommand is None:
         os.execl("/bin/bash", "/bin/bash")

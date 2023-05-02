@@ -1,3 +1,5 @@
+"""Build a single app image."""
+
 from __future__ import annotations
 
 import time
@@ -7,9 +9,9 @@ from pathlib import Path
 from cleez import Argument, Command
 from cleez.colors import green, red
 
-from nua_dev.backports import chdir
 from nua_dev.builder import Builder
 from nua_dev.config import Config, ConfigParseError
+from nua_dev.utils.backports import chdir
 
 
 class BuildCommand(Command):

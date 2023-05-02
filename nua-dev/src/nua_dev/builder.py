@@ -9,9 +9,9 @@ from typing import Any
 from attr import define, field
 from cleez.colors import blue
 
-from . import sh
-from .backports import chdir
 from .config import Config
+from .utils import sh
+from .utils.backports import chdir
 
 
 @define

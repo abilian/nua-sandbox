@@ -1,3 +1,8 @@
+"""Build all the apps in a given directory.
+
+Useful for tests and benchmarks.
+"""
+
 import argparse
 import multiprocessing as mp
 import subprocess
