@@ -19,7 +19,7 @@ nua-dev = "nua_dev.cli:main"
 [tool.poetry.dependencies]
 python = "^3.10"
 
-nua-build-agent = "*"
+# nua-build-agent = "*"
 
 cleez = "^0.1.9"
 jinja2 = "^3.1.2"
@@ -87,18 +87,24 @@ exclude = [
 ]
 
 ignore = [
+    # Fix these later
+    "B904",
+    "BLE001",
+    "PLR0913",
+    # No need to fix
     "S101",  # Use of `assert` detected
     "SIM108", # Use ternary operator
     "A001",  # Shadowing of built-in
     "A002",  # Argument `input` is shadowing a python builtin
     "I001",  # Ruff not agreeing with isort
-    "B904",
-    "BLE001",
-    "PLR0913",
+    # Irrelevant security issues
     "S101",
     "S603",
     "S605",
     "S701",
+    # Esthetic issues I don't agree with
+    "RET505",
+    "PLC1901",
 ]
 
 

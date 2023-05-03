@@ -9,22 +9,22 @@ ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /nua/build
 
 # Initial bootstrap (install Python, etc.)
-COPY nua-image-bootstrap.sh ./bin/
-RUN /bin/sh bin/nua-image-bootstrap.sh
+COPY nua-bootstrap-image.sh nua-install-build-agent.py ./bin/
+RUN /bin/sh bin/nua-bootstrap-image.sh
 
 # Install nua-build-agent
 COPY ./dist/ ./dist/
-RUN /nua/build/env/bin/pip install \
-    /nua/build/dist/*.whl setuptools typer jinja2 snoop
+RUN /nua/build-env/bin/python3 bin/nua-install-build-agent.py
 
 # Install system dependencies
 COPY ./_nua-build-config.json ./
-RUN ./env/bin/nua-build-agent install-deps
+RUN /nua/build-env/bin/nua-build-agent install-deps
 
 # Build app
 COPY ./_nua-config.json ./
-RUN ./env/bin/nua-build-agent build-app
+ADD ./src/* /nua/src/
+RUN /nua/build-env/bin/nua-build-agent build-app
 
 # Cleanup
-RUN ./env/bin/nua-build-agent cleanup
+RUN /nua/build-env/bin/nua-build-agent cleanup
 RUN rm -rf /nua/build-env

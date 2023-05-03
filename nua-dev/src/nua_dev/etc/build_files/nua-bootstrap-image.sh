@@ -1,4 +1,6 @@
-#/usr/bin/sh
+#!/usr/bin/sh
+
+set -e
 
 useradd nua -m -d /nua -U -s /bin/bash
 
@@ -11,8 +13,9 @@ Acquire::CompressionTypes::Order:: "gz";
 Dir::Cache { srcpkgcache ""; pkgcache ""; }
 EOF
 
-apt-get -y update && \
+echo "Installing Python packages" && \
+    apt-get -y update && \
     apt-get -qq --no-install-recommends install \
-      python3 python3-pip python3.10-venv curl python3-setuptools
+        python3.10 python3.10-venv python-pip python-setuptools curl
 
-python3 -m venv /nua/build/env
+python3 -m venv /nua/build-env

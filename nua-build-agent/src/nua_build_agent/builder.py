@@ -5,7 +5,7 @@ from urllib.error import HTTPError
 from urllib.request import urlretrieve
 
 from . import system
-from .config import read_config
+from .config import Config, read_config
 from .profiles import PROFILE_CLASSES, BaseProfile
 from .types import JsonDict
 from .unarchiver import unarchive
@@ -16,14 +16,14 @@ from .utils.exceptions import Fail
 class Builder:
     """Builds an app."""
 
-    config: JsonDict
+    config: Config
     _profile: BaseProfile | None = None
 
     builder_packages: list[str] = []
 
     def __init__(self, config: JsonDict | None = None):
         if config:
-            self.config = config
+            self.config = Config(config)
         else:
             self.config = read_config()
 
@@ -41,26 +41,27 @@ class Builder:
 
         # TODO: rewrite in pure Python and deal with all the cases (zip, git...)
         # Cf. download_extract() in nua/lib/actions.py
-        metadata = cast(JsonDict, self.config["metadata"])
-        src_url = cast(str, metadata["src-url"])
+        src_url = self.config.get_str("metadata.src-url")
         print(f"Fetching: {src_url}")
 
         # shell(f"curl -sL {src_url} | tar xz --strip-components={strip_components} -f -")
 
         with tempfile.TemporaryDirectory() as tmp:
-            try:
+            if src_url:
                 self.download_src(src_url, tmp)
-            except HTTPError as e:
-                Fail(f"Error while downloading {src_url}: {e}")
-            archive = Path(tmp) / Path(src_url).name
-            unarchive(archive, ".")
+                archive = Path(tmp) / Path(src_url).name
+                unarchive(archive, ".")
+            else:
+                sh.shell("pwd")
+                sh.shell("ls /nua")
+                sh.shell("cp -r /nua/src/* .")
 
     def prepare(self):
         system.install_packages(self._get_system_packages())
         self.profile.prepare()
 
     def build_app(self):
-        build_config = cast(JsonDict, self.config.get("build", {}))
+        build_config = self.config.get("build", {})
 
         if "before-build" in build_config:
             sh.shell(build_config["before-build"])
@@ -97,13 +98,16 @@ class Builder:
         # if not any(name.endswith(suf) for suf in (".zip", ".tar", ".tar.gz", ".tgz")):
         #     raise ValueError(f"Unknown archive format for '{name}'")
         target = Path(tmp) / name
-        urlretrieve(url, target)
+        try:
+            urlretrieve(url, target)
+        except HTTPError as e:
+            Fail(f"Error while downloading {url}: {e}")
 
     def _get_system_packages(self) -> list[str]:
         return self.profile.get_system_packages()
 
     def _get_profile(self) -> BaseProfile:
-        build_config = cast(JsonDict, self.config["build"])
+        build_config = self.config.get_dict("build")
         if builder_name := cast(str, build_config.get("builder", "")):
             if "-" in builder_name:
                 builder_name = builder_name.split("-")[0]

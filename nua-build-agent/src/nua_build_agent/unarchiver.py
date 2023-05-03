@@ -58,4 +58,5 @@ def unarchive(src: str | Path, dest_dir: str) -> None:
         if unarchiver.accept(src):
             unarchiver.extract(str(src), dest_dir)
             return
+
     raise ValueError(f"Unknown archive format for '{src}'")

@@ -1,17 +1,18 @@
 from pathlib import Path
 from typing import cast
 
+from ..config import Config
 from ..types import JsonDict
 
 
 class BaseProfile:
-    config: JsonDict
+    config: Config
 
     name: str = ""
     label: str = ""
     builder_packages: list[str] = []
 
-    def __init__(self, config: JsonDict):
+    def __init__(self, config: Config):
         self.config = config
 
     @property
@@ -53,7 +54,7 @@ class BaseProfile:
     #
     def get_system_packages(self) -> list[str]:
         default_build: JsonDict = {}
-        build_info: JsonDict = cast(JsonDict, self.config.get("build", default_build))
+        build_info: JsonDict = self.config.get_dict("build", default_build)
 
         packages: set[str] = set()
         packages.update(cast(list[str], build_info.get("build-packages", [])))
