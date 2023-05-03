@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "nua-agent"
+name = "nua-build-agent"
 version = "0.1"
-description = "Nua agent - CLI and code that runs in the containers / VMs"
+description = "Nua build agent - CLI and code that runs in the containers / VMs"
 authors = [
     "Stefane Fermigier <sf@abilian.com>",
     "Jerome Dumonteil <jd@abilian.com>",
@@ -9,11 +9,11 @@ authors = [
 license = "MIT"
 readme = "README.md"
 packages = [
-    { include = "nua_agent", from = "src" },
+    { include = "nua_build_agent", from = "src" },
 ]
 
 [tool.poetry.scripts]
-nua-agent = "nua_agent.cli:main"
+nua-build-agent = "nua_build_agent.cli:main"
 
 
 [tool.poetry.dependencies]

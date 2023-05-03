@@ -1668,7 +1668,7 @@ virtualenv = ">=14"
 tox-to-nox = ["jinja2", "tox (<4)"]
 
 [[package]]
-name = "nua-agent"
+name = "nua-build-agent"
 version = "0.1"
 description = "Nua agent - CLI and code that runs in the containers / VMs"
 category = "main"
@@ -1684,7 +1684,7 @@ setuptools = "*"
 
 [package.source]
 type = "directory"
-url = "nua-agent"
+url = "nua-build-agent"
 
 [[package]]
 name = "nua-dev"

@@ -52,7 +52,7 @@ class Builder:
     def agent_root(self) -> Path:
         import nua_dev
 
-        return Path(nua_dev.__file__).parent.parent.parent.parent / "nua-agent"
+        return Path(nua_dev.__file__).parent.parent.parent.parent / "nua-build-agent"
 
     def _build_agent(self):
         print(blue("\nBuilding wheel for agent"))

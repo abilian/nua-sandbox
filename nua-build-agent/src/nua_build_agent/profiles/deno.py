@@ -1,4 +1,4 @@
-from nua_agent.system import install_deno
+from nua_build_agent.system import install_deno
 
 from .base import BaseProfile
 

@@ -14,30 +14,29 @@ packages = [
 
 [tool.poetry.scripts]
 nua-dev = "nua_dev.cli:main"
-nua-build-all = "nua_dev.tools.build_all:main"
 
 
 [tool.poetry.dependencies]
 python = "^3.10"
-tomli = "^2.0.1"
 
-# setuptools = "*"
+nua-build-agent = "*"
+
+cleez = "^0.1.9"
 jinja2 = "^3.1.2"
-jsonschema = "^4.17.3"
 json5 = "^0.9.11"
+jsonschema = "^4.17.3"
 pygithub = "^1.58.1"
 snoop = "^0.4.3"
 tabulate = "^0.9.0"
-cleez = "^0.1.9"
-
+tomli = "^2.0.1"
 
 [tool.poetry.group.dev.dependencies]
 abilian-devtools = "^0.5.1"
 nox = "^2023.4.22"
-types-jsonschema = "^4.17.0.7"
 
-# types-setuptools = "*"
+types-jsonschema = "^4.17.0.7"
 types-tabulate = "^0.9.0.2"
+
 
 [tool.pytest.ini_options]
 filterwarnings = [

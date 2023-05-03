@@ -12,19 +12,19 @@ WORKDIR /nua/build
 COPY nua-image-bootstrap.sh ./bin/
 RUN /bin/sh bin/nua-image-bootstrap.sh
 
-# Install nua-agent
+# Install nua-build-agent
 COPY ./dist/ ./dist/
 RUN /nua/build/env/bin/pip install \
     /nua/build/dist/*.whl setuptools typer jinja2 snoop
 
 # Install system dependencies
 COPY ./_nua-build-config.json ./
-RUN ./env/bin/nua-agent install-deps
+RUN ./env/bin/nua-build-agent install-deps
 
 # Build app
 COPY ./_nua-config.json ./
-RUN ./env/bin/nua-agent build-app
+RUN ./env/bin/nua-build-agent build-app
 
 # Cleanup
-RUN ./env/bin/nua-agent cleanup
+RUN ./env/bin/nua-build-agent cleanup
 RUN rm -rf /nua/build-env

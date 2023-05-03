@@ -15,10 +15,14 @@ from nua_dev.utils.backports import chdir
 
 
 class BuildCommand(Command):
+    """Build one or more apps images."""
+
     name = "build"
 
     arguments = [
-        Argument("targets", nargs="+", help="Files or directories to check"),
+        Argument(
+            "targets", nargs="*", help="Directories where to find the apps to build"
+        )
     ]
 
     def run(self, targets: list[Path]):

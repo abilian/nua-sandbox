@@ -4,10 +4,10 @@ from abilian_devtools.invoke import import_tasks
 from click import secho as echo
 from invoke import Context, task
 
-NUA_AGENT_WHL = "nua-agent/dist/nua_agent-0.1-py3-none-any.whl"
+NUA_AGENT_WHL = "nua-build-agent/dist/nua_agent-0.1-py3-none-any.whl"
 
 SUB_REPOS = [
-    "nua-agent",
+    "nua-build-agent",
     "nua-dev",
     "nua-run",
 ]

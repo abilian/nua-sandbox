@@ -1,7 +1,7 @@
 import pytest
 from cleez.testing import CliRunner
 
-from nua_agent.cli import get_cli
+from nua_build_agent.cli import get_cli
 
 
 @pytest.fixture()

@@ -10,7 +10,7 @@ src-url = "https://github.com/railwayapp-templates/flask/archive/refs/heads/main
 
 #
 # Warning: doesn't work currently because we need to put app in a virtualenv
-# (to prevent conflcit between nua-agent's jinja2 and the app's jinja2)
+# (to prevent conflcit between nua-build-agent's jinja2 and the app's jinja2)
 #
 
 [build]

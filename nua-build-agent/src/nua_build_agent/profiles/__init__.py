@@ -1,4 +1,4 @@
-from nua_agent.profiles.deno import DenoProfile
+from nua_build_agent.profiles.deno import DenoProfile
 
 from .base import BaseProfile
 from .clojure import ClojureProfile

@@ -2,7 +2,7 @@
 
 Build:
 
-- `nua-agent build` builds the application.
+- `nua-build-agent build` builds the application.
 
 Run (TODO, but not sure it's needed)
 
@@ -130,7 +130,7 @@ class Cleanup(Command):
 
 
 def get_cli() -> CLI:
-    cli = CLI("nua-agent", version=importlib.metadata.version("nua-agent"))
+    cli = CLI("nua-build-agent", version=importlib.metadata.version("nua-build-agent"))
     cli.add_option(
         "-V",
         "--version",

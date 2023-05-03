@@ -11,13 +11,13 @@ DON'T USE. Useful concepts will be merged into the main `Nua` project.
 
 ## Specific points
 
-- What's called `nua-runtime` in Nua is called `nua-agent` here.
+- What's called `nua-runtime` in Nua is called `nua-build-agent` here.
 - Python sub-packages are called `nua_something` instead of `nua.something`.
 - Main entry point for the project in the `tasks.py` file.
   - Run `poetry shell && poetry install` first
   - Then `invoke install`
   - Then `invoke build-all`.
-- Every time you edit something in `nua-agent`, you need to rebuild the base image
+- Every time you edit something in `nua-build-agent`, you need to rebuild the base image
   - (so either run `invoke build-all` or `invoke build-base` before building specific apps).
 - Many apps are not building (yet). Sometimes it's not our fault.
 - Debian (actually, Ubuntu) is used as the base image. This causes some issues (TBD).
@@ -30,7 +30,7 @@ To work specifically on trying to build a specific app, you can run (from the ro
 invoke build-all --only <app-name>
 ```
 
-(This will rebuild the base image each time, so any changes to `nua-agent` will be taken into account.)
+(This will rebuild the base image each time, so any changes to `nua-build-agent` will be taken into account.)
 
 ## What's missing
 

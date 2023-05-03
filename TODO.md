@@ -51,11 +51,11 @@ Metadata / lifecycle:
 
 ## Longer term / advanced R&D
 
-- [ ] Runtime support via `nua-agent`
-  - [ ] Should we split `nua-agent` into a build-time and a run-time part?
+- [ ] Runtime support via `nua-build-agent`
+  - [ ] Should we split `nua-build-agent` into a build-time and a run-time part?
 - [ ] Alternatives build systems (hand-crafted Dockerfiles, Nix/Guix, https://buildpacks.io/, https://modus-continens.com/, https://nixpacks.com/, etc.)
 - [ ] Alternative backends (e.g. SlapOS)
 - [ ] Support for `docker-compose` (or similar)
 - [ ] Reproducible builds.
 - [ ] SBOM and software supply chain.
-- [ ] Plugins: the system should be extensible. For the build subsystem, this should probably (at least in the current architecture) done by adding support for plugins at the `nua-agent` level. This means that the plugins to use should be specified (in a specific section) in the `nua-config.toml` file and be injected early in the build process (this seems a bit tricky so more thoughts are needed).
+- [ ] Plugins: the system should be extensible. For the build subsystem, this should probably (at least in the current architecture) done by adding support for plugins at the `nua-build-agent` level. This means that the plugins to use should be specified (in a specific section) in the `nua-config.toml` file and be injected early in the build process (this seems a bit tricky so more thoughts are needed).

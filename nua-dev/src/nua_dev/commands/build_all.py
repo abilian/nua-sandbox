@@ -26,6 +26,8 @@ class SplitArgs(argparse.Action):
 
 
 class BuildAllCommand(Command):
+    """Build all the apps in a given directory."""
+
     name = "build-all"
 
     arguments = [
@@ -34,7 +36,7 @@ class BuildAllCommand(Command):
             nargs="?",
             action=STORE,
             default=".",
-            help="Where to find the apps",
+            help="Directory where to find the apps",
         ),
         Option(
             "-v",

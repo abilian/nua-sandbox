@@ -1,6 +1,6 @@
 from typing import cast
 
-from nua_agent.types import JsonDict
+from nua_build_agent.types import JsonDict
 
 from ..system import install_nodejs
 from ..utils import sh
