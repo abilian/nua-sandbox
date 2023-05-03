@@ -36,10 +36,13 @@ class Builder:
     # Lifecycle methods (called from CLI i.e. `main.py`)
     #
     def fetch_app_source(self, strip_components=1):
+        # Silence vulture while we figure out how to deal with this
+        assert strip_components == 1
+
         # TODO: rewrite in pure Python and deal with all the cases (zip, git...)
         # Cf. download_extract() in nua/lib/actions.py
-        metadata = self.config["metadata"]
-        src_url = metadata["src-url"]
+        metadata = cast(JsonDict, self.config["metadata"])
+        src_url = cast(str, metadata["src-url"])
         print(f"Fetching: {src_url}")
 
         # shell(f"curl -sL {src_url} | tar xz --strip-components={strip_components} -f -")
@@ -57,7 +60,7 @@ class Builder:
         self.profile.prepare()
 
     def build_app(self):
-        build_config = self.config.get("build", {})
+        build_config = cast(JsonDict, self.config.get("build", {}))
 
         if "before-build" in build_config:
             sh.shell(build_config["before-build"])
@@ -69,7 +72,7 @@ class Builder:
 
         if test := build_config.get("test"):
             print("Running smoke test(s)...")
-            match build_config["test"]:
+            match cast(str | list[str], build_config["test"]):
                 case str(line):
                     test_str = line
                 case [*lines]:

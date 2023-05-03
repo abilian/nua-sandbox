@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from .. import sh
+from ..utils import sh
 from .base import BaseProfile
 from .common import check_requirements
 

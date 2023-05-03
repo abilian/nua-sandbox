@@ -1,3 +1,7 @@
+from typing import cast
+
+from nua_agent.types import JsonDict
+
 from ..system import install_nodejs
 from ..utils import sh
 from .base import BaseProfile
@@ -24,8 +28,8 @@ class NodeProfile(BaseProfile):
         )
 
     def prepare(self):
-        build_config = self.config.get("build", {})
-        node_version = build_config.get("node-version", "14.x")
+        build_config = cast(JsonDict, self.config.get("build", {}))
+        node_version = cast(str, build_config.get("node-version", "14.x"))
         install_nodejs(node_version)
         sh.shell("ln -sf /usr/bin/yarnpkg /usr/bin/yarn")
 
