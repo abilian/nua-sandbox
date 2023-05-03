@@ -11,6 +11,7 @@ from .types import JsonDict
 from .unarchiver import unarchive
 from .utils import sh
 from .utils.exceptions import Fail
+from .utils.sh import virtualenv
 
 
 class Builder:
@@ -71,20 +72,29 @@ class Builder:
         else:
             self.profile.build()
 
-        if test := build_config.get("test"):
-            print("Running smoke test(s)...")
-            match cast(str | list[str], build_config["test"]):
-                case str(line):
-                    test_str = line
-                case [*lines]:
-                    test_str = "\n".join(lines)
-                case _:
-                    raise ValueError(f"Invalid test: {test}")
-            try:
-                sh.shell(test_str)
-            except RuntimeError:
-                print(f"Test {test} failed.")
-                raise Fail("Test failed.")
+        self._run_tests(build_config)
+
+    def _run_tests(self, build_config: JsonDict):
+        test = build_config.get("test")
+        if not test:
+            return
+
+        print("Running smoke test(s)...")
+        match cast(str | list[str], build_config["test"]):
+            case str(line):
+                test_lines = [line]
+            case [*lines]:
+                test_lines = lines
+            case _:
+                raise ValueError(f"Invalid test: {test}")
+
+        with virtualenv("/nua/venv"):
+            for test_line in test_lines:
+                try:
+                    sh.shell(test_line)
+                except RuntimeError:
+                    print(f"Test {test_line} failed.")
+                    raise Fail(f"Test {test_line} failed.")
 
     def cleanup(self):
         self.profile.cleanup()

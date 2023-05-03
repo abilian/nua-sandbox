@@ -17,7 +17,10 @@ build-packages = [
     "libpq-dev",
 ]
 
-test = "python -c 'import mysite.wsgi'"
+test = [
+    "python3 -c 'import django'",
+    "python3 -c 'import mysite.wsgi'",
+]
 
 [run]
 start-command = "gunicorn mysite.wsgi:application"

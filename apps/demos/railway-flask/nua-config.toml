@@ -15,8 +15,8 @@ src-url = "https://github.com/railwayapp-templates/flask/archive/refs/heads/main
 
 [build]
 builder = "python"
-test = "python -c 'import app'"
+test = "python -c 'import main'"
 
 
 [run]
-start-command = "gunicorn app:app"
+start-command = "gunicorn main:app"

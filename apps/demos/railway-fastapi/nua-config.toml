@@ -12,7 +12,7 @@ src-url = "https://github.com/railwayapp-templates/fastapi/archive/refs/heads/ma
 [build]
 builder = "python"
 build-packages = []
-test = "python -c 'import mysite.wsgi'"
+test = "python -c 'import main'"
 
 [run]
-start-command = "gunicorn app:app"
+start-command = "gunicorn main:app"
