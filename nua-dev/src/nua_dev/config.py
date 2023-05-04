@@ -48,8 +48,10 @@ class Config:
             elif (path / "nua" / "nua-config.toml").exists():
                 path = path / "nua" / "nua-config.toml"
             else:
+                abs_path = path.resolve()
                 raise ConfigParseError(
-                    f"Could not find nua-config.json or nua/nua-config.toml in {path}"
+                    f"Could not find nua-config.json "
+                    f"or nua/nua-config.toml in {abs_path}"
                 )
 
         file = path.open("rb")

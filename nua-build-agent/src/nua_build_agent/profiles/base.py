@@ -57,8 +57,8 @@ class BaseProfile:
         build_info: JsonDict = self.config.get_dict("build", default_build)
 
         packages: set[str] = set()
-        packages.update(cast(list[str], build_info.get("build-packages", [])))
-        packages.update(cast(list[str], build_info.get("run-packages", [])))
+        packages.update(cast(list[str], build_info.get("packages", [])))
+        # packages.update(cast(list[str], build_info.get("run-packages", [])))
         packages.update(self.builder_packages)
 
         return list(packages)

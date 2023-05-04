@@ -26,10 +26,8 @@ class BuildCommand(Command):
     ]
 
     def run(self, targets: list[Path]):
-        """Build image(s)."""
         if not targets:
-            self._build()
-            return
+            targets = ["."]
 
         for target in targets:
             with chdir(target):

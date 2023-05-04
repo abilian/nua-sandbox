@@ -4,8 +4,6 @@ from pathlib import Path
 from zipfile import ZipFile
 
 
-
-
 class Unarchiver(object):
     """ABC for unarchivers."""
 

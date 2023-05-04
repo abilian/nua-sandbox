@@ -55,9 +55,19 @@ class Builder:
         if agent_wheel := self.get_agent_wheel():
             (build_dir / "dist" / BUILD_AGENT_WHEEL).write_bytes(agent_wheel)
 
+        if self.config.get("build.src-url"):
+            # Sources are downloaded by the build agent, no need to include them
+            return
+
         (build_dir / "src").mkdir()
-        if src := self.config.get("build.src"):
-            sh.shell(f"cp -r {src}  {build_dir / 'src'}")
+        src = self.config.get("build.src", ".")
+        sh.cp(src, build_dir / "src", recursive=True)
+
+        # FIXME: the dockerignore is relative to src dir, not the build dir
+        # TODO: introduce ".nuaignore"?
+        dockerignore_path = Path(src) / ".dockerignore"
+        if dockerignore_path.exists():
+            sh.cp(dockerignore_path, build_dir)
 
     def get_agent_wheel(self) -> bytes:
         """Returns a wheel for the agent package, or None if the agent sources

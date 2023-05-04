@@ -14,5 +14,8 @@ def shell(cmd):
         raise RuntimeError(f"Command failed: {cmd!r}")
 
 
-def cp(src, dst):
-    shutil.copy(src, dst)
+def cp(src, dst, recursive: bool = False):
+    if recursive:
+        shutil.copytree(src, dst, dirs_exist_ok=True)
+    else:
+        shutil.copy(src, dst)

@@ -57,7 +57,7 @@ class InstallDeps(Command):
 
         packages = set(profile_cls.builder_packages)
 
-        packages.update(build_config.get("build-packages", []))
+        packages.update(build_config.get("packages", []))
 
         install_packages(packages)
 

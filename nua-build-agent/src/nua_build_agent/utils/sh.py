@@ -30,8 +30,11 @@ def rm(path: str, recursive: bool = False):
         os.unlink(path)
 
 
-def cp(src, dst):
-    shutil.copy(src, dst)
+def cp(src, dst, recursive: bool = False):
+    if recursive:
+        shutil.copytree(src, dst)
+    else:
+        shutil.copy(src, dst)
 
 
 @contextmanager

@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from cleez import Argument, Command
-from cleez.colors import red, blue
+from cleez.colors import blue, red
 
 from nua_dev.config import Config, ConfigParseError
 from nua_dev.utils.backports import chdir
