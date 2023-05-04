@@ -32,12 +32,6 @@
           {
             "type": "string"
           },
-          {
-            "type": "string"
-          },
-          {
-            "type": "string"
-          }
         ]
       },
       "title": {
@@ -60,32 +54,6 @@
   "build": {
     "type": "object",
     "properties": {
-      "build-packages": {
-        "type": "array",
-        "items": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string"
-          },
-          {
-            "type": "string"
-          },
-          {
-            "type": "string"
-          },
-          {
-            "type": "string"
-          },
-          {
-            "type": "string"
-          },
-          {
-            "type": "string"
-          }
-        ]
-      },
       "meta-packages": {
         "type": "array",
         "items": [
@@ -100,13 +68,13 @@
           {
             "type": "string"
           },
-          {
-            "type": "string"
-          }
         ]
       },
       "node-version": {
         "type": "string"
+      },
+      "test": {
+        "type": "string",
       }
     }
   },
@@ -276,20 +244,20 @@
         }
       },
     },
-    //
-    "port": {
-      "type": "object",
-      "properties": {
-        "web": {
-          "type": "object",
-          "properties": {
-            "container": {
-              "type": "integer"
-            }
-          },
-        }
-      },
-    },
+    // FIXME: can be either an int or an indirection to a key
+//    "port": {
+//      "type": "object",
+//      "properties": {
+//        "web": {
+//          "type": "object",
+//          "properties": {
+//            "container": {
+//              "type": "integer"
+//            }
+//          },
+//        }
+//      },
+//    },
     //
     "run": {
       "type": "object",
