@@ -53,6 +53,8 @@ The `/nua/scripts` directory may contain:
 - `/nua/scripts/backup`: the script that backs up the application
 - `/nua/scripts/restore`: the script that restores the application
 
+(Some or even all of these scripts may be unnecessary, TBD).
+
 Or a single script that does all of the above (either a Python script with well-defined entry points, or a shell script with well-defined functions).
 
 The scripts may use templates (e.g. Jinja2) to generate application-specific scripts or config files. Where do we put them ? (e.g. `/nua/scripts/templates` ?)
