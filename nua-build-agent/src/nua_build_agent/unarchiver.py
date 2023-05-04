@@ -4,6 +4,8 @@ from pathlib import Path
 from zipfile import ZipFile
 
 
+
+
 class Unarchiver(object):
     """ABC for unarchivers."""
 
@@ -44,7 +46,7 @@ class ZipUnarchiver(Unarchiver):
             root = Path(archive.infolist()[0].filename)
             for member in archive.infolist():
                 p = Path(member.filename)
-                target_path = p.relative_to(root)
+                target_path = Path(dest_dir) / p.relative_to(root)
                 if member.is_dir():
                     target_path.mkdir(parents=True, exist_ok=True)
                     continue
@@ -52,11 +54,11 @@ class ZipUnarchiver(Unarchiver):
                     shutil.copyfileobj(source, target)
 
 
-def unarchive(src: str | Path, dest_dir: str) -> None:
+def unarchive(src: str | Path, dest_dir: str | Path) -> None:
     unarchivers = [TarUnarchiver(), ZipUnarchiver()]
     for unarchiver in unarchivers:
         if unarchiver.accept(src):
-            unarchiver.extract(str(src), dest_dir)
+            unarchiver.extract(str(src), str(dest_dir))
             return
 
     raise ValueError(f"Unknown archive format for '{src}'")

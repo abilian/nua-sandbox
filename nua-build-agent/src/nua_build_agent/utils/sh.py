@@ -1,3 +1,4 @@
+"""Shell-like utilities."""
 import os
 import shlex
 import shutil
@@ -8,11 +9,15 @@ from os import makedirs, mkdir
 from pathlib import Path
 from shutil import copy as cp
 
-__all__ = ["mkdir", "makedirs", "cp", "shell", "rm"]
+__all__ = ["mkdir", "makedirs", "cp", "shell", "rm", "virtualenv"]
 
 
 def shell(cmd):
-    print(cmd)
+    # HACK (fixme later)
+    if "/nua/bin:" not in os.environ["PATH"]:
+        os.environ["PATH"] = "/nua/bin:" + os.environ["PATH"]
+
+    print(f"$ {cmd}")
     sys.stdout.flush()
 
     args = shlex.split(cmd)
@@ -31,5 +36,15 @@ def virtualenv(path: str | Path):
     """Create a virtualenv and activate it."""
     env = os.environ.copy()
     os.environ["PATH"] = f"{path}/bin:" + env["PATH"]
+    yield
+    os.environ = env  # type: ignore
+
+
+@contextmanager
+def environment(**kw):
+    """Run something with a modified environement."""
+    env = os.environ.copy()
+    for k, v in kw.items():
+        os.environ[k] = str(v)
     yield
     os.environ = env  # type: ignore

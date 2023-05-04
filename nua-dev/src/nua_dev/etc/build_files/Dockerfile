@@ -14,17 +14,18 @@ RUN /bin/sh bin/nua-bootstrap-image.sh
 
 # Install nua-build-agent
 COPY ./dist/ ./dist/
-RUN /nua/build-env/bin/python3 bin/nua-install-build-agent.py
+RUN /nua/build/agent/bin/python3 bin/nua-install-build-agent.py
 
 # Install system dependencies
 COPY ./_nua-build-config.json ./
-RUN /nua/build-env/bin/nua-build-agent install-deps
+RUN /nua/build/agent/bin/nua-build-agent install-deps
 
 # Build app
 COPY ./_nua-config.json ./
-ADD ./src/* /nua/src/
-RUN /nua/build-env/bin/nua-build-agent build-app
+COPY ./src /nua/build/src
+RUN /nua/build/agent/bin/nua-build-agent build-app
 
 # Cleanup
-RUN /nua/build-env/bin/nua-build-agent cleanup
-RUN rm -rf /nua/build-env
+RUN /nua/build/agent/bin/nua-build-agent cleanup
+RUN rm -rf /nua/build/agent
+# TODO: rm -rf /nua/build

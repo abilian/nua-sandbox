@@ -13,9 +13,13 @@ Acquire::CompressionTypes::Order:: "gz";
 Dir::Cache { srcpkgcache ""; pkgcache ""; }
 EOF
 
-echo "Installing Python packages" && \
-    apt-get -y update && \
-    apt-get -qq --no-install-recommends install \
-        python3.10 python3.10-venv python-pip python-setuptools curl
+echo "Installing Python packages"
+apt-get -y update
+apt-get -qq --no-install-recommends install \
+        python3.10 python3.10-venv python-pip python-setuptools \
+        unzip curl
 
-python3 -m venv /nua/build-env
+# unzip and curl may be removed someday
+
+python3 -m venv /nua/build/agent
+chown -R nua:nua /nua/build

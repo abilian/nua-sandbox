@@ -25,6 +25,7 @@ class PythonProfile(BaseProfile):
         sh.shell("python3 -m venv --symlinks /nua/venv")
         sh.shell("/nua/venv/bin/pip install -U pip setuptools wheel")
 
+        sh.shell("ls -l")
         if self._check_files(["requirements.txt"]):
             sh.shell("/nua/venv/bin/pip install -r requirements.txt")
         else:

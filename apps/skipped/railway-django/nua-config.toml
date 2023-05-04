@@ -1,3 +1,6 @@
+# FIXME: this one needs a postgres database
+# `KeyError: 'PGDATABASE'`
+
 [metadata]
 id = "railway-django"
 title = "Demo for Django"

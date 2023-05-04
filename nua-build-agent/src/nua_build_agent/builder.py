@@ -10,6 +10,7 @@ from .profiles import PROFILE_CLASSES, BaseProfile
 from .types import JsonDict
 from .unarchiver import unarchive
 from .utils import sh
+from .utils.backports import chdir
 from .utils.exceptions import Fail
 from .utils.sh import virtualenv
 
@@ -37,42 +38,53 @@ class Builder:
     # Lifecycle methods (called from CLI i.e. `main.py`)
     #
     def fetch_app_source(self, strip_components=1):
+        """Fetches the app source code (if needed) and puts it in
+        /nua/build/src/."""
         # Silence vulture while we figure out how to deal with this
         assert strip_components == 1
 
-        # TODO: rewrite in pure Python and deal with all the cases (zip, git...)
-        # Cf. download_extract() in nua/lib/actions.py
         src_url = self.config.get_str("metadata.src-url")
-        print(f"Fetching: {src_url}")
 
+        # Was:
         # shell(f"curl -sL {src_url} | tar xz --strip-components={strip_components} -f -")
 
-        with tempfile.TemporaryDirectory() as tmp:
-            if src_url:
+        # TODO: rewrite in pure Python and deal with all the cases (zip, git...)
+        # Cf. download_extract() in nua/lib/actions.py
+        if src_url:
+            print(f"Fetching: {src_url}")
+            with tempfile.TemporaryDirectory() as tmp:
                 self.download_src(src_url, tmp)
                 archive = Path(tmp) / Path(src_url).name
-                unarchive(archive, ".")
-            else:
-                sh.shell("pwd")
-                sh.shell("ls /nua")
-                sh.shell("cp -r /nua/src/* .")
+                print(f"Unarchiving {archive} to /nua/build/src/")
+                unarchive(archive, "/nua/build/src")
+        else:
+            print("No source URL, skipping fetch.")
+
+        assert len(list(Path("/nua/build/src").glob("*"))) > 0
 
     def prepare(self):
+        """Prepare the build environment (install packages, etc.).
+
+        To be replaced by something more fine-grained.
+        """
         system.install_packages(self._get_system_packages())
         self.profile.prepare()
 
     def build_app(self):
-        build_config = self.config.get("build", {})
+        """Build the app."""
+        with chdir("/nua/build/src"):
+            build_config = self.config.get("build", {})
 
-        if "before-build" in build_config:
-            sh.shell(build_config["before-build"])
+            if "before-build" in build_config:
+                sh.shell(build_config["before-build"])
 
-        if Path("build.sh").exists():
-            sh.shell("bash build.sh")
-        else:
-            self.profile.build()
+            # FIXME: remove or make it clean there is a convention
+            if Path("build.sh").exists():
+                sh.shell("bash build.sh")
+            else:
+                self.profile.build()
 
-        self._run_tests(build_config)
+            self._run_tests(build_config)
 
     def _run_tests(self, build_config: JsonDict):
         test = build_config.get("test")
@@ -117,12 +129,13 @@ class Builder:
         return self.profile.get_system_packages()
 
     def _get_profile(self) -> BaseProfile:
-        build_config = self.config.get_dict("build")
-        if builder_name := cast(str, build_config.get("builder", "")):
-            if "-" in builder_name:
-                builder_name = builder_name.split("-")[0]
-            return self._get_builder(builder_name)
-        return self._detect_profile()
+        with chdir("/nua/build/src"):
+            build_config = self.config.get_dict("build")
+            if builder_name := cast(str, build_config.get("builder", "")):
+                if "-" in builder_name:
+                    builder_name = builder_name.split("-")[0]
+                return self._get_builder(builder_name)
+            return self._detect_profile()
 
     def _detect_profile(self) -> BaseProfile:
         for profile_cls in PROFILE_CLASSES:
