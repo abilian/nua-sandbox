@@ -86,6 +86,31 @@ class BuildApp(Command):
             raise Fail("An exception occurred")
 
 
+class Install(Command):
+    """Install the application."""
+
+    name = "install"
+
+    def run(self):
+        builder = Builder()
+
+        try:
+            builder.install()
+
+        except Exception:
+            raise Fail("An exception occurred during installation")
+
+
+class Check(Command):
+    """Install the application."""
+
+    name = "check"
+
+    def run(self):
+        builder = Builder()
+        builder.check()
+
+
 class Cleanup(Command):
     """Clean up."""
 
@@ -140,6 +165,8 @@ def get_cli() -> CLI:
     )
     cli.add_command(InstallDeps)
     cli.add_command(BuildApp)
+    cli.add_command(Install)
+    cli.add_command(Check)
     cli.add_command(Cleanup)
     return cli
 

@@ -23,7 +23,9 @@ RUN /nua/build/agent/bin/nua-build-agent install-deps
 # Build app
 COPY ./_nua-config.json ./
 COPY ./src /nua/build/src
-RUN /nua/build/agent/bin/nua-build-agent build-app
+RUN /nua/build/agent/bin/nua-build-agent build-app && \
+  /nua/build/agent/bin/nua-build-agent install && \
+  /nua/build/agent/bin/nua-build-agent check
 
 # Cleanup
 RUN /nua/build/agent/bin/nua-build-agent cleanup

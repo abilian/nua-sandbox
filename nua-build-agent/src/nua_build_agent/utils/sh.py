@@ -7,7 +7,6 @@ import sys
 from contextlib import contextmanager
 from os import makedirs, mkdir
 from pathlib import Path
-from shutil import copy as cp
 
 __all__ = ["mkdir", "makedirs", "cp", "shell", "rm", "virtualenv"]
 
@@ -29,6 +28,10 @@ def rm(path: str, recursive: bool = False):
         shutil.rmtree(path)
     else:
         os.unlink(path)
+
+
+def cp(src, dst):
+    shutil.copy(src, dst)
 
 
 @contextmanager

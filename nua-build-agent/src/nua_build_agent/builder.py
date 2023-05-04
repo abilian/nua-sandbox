@@ -12,9 +12,14 @@ from .unarchiver import unarchive
 from .utils import sh
 from .utils.backports import chdir
 from .utils.exceptions import Fail
-from .utils.sh import virtualenv
+from .utils.sh import cp, virtualenv
 
 
+#
+# TODO:
+# - Rename it: call it Agent, not Builder (and rename "Profiles" to "Builders") ?
+# - Introduce "AgentStage" classes ?
+#
 class Builder:
     """Builds an app."""
 
@@ -107,6 +112,20 @@ class Builder:
                 except RuntimeError:
                     print(f"Test {test_line} failed.")
                     raise Fail(f"Test {test_line} failed.")
+
+    def install(self):
+        """Install the app."""
+        Path("/nua/metadata").mkdir(exist_ok=True)
+        Path("/nua/app").mkdir(exist_ok=True)
+        # FIXME: _nua-config.json will probably move someplace else
+        cp("/nua/build/_nua-config.json", "/nua/metadata/nua-config.json")
+
+    def check(self):
+        """Install the app."""
+        assert Path("/nua/metadata/nua-config.json").exists()
+        assert Path("/nua/app").exists()
+        # TODO:
+        # assert not Path("/nua/build").exists()
 
     def cleanup(self):
         self.profile.cleanup()
