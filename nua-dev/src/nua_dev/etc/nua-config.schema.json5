@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema#",
   "type": "object",
   "required": [
     "metadata",
@@ -54,14 +54,6 @@
   "build": {
     "type": "object",
     "properties": {
-      "meta-packages": {
-        "type": "array",
-        "items": [
-          {
-            "type": "string"
-          }
-        ]
-      },
       "packages": {
         "type": "array",
         "items": [
@@ -70,205 +62,213 @@
           },
         ]
       },
-      "node-version": {
-        "type": "string"
+      "meta-packages": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string"
+          }
+        ]
       },
+//      "node-version": {
+//        "type": "string"
+//      },
       "test": {
         "type": "string",
       }
     }
   },
   //
-  "properties": {
-    "assign": {
-      "type": "array",
-      "items": [
-        {
-          "type": "object",
-          "properties": {
-            "key": {
-              "type": "string"
-            },
-            "random_str": {
-              "type": "boolean"
-            }
-          },
-        },
-        {
-          "type": "object",
-          "properties": {
-            "key": {
-              "type": "string"
-            },
-            "resource_host": {
-              "type": "string"
-            }
-          },
-        },
-        {
-          "type": "object",
-          "properties": {
-            "key": {
-              "type": "string"
-            },
-            "random_str": {
-              "type": "boolean"
-            }
-          },
-        }
-      ]
-    },
-    //
-    "resource": {
-      "type": "array",
-      "items": [
-        {
-          "type": "object",
-          "properties": {
-            "image": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string"
-            },
-            "volume": {
-              "type": "array",
-              "items": [
-                {
-                  "type": "object",
-                  "properties": {
-                    "driver": {
-                      "type": "string"
-                    },
-                    "source_prefix": {
-                      "type": "string"
-                    },
-                    "target": {
-                      "type": "string"
-                    },
-                    "type": {
-                      "type": "string"
-                    }
-                  },
-                }
-              ]
-            },
-            //
-            "backup": {
-              "type": "object",
-              "properties": {
-                "destination": {
-                  "type": "string"
-                },
-                "frequency": {
-                  "type": "string"
-                },
-                "method": {
-                  "type": "string"
-                }
-              },
-            },
-            "run": {
-              "type": "object",
-              "properties": {
-                "detach": {
-                  "type": "boolean"
-                },
-                "restart_policy": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "name"
-                  ]
-                }
-              },
-              "required": [
-                "detach",
-                "restart_policy"
-              ]
-            }
-          },
-        }
-      ]
-    },
-    //
-    "volume": {
-      "type": "array",
-      "items": [
-        {
-          "type": "object",
-          "properties": {
-            "source_prefix": {
-              "type": "string"
-            },
-            "target": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string"
-            },
-            "backup": {
-              "type": "object",
-              "properties": {
-                "destination": {
-                  "type": "string"
-                },
-                "frequency": {
-                  "type": "string"
-                },
-                "method": {
-                  "type": "string"
-                }
-              },
-            }
-          },
-        }
-      ]
-    },
-    //
-    "healthcheck": {
-      "type": "object",
-      "properties": {
-        "command": {
-          "type": "string"
-        },
-        "interval": {
-          "type": "integer"
-        }
-      },
-    },
-    // FIXME: can be either an int or an indirection to a key
-//    "port": {
-//      "type": "object",
-//      "properties": {
-//        "web": {
+//  "properties": {
+//    "assign": {
+//      "type": "array",
+//      "items": [
+//        {
 //          "type": "object",
 //          "properties": {
-//            "container": {
-//              "type": "integer"
+//            "key": {
+//              "type": "string"
+//            },
+//            "random_str": {
+//              "type": "boolean"
+//            }
+//          },
+//        },
+//        {
+//          "type": "object",
+//          "properties": {
+//            "key": {
+//              "type": "string"
+//            },
+//            "resource_host": {
+//              "type": "string"
+//            }
+//          },
+//        },
+//        {
+//          "type": "object",
+//          "properties": {
+//            "key": {
+//              "type": "string"
+//            },
+//            "random_str": {
+//              "type": "boolean"
 //            }
 //          },
 //        }
+//      ]
+//    },
+//    //
+//    "resource": {
+//      "type": "array",
+//      "items": [
+//        {
+//          "type": "object",
+//          "properties": {
+//            "image": {
+//              "type": "string"
+//            },
+//            "name": {
+//              "type": "string"
+//            },
+//            "type": {
+//              "type": "string"
+//            },
+//            "volume": {
+//              "type": "array",
+//              "items": [
+//                {
+//                  "type": "object",
+//                  "properties": {
+//                    "driver": {
+//                      "type": "string"
+//                    },
+//                    "source_prefix": {
+//                      "type": "string"
+//                    },
+//                    "target": {
+//                      "type": "string"
+//                    },
+//                    "type": {
+//                      "type": "string"
+//                    }
+//                  },
+//                }
+//              ]
+//            },
+//            //
+//            "backup": {
+//              "type": "object",
+//              "properties": {
+//                "destination": {
+//                  "type": "string"
+//                },
+//                "frequency": {
+//                  "type": "string"
+//                },
+//                "method": {
+//                  "type": "string"
+//                }
+//              },
+//            },
+//            "run": {
+//              "type": "object",
+//              "properties": {
+//                "detach": {
+//                  "type": "boolean"
+//                },
+//                "restart_policy": {
+//                  "type": "object",
+//                  "properties": {
+//                    "name": {
+//                      "type": "string"
+//                    }
+//                  },
+//                  "required": [
+//                    "name"
+//                  ]
+//                }
+//              },
+//              "required": [
+//                "detach",
+//                "restart_policy"
+//              ]
+//            }
+//          },
+//        }
+//      ]
+//    },
+//    //
+//    "volume": {
+//      "type": "array",
+//      "items": [
+//        {
+//          "type": "object",
+//          "properties": {
+//            "source_prefix": {
+//              "type": "string"
+//            },
+//            "target": {
+//              "type": "string"
+//            },
+//            "type": {
+//              "type": "string"
+//            },
+//            "backup": {
+//              "type": "object",
+//              "properties": {
+//                "destination": {
+//                  "type": "string"
+//                },
+//                "frequency": {
+//                  "type": "string"
+//                },
+//                "method": {
+//                  "type": "string"
+//                }
+//              },
+//            }
+//          },
+//        }
+//      ]
+//    },
+//    //
+//    "healthcheck": {
+//      "type": "object",
+//      "properties": {
+//        "command": {
+//          "type": "string"
+//        },
+//        "interval": {
+//          "type": "integer"
+//        }
 //      },
 //    },
-    //
-    "run": {
-      "type": "object",
-      "properties": {
-        "auto-remove": {
-          "type": "boolean"
-        },
-        "env": {
-          "type": "object"
-        }
-      }
-    }
-  }
+//    // FIXME: can be either an int or an indirection to a key
+////    "port": {
+////      "type": "object",
+////      "properties": {
+////        "web": {
+////          "type": "object",
+////          "properties": {
+////            "container": {
+////              "type": "integer"
+////            }
+////          },
+////        }
+////      },
+////    },
+//    //
+//    "run": {
+//      "type": "object",
+//      "properties": {
+//        "auto-remove": {
+//          "type": "boolean"
+//        },
+//        "env": {
+//          "type": "object"
+//        }
+//      }
+//    }
+//  }
 }
