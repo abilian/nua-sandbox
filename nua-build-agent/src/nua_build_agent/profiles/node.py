@@ -1,12 +1,11 @@
 import os
-from typing import cast
-
-from nua_build_agent.types import JsonDict
 
 from ..utils import sh
 from ..utils.sh import environment, shell
 from .base import BaseProfile
 from .common import check_requirements
+
+DEFAULT_NODE_VERSION = "14"
 
 
 class NodeProfile(BaseProfile):
@@ -30,10 +29,20 @@ class NodeProfile(BaseProfile):
         )
 
     def prepare(self):
-        build_config = cast(JsonDict, self.config.get("build", {}))
-        node_version = cast(str, build_config.get("node-version", "14.x"))
+        node_version = self._get_node_version()
         install_nodejs(node_version)
         sh.shell("ln -sf /usr/bin/yarnpkg /usr/bin/yarn")
+
+    def _get_node_version(self) -> str:
+        builder = self.config.get(["build", "builder"])
+        node_version = self.config.get(["build", "node-version"])
+        if not node_version and "-" in builder:
+            node_version = builder.split("-")[1]
+        if not node_version:
+            node_version = DEFAULT_NODE_VERSION
+        if not node_version.endswith(".x"):
+            node_version += ".x"
+        return node_version
 
     def build(self):
         print("yarn version:")

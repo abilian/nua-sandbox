@@ -9,7 +9,12 @@ src-url = "https://github.com/render-examples/vuepress/archive/refs/heads/master
 
 [build]
 builder = "node-16"
-build-command = "npm install && npm run build"
+build-command = [
+    "npm install",
+    "npm run build",
+]
+test = "find . -name index.js"
+#test = "test -f build/index.js"
 
 [run]
 # This is a static app. No need to start anything.

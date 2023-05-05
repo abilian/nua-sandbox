@@ -12,7 +12,11 @@ src-url = "https://github.com/render-examples/sveltekit/archive/refs/heads/main.
 
 [build]
 builder = "node-16"
-build-command = "npm install && npm run build"
+build-command = [
+    "npm install",
+    "npm run build",
+]
+test = "test -f build/index.js"
 
 [run]
 run-command = "node build/index.js"

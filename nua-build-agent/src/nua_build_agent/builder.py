@@ -77,33 +77,41 @@ class Builder:
 
     def build_app(self):
         """Build the app."""
-        # sh.shell("find .")
-        build_config = self.config.get("build", {})
-        if "before-build" in build_config:
-            sh.shell(build_config["before-build"])
+        if before_build := self.config.get(["build", "before-build"]):
+            sh.shell(before_build)
 
         with chdir("/nua/build/src"):
+            if build_command := self.config.get(["build", "build-command"]):
+                if isinstance(build_command, str):
+                    build_commands = [build_command]
+                else:
+                    build_commands = build_command
+                for command in build_commands:
+                    sh.shell(command)
+
             # FIXME: remove or make it clean there is a convention
-            if Path("build.sh").exists():
+            elif Path("build.sh").exists():
                 sh.shell("bash build.sh")
+
             else:
+                # Use the generic build method of the builder
                 self.profile.build()
 
-            self._run_tests(build_config)
+            self._run_tests()
 
-    def _run_tests(self, build_config: JsonDict):
-        test = build_config.get("test")
-        if not test:
+    def _run_tests(self):
+        test_cmd = self.config.get(["build", "test"])
+        if not test_cmd:
             return
 
         print("Running smoke test(s)...")
-        match cast(str | list[str], build_config["test"]):
+        match cast(str | list[str], test_cmd):
             case str(line):
                 test_lines = [line]
             case [*lines]:
                 test_lines = lines
             case _:
-                raise ValueError(f"Invalid test: {test}")
+                raise ValueError(f"Invalid test: {test_cmd}")
 
         with virtualenv("/nua/venv"):
             for test_line in test_lines:

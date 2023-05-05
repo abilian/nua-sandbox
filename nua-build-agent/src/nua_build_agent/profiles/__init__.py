@@ -4,6 +4,7 @@ from .base import BaseProfile
 from .clojure import ClojureProfile
 from .go import GoProfile
 from .gradle import GradleProfile
+from .manual import ManualProfile
 from .maven import MavenProfile
 from .node import NodeProfile
 from .php import PhpProfile
@@ -22,6 +23,7 @@ PROFILE_CLASSES: list[type[BaseProfile]] = [
     ClojureProfile,
     RustProfile,
     DenoProfile,
+    ManualProfile,
 ]
 
 

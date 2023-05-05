@@ -2,13 +2,13 @@
 id = "nocodb"
 title = "nocodb"
 author = "nocodb authors"
-description = "🔥 🔥 🔥 Open Source Airtable Alternative"
+description = "Open Source Airtable Alternative"
 website = "https://nocodb.com"
 version = "0.106.1"
 release = 1
 license = "AGPL-3.0"
 
-src-url = "https://github.com/nocodb/nocodb/archive/v{version}.tar.gz"
+src-url = "https://github.com/nocodb/nocodb/archive/refs/tags/{version}.zip"
 
 [build]
 builder = "node"

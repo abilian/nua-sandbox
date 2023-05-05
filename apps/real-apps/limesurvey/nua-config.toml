@@ -4,7 +4,7 @@ title = "LimeSurvey"
 author = "LimeSurvey authors"
 description = "The most popular FOSS online survey tool on the web."
 website = "https://www.limesurvey.org"
-version = "5.6.1+230123"
+version = "6.0.4+230427"
 release = 1
 license = "GPLv2+"
 
