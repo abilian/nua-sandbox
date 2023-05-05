@@ -7,6 +7,7 @@
 - [x] Make sure all the applications build (mostly done for now)
 - [x] Extract metadata from GitHub projects
 - [x] Support Ruby apps
+- [x] Make all the demo build
 
 ## Short term
 
@@ -22,6 +23,7 @@ Build / Run:
 - [ ] Support "multi-language" apps (ex: Ruby + Node)
 - [ ] Support "old-school PHP" apps (i.e. w/o Composer)
 - [ ] Support multiple Python / Node / PHP / Ruby / etc. versions
+- [ ] Make sure (test) that the images built with nua-dev are compatible with nua-orchestrator
 
 DX:
 
@@ -49,6 +51,12 @@ Metadata / lifecycle:
   - [ ] Of the build profiles (config + support files).
   - [ ] Of the runtime images.
 
+Buildpacks:
+
+- [ ] Make it possible to use buildpacks
+  - [ ] We need to choose the right one
+- [ ] make `nua-dev` into a buildpack
+
 ## Longer term / advanced R&D
 
 - [ ] Runtime support via `nua-agent` (not sure if this is needed)
@@ -56,5 +64,5 @@ Metadata / lifecycle:
 - [ ] Alternative backends (e.g. SlapOS)
 - [ ] Support for `docker-compose` (or similar)
 - [ ] Reproducible builds.
-- [ ] SBOM and software supply chain.
+- [ ] SBOM and software supply chain issues.
 - [ ] Plugins: the system should be extensible. For the build subsystem, this should probably (at least in the current architecture) done by adding support for plugins at the `nua-build-agent` level. This means that the plugins to use should be specified (in a specific section) in the `nua-config.toml` file and be injected early in the build process (this seems a bit tricky so more thoughts are needed).
