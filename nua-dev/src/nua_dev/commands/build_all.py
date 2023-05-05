@@ -149,16 +149,24 @@ class BuildRunner:
 
         headers = []
         table = []
+        count_ok = 0
         for k, g in groupby(results, lambda x: x.path):
             line = [k]
             headers = []
             for result in g:
+                if result.success:
+                    count_ok += 1
                 mark = {True: "✅", False: "❌"}[result.success]
                 line.append(f"{mark} ({result.duration:.2f}s)")
                 headers.append(result.command)
             table.append(line)
 
         print(tabulate(table, headers=["App", *headers]))
+        print(
+            f"Total: {len(results)}. "
+            f"Success: {count_ok} (100*{count_ok/len(results):.2%}. "
+            f"Fail: {len(results) - count_ok}"
+        )
 
     def try_build(self, path: Path, method: str) -> BuildResult:
         t0 = now()
