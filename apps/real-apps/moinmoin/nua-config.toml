@@ -10,10 +10,9 @@ license = "GPLv2+"
 profile = ["generic"]
 
 src-url = "https://github.com/moinwiki/moin/archive/refs/heads/master.zip"
-#src-git = "https://github.com/moinwiki/moin.git"
+# src-git = "https://github.com/moinwiki/moin.git"
 
 [build]
-#[build]
-##src_url = "https://github.com/moinwiki/moin/archive/refs/heads/master.tar.gz"
+builder = "python"
 # Doesn't work.
 # before-build = "/nua/build/bin/pip install setuptools-scm"

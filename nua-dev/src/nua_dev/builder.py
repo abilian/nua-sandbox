@@ -55,6 +55,13 @@ class Builder:
         if agent_wheel := self.get_agent_wheel():
             (build_dir / "dist" / BUILD_AGENT_WHEEL).write_bytes(agent_wheel)
 
+        if Path("nua").exists():
+            sh.shell("pwd")
+            sh.shell(f"echo {build_dir}")
+            sh.cp("nua", build_dir / "nua", recursive=True)
+        else:
+            (Path(build_dir) / "nua").mkdir(exist_ok=True)
+
         if self.config.get("build.src-url"):
             # Sources are downloaded by the build agent, no need to include them
             return

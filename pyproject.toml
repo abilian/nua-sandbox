@@ -19,6 +19,7 @@ devtools = "^0.10.0"
 watchfiles = "^0.18.1"
 types-jsonschema = "^4.17.0.5"
 docformatter = "^1.6.3"
+pydeps = "^1.12.3"
 
 [build-system]
 requires = ["poetry-core"]

@@ -11,4 +11,3 @@ license = "???"
 src-url = "https://github.com/nuxeo/nuxeo/archive/v{version}.tar.gz"
 
 [build]
-build-packages = []

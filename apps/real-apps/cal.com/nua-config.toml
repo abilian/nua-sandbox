@@ -11,7 +11,7 @@ license = "AGPL-3.0"
 src-url = "https://github.com/calcom/cal.com/archive/refs/heads/main.tar.gz"
 
 [build]
-node-version = "16.x"
+builder = "node-16"
 
 # Not needed (autodetected)
 build-script = "build.sh"

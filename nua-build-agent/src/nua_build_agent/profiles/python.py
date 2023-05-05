@@ -11,7 +11,8 @@ class PythonProfile(BaseProfile):
     name = "python"
     label = "Python / Pip"
     builder_packages = [
-        "python3.10-venv",
+        "build-essential",
+        "python3-dev",
     ]
 
     def accept(self):

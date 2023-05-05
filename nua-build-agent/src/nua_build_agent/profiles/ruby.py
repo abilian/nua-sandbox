@@ -9,11 +9,9 @@ class RubyProfile(BaseProfile):
     name = "ruby"
     label = "Ruby / Bundler"
     builder_packages = [
+        "build-essential",
+        "ruby-dev",
         "bundler",
-        # "wget",
-        # "pkg-config",
-        # "build-essential",
-        # "libpq-dev",
     ]
 
     def accept(self):

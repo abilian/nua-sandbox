@@ -4,7 +4,7 @@ title = "XWiki"
 author = "WWiki authors"
 description = "The XWiki platform"
 website = "http://platform.xwiki.org/"
-version = "14.10.3"
+version = "15.3"
 release = 1
 license = "LGPL-2.1"
 
@@ -12,4 +12,3 @@ src-url = "https://github.com/xwiki/xwiki-platform/archive/refs/tags/xwiki-platf
 
 [build]
 builder = "maven"
-build-packages = []

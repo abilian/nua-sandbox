@@ -11,7 +11,6 @@ src-url = "https://github.com/railwayapp-templates/fastapi/archive/refs/heads/ma
 
 [build]
 builder = "python"
-build-packages = []
 test = "python -c 'import main'"
 
 [run]

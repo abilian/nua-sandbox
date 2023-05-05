@@ -14,6 +14,7 @@ Everything related to Nua is under `/nua` in the image.
 
 - `/nua/build/src`: the source code of the application
 - `/nua/build/metadata`: the metadata of the application
+- `/nua/build/nua`: the content of the `nua` directory of the application (which could contain helper scripts)
 
 The build itself is done in `/nua/build/src` (e.g. `cd /nua/build/src && ./configure && make` or its modern equivalent).
 

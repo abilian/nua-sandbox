@@ -5,7 +5,7 @@ author = "Wekan developers"
 tagline = "Open-source kanban boards"
 license = "MIT"
 
-version = "6.71"
+version = "6.86"
 website = "https://wekan.github.io/"
 tags = ["kanban", "planning", "project"]
 

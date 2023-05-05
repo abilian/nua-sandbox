@@ -14,9 +14,7 @@ src-checksum = ""
 
 [build]
 builder = "python"
-build-packages = [
-    "gcc",
-    "python3-dev",
+packages = [
     "libssl-dev",
     "libmysqlclient-dev",
 ]

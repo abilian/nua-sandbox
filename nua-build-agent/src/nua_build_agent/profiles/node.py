@@ -14,6 +14,7 @@ class NodeProfile(BaseProfile):
     name = "node"
     label = "Node.js / NPM or Yarn"
     builder_packages = [
+        "build-essential",
         "git",
     ]
 
@@ -42,7 +43,7 @@ class NodeProfile(BaseProfile):
         if self._check_files(["package-lock.json"]):
             sh.shell("npm install")
         elif self._check_files(["yarn.lock"]):
-            sh.shell("yarn install --production=true --pure-lockfile")
+            sh.shell("yarn install")
         else:
             sh.shell("npm install")
 

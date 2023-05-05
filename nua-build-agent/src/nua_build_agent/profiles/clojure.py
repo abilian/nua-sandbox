@@ -8,6 +8,7 @@ class ClojureProfile(BaseProfile):
 
     name = "clojure"
     label = "Clojure / Lein"
+
     builder_packages = [
         "leiningen",
     ]

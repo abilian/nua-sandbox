@@ -1,6 +1,6 @@
 [metadata]
 id = "hedgedoc"
-version = "1.9.6"
+version = "1.9.7"
 release = 11
 title = "Hedgedoc"
 author = "Hedgedoc developers"
@@ -12,19 +12,25 @@ license = "AGPL-3.0"
 src-url = "https://github.com/hedgedoc/hedgedoc/releases/download/{version}/hedgedoc-{version}.tar.gz"
 
 [build]
-builder = "node"
-meta-packages = ["psycopg2"]
-build-packages = [
+builder = "node-14"
+#meta-packages = ["psycopg2"]
+packages = [
     "build-essential",
-#    "python3-dev",
-#    "libsqlite3-dev",
-#    "netcat",
-#    "libicu-dev",
-#    "libssl-dev",
-#    "git",
+    "python3-dev",
+    "libsqlite3-dev",
+    "netcat",
+    "libicu-dev",
+    "libssl-dev",
+    "git",
 ]
+build-command = [
+    "bin/setup",
+    "yarn cache clean; rm -fr /tmp/*"
+]
+test = "test -f /nua/build/hedgedoc/app.js"
 
-run-packages = [
+[run]
+packages = [
     "fontconfig",
     "fonts-noto"
 ]

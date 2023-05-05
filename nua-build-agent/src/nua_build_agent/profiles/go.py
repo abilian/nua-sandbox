@@ -10,6 +10,7 @@ class GoProfile(BaseProfile):
 
     name = "go"
     label = "Go"
+
     builder_packages = ["golang-go"]
 
     def accept(self):

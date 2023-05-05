@@ -30,3 +30,17 @@ After refactoring, the build lifecycle should become:
 Notes:
 
 - `cleanup` is probably not needef (or maybe exceptionnally) as `/nua/build` is removed at the end of the build.
+
+### Build scripts
+
+The `nua` directory may contain scripts that are called during the build lifecycle (e.g. `nua/build.sh`, `nua/build.py`, etc.).
+
+Some convention could be defined to avoid having to specify the build script in the `nua-config.json` file.
+
+### Templates / patches / overrides
+
+The `nua` directory may contain:
+
+- Files that override or complement some of the source files.
+- Patches.
+- Templates that are used during the build lifecycle.

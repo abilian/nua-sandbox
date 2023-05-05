@@ -11,4 +11,4 @@ license = "GPLv2+"
 src-url = "https://github.com/LimeSurvey/LimeSurvey/archive/{version}.tar.gz"
 
 [build]
-build-packages = []
+builder = "php"

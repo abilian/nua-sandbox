@@ -1,5 +1,0 @@
-Doesn't build because it need a DB connection.
-
-"@calcom/prisma:db-deploy: error: Error validating datasource `db`: You must provide a nonempty URL. The environment variable `DATABASE_URL` resolved to an empty string."
-
-(WTF?)

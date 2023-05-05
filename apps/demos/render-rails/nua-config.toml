@@ -9,8 +9,11 @@ license = "MIT"
 src-url = "https://github.com/render-examples/rails-6/archive/refs/heads/master.zip"
 
 [build]
-builder = "ruby-32"
-build-command = "./bin/render-build.sh"
+builder = "ruby"
+packages = [
+    "libpq-dev",
+]
+before-build = "python3 nua/fix-sources.py"
 
 [run]
 start-command = "bundle exec puma -C config/puma.rb"

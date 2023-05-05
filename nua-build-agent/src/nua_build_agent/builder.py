@@ -77,12 +77,12 @@ class Builder:
 
     def build_app(self):
         """Build the app."""
+        # sh.shell("find .")
+        build_config = self.config.get("build", {})
+        if "before-build" in build_config:
+            sh.shell(build_config["before-build"])
+
         with chdir("/nua/build/src"):
-            build_config = self.config.get("build", {})
-
-            if "before-build" in build_config:
-                sh.shell(build_config["before-build"])
-
             # FIXME: remove or make it clean there is a convention
             if Path("build.sh").exists():
                 sh.shell("bash build.sh")

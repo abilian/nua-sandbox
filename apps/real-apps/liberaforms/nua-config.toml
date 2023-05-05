@@ -14,7 +14,7 @@ src-checksum = ""
 
 [build]
 builder = "python"
-build-packages = [
+packages = [
     # Needed to build psycopg2
     "gcc",
     "python3-dev",

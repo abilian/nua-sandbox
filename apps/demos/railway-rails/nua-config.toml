@@ -8,14 +8,11 @@ release = 1
 license = "MIT"
 src-url = "https://github.com/railwayapp-templates/ruby-rails/archive/refs/heads/main.tar.gz"
 
-#
-# Warning: doesn't work currently, because of errors like:
-# > Don't run Bundler as root. Bundler can ask for sudo if it is needed, and
-# > installing your bundle as root will break this application for all non-root
-# > users on this machine.
-# > Your Ruby version is 3.0.2, but your Gemfile specified 3.1.2
-#
-
 [build]
-builder = "ruby-32"
-build-command = "bundle install"
+builder = "ruby"
+packages = [
+    "libpq-dev",
+]
+before-build = "python3 nua/fix-sources.py"
+
+[run]

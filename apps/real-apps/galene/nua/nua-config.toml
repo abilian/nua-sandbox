@@ -12,6 +12,8 @@ git-url = "https://github.com/jech/galene.git"
 git-branch = "galene-0.6-branch"
 
 [build]
+# Autodetection shoul
+builder = "go"
 packages = ['golang-go', 'git']  # go modules need git for VCS version
 build-command = [
     "CGO_ENABLED=0 go build -ldflags='-s -w'",
@@ -26,12 +28,12 @@ test = "test -f /nua/app/galene"
 [run]
 start = """\
 /nua/app/galene \
--insecure \
--http 127.0.0.1:${LISTEN_PORT} \
--turn :${TURN_PORT} \
--udp-range 49152-65535 \
--groups /nua/app/groups \
--data /nua/app/data"""
+    -insecure \
+    -http 127.0.0.1:${LISTEN_PORT} \
+    -turn :${TURN_PORT} \
+    -udp-range 49152-65535 \
+    -groups /nua/app/groups \
+    -data /nua/app/data"""
 # -recordings __DATA_DIR__/recordings  \
 
 [env]

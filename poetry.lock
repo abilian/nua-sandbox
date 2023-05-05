@@ -1943,6 +1943,21 @@ files = [
 ]
 
 [[package]]
+name = "pydeps"
+version = "1.12.3"
+description = "Display module dependencies"
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pydeps-1.12.3-py3-none-any.whl", hash = "sha256:d828ab178244f147119a4aa3757a0ffa062e2069b1ac3c244f3013bfdfe0aa5e"},
+    {file = "pydeps-1.12.3.tar.gz", hash = "sha256:3f14f2d5ef04df050317a6ed4747e7fefd14399f9decfe5114271541b1b8ffe7"},
+]
+
+[package.dependencies]
+stdlib-list = "*"
+
+[[package]]
 name = "pyflakes"
 version = "3.0.1"
 description = "passive checker of Python programs"
@@ -2828,4 +2843,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "8096e681a31ceb6e75d6688432f46681e0035688b4a2c198fa64f742b8146b7e"
+content-hash = "82f28a6c51467d1fba6f9af4ad6a574aadb6ae6cde84bb2f57c1c73833c24c11"

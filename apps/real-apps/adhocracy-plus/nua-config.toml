@@ -12,10 +12,10 @@ src-url = "https://github.com/liqd/adhocracy-plus/archive/v{version}.tar.gz"
 
 [build]
 builder = "python"
-build-packages = [
+packages = [
     "git",
     # Needed to build psycopg2
-    "gcc",
-    "python3-dev",
     "libpq-dev",
+    #
+    "libcairo2-dev",
 ]

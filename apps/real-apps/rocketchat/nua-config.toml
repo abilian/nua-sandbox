@@ -10,6 +10,10 @@ tags = [ "chat", "webchat", "slack", "teams" ]
 version = "5.4.1"
 src-url = "https://github.com/RocketChat/Rocket.Chat/archive/refs/tags/{version}.tar.gz"
 
+[build]
+builder = "node"
+#build-command = "yarn"
+
 #[addons]
 #sendmail = { }
 #turn = { }

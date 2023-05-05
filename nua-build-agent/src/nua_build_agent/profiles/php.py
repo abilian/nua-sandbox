@@ -8,6 +8,7 @@ class PhpProfile(BaseProfile):
     name = "php"
     label = "PHP / Composer"
     builder_packages = [
+        "build-essential",
         # Probably not needed at runtime
         "composer",
         # Useful for composer install

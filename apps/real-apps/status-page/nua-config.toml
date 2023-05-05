@@ -10,10 +10,8 @@ src-url = "https://github.com/Status-Page/Status-Page/archive/refs/tags/v{versio
 
 [build]
 builder = "python"
-build-packages = [
+packages = [
     # Needed to build psycopg2
-    "gcc",
-    "python3-dev",
     "libpq-dev",
 ]
 
