@@ -1,3 +1,5 @@
+from subprocess import CalledProcessError
+
 from ..utils import sh
 from .base import BaseProfile
 
@@ -9,7 +11,7 @@ class PhpProfile(BaseProfile):
     label = "PHP / Composer"
     builder_packages = [
         "build-essential",
-        # Probably not needed at runtime
+        # NB: Probably not needed at runtime
         "composer",
         # Useful for composer install
         "php-curl",
@@ -23,7 +25,7 @@ class PhpProfile(BaseProfile):
     def build(self):
         try:
             sh.shell("composer install")
-        except:
+        except CalledProcessError:
             # FIXME: if this happens, the upstream package is probably broken.
             sh.shell("composer update")
             sh.shell("composer install")

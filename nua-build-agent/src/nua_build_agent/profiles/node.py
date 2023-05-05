@@ -1,9 +1,10 @@
+import os
 from typing import cast
 
 from nua_build_agent.types import JsonDict
 
-from ..system import install_nodejs
 from ..utils import sh
+from ..utils.sh import shell
 from .base import BaseProfile
 from .common import check_requirements
 
@@ -124,3 +125,14 @@ class NodeProfile(BaseProfile):
         #             env=env,
         #             shell=True,
         #         )
+
+
+def install_nodejs(version="14.x"):
+    # TODO: don't use curl (?)
+    cmd = f"curl -sL https://deb.nodesource.com/setup_{version} | bash -"
+    # Can't use subprocess here because of the pipe
+    print(f"$ {cmd}")
+    os.system(cmd)
+
+    shell("apt-get install -qq -y nodejs")
+    shell("/usr/bin/npm install -g yarn")
