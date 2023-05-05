@@ -6,19 +6,19 @@
 - [x] Implement and test all the build profiles (moslty done for now)
 - [x] Make sure all the applications build (mostly done for now)
 - [x] Extract metadata from GitHub projects
+- [x] Support Ruby apps
 
 ## Short term
 
 Source code:
 
-- [ ] 'src-url': should it go in '[metadata]' or in '[build]'?
 - [ ] Git support.
 - [ ] Version update (automated)
 - [ ] Check and update checksums
 
 Build / Run:
 
-- [ ] Support Ruby apps
+- [ ] Build as `nua`, not as `root`
 - [ ] Support "multi-language" apps (ex: Ruby + Node)
 - [ ] Support "old-school PHP" apps (i.e. w/o Composer)
 - [ ] Support multiple Python / Node / PHP / Ruby / etc. versions
@@ -51,8 +51,7 @@ Metadata / lifecycle:
 
 ## Longer term / advanced R&D
 
-- [ ] Runtime support via `nua-build-agent`
-  - [ ] Should we split `nua-build-agent` into a build-time and a run-time part?
+- [ ] Runtime support via `nua-agent` (not sure if this is needed)
 - [ ] Alternatives build systems (hand-crafted Dockerfiles, Nix/Guix, https://buildpacks.io/, https://modus-continens.com/, https://nixpacks.com/, etc.)
 - [ ] Alternative backends (e.g. SlapOS)
 - [ ] Support for `docker-compose` (or similar)
