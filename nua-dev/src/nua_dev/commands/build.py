@@ -27,7 +27,7 @@ class BuildCommand(Command):
 
     def run(self, targets: list[Path]):
         if not targets:
-            targets = ["."]
+            targets = [Path(".")]
 
         for target in targets:
             with chdir(target):

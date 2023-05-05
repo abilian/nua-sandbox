@@ -24,7 +24,7 @@ class ValidateCommand(Command):
 
     def run(self, targets: list[Path]):
         if not targets:
-            targets = ["."]
+            targets = [Path(".")]
 
         for target in targets:
             print(blue(f"Validating Nua config in: {target}"))
