@@ -13,6 +13,9 @@ src-url = "https://github.com/RocketChat/Rocket.Chat/archive/refs/tags/{version}
 [build]
 builder = "node"
 
+before-build = "python3 nua/fix-sources.py"
+
+
 #[addons]
 #sendmail = { }
 #turn = { }
