@@ -12,15 +12,7 @@ src-url = "https://github.com/abilian/abilian-sbe-monorepo/archive/refs/heads/ma
 builder = "python"
 packages = [
     # Needed to build psycopg2
-    "gcc",
-    "python3-dev",
     "libpq-dev",
     # For magic
     "libmagic-dev",
 ]
-
-build-script = """
-!#/bin/sh
-
-echo "hello"
-"""

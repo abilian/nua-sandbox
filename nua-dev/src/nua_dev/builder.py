@@ -39,6 +39,8 @@ class Builder:
         self.setup_build_dir(build_dir)
         with chdir(build_dir):
             sh.shell(f"docker build -t nua-{self.app_id} .")
+            # Or?
+            # sh.shell(f"docker build --progress plain -t nua-{self.app_id} .")
 
     def setup_build_dir(self, build_dir: Path):
         assert build_dir.is_dir()

@@ -162,10 +162,13 @@ class BuildRunner:
             table.append(line)
 
         print(tabulate(table, headers=["App", *headers]))
+
+        total = len(results)
+        count_ko = total - count_ok
         print(
-            f"Total: {len(results)}. "
-            f"Success: {count_ok} (100*{count_ok/len(results):.2%}. "
-            f"Fail: {len(results) - count_ok}"
+            f"Total: {total}. "
+            f"Success: {count_ok} ({count_ok / total:.2%}). "
+            f"Fail: {count_ko} ({count_ko / total:.2%})."
         )
 
     def try_build(self, path: Path, method: str) -> BuildResult:

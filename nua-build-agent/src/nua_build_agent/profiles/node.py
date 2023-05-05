@@ -4,7 +4,7 @@ from typing import cast
 from nua_build_agent.types import JsonDict
 
 from ..utils import sh
-from ..utils.sh import shell
+from ..utils.sh import environment, shell
 from .base import BaseProfile
 from .common import check_requirements
 
@@ -41,12 +41,13 @@ class NodeProfile(BaseProfile):
         print("npm version:")
         sh.shell("npm --version")
 
-        if self._check_files(["package-lock.json"]):
-            sh.shell("npm install")
-        elif self._check_files(["yarn.lock"]):
-            sh.shell("yarn install")
-        else:
-            sh.shell("npm install")
+        with environment(NODE_ENV="production"):
+            if self._check_files(["package-lock.json"]):
+                sh.shell("npm install")
+            elif self._check_files(["yarn.lock"]):
+                sh.shell("yarn install")
+            else:
+                sh.shell("npm install")
 
         # virtual = join(ENV_ROOT, self.app)
         # virtualenv_path = join(ENV_ROOT, self.app)

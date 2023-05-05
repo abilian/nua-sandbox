@@ -13,5 +13,4 @@ src-url = "https://github.com/calcom/cal.com/archive/refs/heads/main.tar.gz"
 [build]
 builder = "node-16"
 
-# Not needed (autodetected)
 build-script = "build.sh"

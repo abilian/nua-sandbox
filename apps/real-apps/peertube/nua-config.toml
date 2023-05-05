@@ -11,4 +11,13 @@ license = "AGPL-3.0"
 src-url = "https://github.com/Chocobozzz/PeerTube/archive/v{version}.tar.gz"
 
 [build]
-builder = "php"
+# Note: incompatible w/ Node 20.
+builder = "node"
+build-command = [
+    "yarn",
+    "yarn run build",
+]
+test = [
+    "find . -name peertube.js",
+    "test -f dist/server/tools/peertube.js",
+]

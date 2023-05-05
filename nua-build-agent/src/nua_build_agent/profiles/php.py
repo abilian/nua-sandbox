@@ -5,7 +5,7 @@ from .base import BaseProfile
 
 
 class PhpProfile(BaseProfile):
-    """Build a PHP application."""
+    """Build a PHP application (using Composer)."""
 
     name = "php"
     label = "PHP / Composer"

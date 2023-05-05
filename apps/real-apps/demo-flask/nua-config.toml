@@ -12,13 +12,7 @@ src-checksum = ""
 [build]
 builder = "python"
 packages = [
-    "build-essential",
-    "python3-dev",
     "libsqlite3-dev",
-#    "netcat",
-#    "libicu-dev",
-#    "libssl-dev",
-#    "git",
 ]
 
 

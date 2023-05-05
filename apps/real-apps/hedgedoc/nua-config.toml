@@ -27,7 +27,10 @@ build-command = [
     "bin/setup",
     "yarn cache clean; rm -fr /tmp/*"
 ]
-test = "test -f /nua/build/hedgedoc/app.js"
+test = [
+    # YMMV
+    "test -f app.js",
+]
 
 [run]
 packages = [

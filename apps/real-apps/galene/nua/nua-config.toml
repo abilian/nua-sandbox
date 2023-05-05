@@ -12,7 +12,6 @@ git-url = "https://github.com/jech/galene.git"
 git-branch = "galene-0.6-branch"
 
 [build]
-# Autodetection shoul
 builder = "go"
 packages = ['golang-go', 'git']  # go modules need git for VCS version
 build-command = [
