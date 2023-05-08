@@ -12,4 +12,12 @@ src-url = "https://github.com/matomo-org/matomo/archive/{version}.tar.gz"
 
 [build]
 builder = "php"
+packages = [
+    "libfreetype6-dev",
+    "libjpeg-dev",
+    "libldap2-dev",
+    "libpng-dev",
+    "libzip-dev",
+    "procps",
+]
 # builders = ["php", "node"]
