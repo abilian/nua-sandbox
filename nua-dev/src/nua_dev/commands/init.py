@@ -28,6 +28,12 @@ class InitCommand(Command):
         if not from_github:
             raise Abort("Please specify a GitHub repository.")
 
+        if from_github.endswith(".git"):
+            from_github = from_github[:-4]
+        if from_github.startswith("https:") or from_github.startswith("git@"):
+            from_github = "/".join(from_github.split("/")[-2:])
+        print(f"Using: {from_github}")
+
         ctx = GitHub(from_github).get_repo_info()
         template_file = Path(__file__).parent.parent / "etc" / "nua-config.toml.j2"
         template_str = template_file.read_text()
@@ -85,4 +91,5 @@ class GitHub:
             ctx["src_url"] = f"{repo.html_url}/archive/{{version}}.tar.gz"
         ctx["license"] = license
         ctx["website"] = repo.homepage
+        ctx["repo"] = repo.html_url
         return ctx

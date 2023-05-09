@@ -36,10 +36,11 @@ class NodeProfile(BaseProfile):
     def _get_node_version(self) -> str:
         builder = self.config.get(["build", "builder"])
         node_version = self.config.get(["build", "node-version"])
-        if not node_version and "-" in builder:
-            node_version = builder.split("-")[1]
         if not node_version:
-            node_version = DEFAULT_NODE_VERSION
+            if builder and "-" in builder:
+                node_version = builder.split("-")[1]
+            else:
+                node_version = DEFAULT_NODE_VERSION
         if not node_version.endswith(".x"):
             node_version += ".x"
         return node_version

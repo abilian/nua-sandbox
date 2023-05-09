@@ -6,6 +6,7 @@ Useful for tests and benchmarks.
 import argparse
 import multiprocessing as mp
 import subprocess
+import time
 from dataclasses import dataclass, field
 from itertools import groupby
 from pathlib import Path
@@ -124,10 +125,13 @@ class BuildRunner:
     verbosity: int = 0
 
     def run(self):
+        t0 = time.perf_counter()
         self.validate()
         results = self.build_all()
         if self.report:
             self.report_results(results)
+        t1 = time.perf_counter()
+        print(f"Wall clock run time: {t1 - t0:.2f} seconds")
 
     def validate(self):
         for bm in self.build_methods:
@@ -166,6 +170,7 @@ class BuildRunner:
         total = len(results)
         count_ko = total - count_ok
         print(
+            "\n"
             f"Total: {total}. "
             f"Success: {count_ok} ({count_ok / total:.2%}). "
             f"Fail: {count_ko} ({count_ko / total:.2%})."
