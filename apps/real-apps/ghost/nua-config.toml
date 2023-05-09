@@ -1,0 +1,16 @@
+[metadata]
+id = "ghost"
+title = "Ghost"
+author = "Ghost authors"
+description = "Turn your audience into a business. Publishing, memberships, subscriptions and newsletters."
+website = "https://ghost.org"
+repo = "https://github.com/TryGhost/Ghost"
+version = "5.47.0"
+release = 1
+license = "MIT"
+
+src-url = "https://github.com/TryGhost/Ghost/archive/v{version}.tar.gz"
+
+[build]
+builder = "node-18"
+packages = []
