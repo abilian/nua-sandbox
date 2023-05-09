@@ -1,6 +1,8 @@
 # Specific to this project
 _nua-config.json
 Dockerfile.nua
+/sandbox
+
 
 # Old stuff, kept for reference
 _OLD
