@@ -1,5 +1,3 @@
+# Nua Flask PostgreSQL Demo
 
-Testing:
-- use the feature of no build.py but project auto detection
-- use resource type = "docker" for automated configuration of DB
-- no need of  meta-packages = ["postgres-client"] when using resource type="docker"
+This demo shows how to use the Nua framework to create a simple web application backed by a PostgreSQL database.

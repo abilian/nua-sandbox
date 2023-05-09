@@ -1,3 +1,3 @@
-from flask_app.app import app
+from flask_app.app import create_app
 
-assert app
+app = create_app()

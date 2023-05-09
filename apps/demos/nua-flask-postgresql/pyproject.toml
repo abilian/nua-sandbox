@@ -22,6 +22,7 @@ Flask-WTF = "^1.0"
 psycopg2-binary = "^2.9.3"
 
 [tool.poetry.dev-dependencies]
+abilian-devtools = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
