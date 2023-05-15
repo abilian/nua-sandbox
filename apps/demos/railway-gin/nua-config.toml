@@ -8,7 +8,7 @@ release = 1
 license = "MIT"
 src-url = "https://github.com/railwayapp-templates/gin/archive/refs/heads/main.tar.gz"
 
-[buikd]
+[build]
 builder = "go"
 build-command = "go build"
 

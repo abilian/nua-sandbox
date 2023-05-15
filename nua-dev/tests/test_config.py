@@ -1,6 +1,6 @@
 from io import BytesIO
 
-from nua_dev.config import Config, AttrGetter
+from nua_dev.config import AttrGetter, Config
 
 CONFIG = b"""
 [metadata]

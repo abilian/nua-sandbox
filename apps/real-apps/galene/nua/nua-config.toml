@@ -7,7 +7,7 @@ author = "Galene authors"
 tagline = "Galène videoconference server"
 website = "https://galene.org/"
 tags = ["golang", "visio"]
-licence = "MIT"
+license = "MIT"
 src-url = "https://github.com/jech/galene/archive/refs/tags/galene-{version}.zip"
 
 [build]

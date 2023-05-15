@@ -11,7 +11,7 @@ release = 1
 license = "MIT"
 src-url = "https://github.com/railwayapp-templates/rocket/archive/refs/heads/main.tar.gz"
 
-[builder]
+[build]
 builder = "rust"
 
 [run]

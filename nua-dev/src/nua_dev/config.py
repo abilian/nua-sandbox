@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import BinaryIO, Optional, cast
+from typing import BinaryIO, cast
 
 import json5
 import jsonschema
@@ -115,7 +115,7 @@ class Config:
         with Path("_nua-config.json").open("w") as fd:
             self.dump_to(fd)
 
-    def dump_to(self, fd, sections=Optional[list[str]]):
+    def dump_to(self, fd, sections=list[str] | None):
         if sections is None:
             json.dump(self._config, fd, indent=2)
         else:

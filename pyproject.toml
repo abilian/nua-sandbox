@@ -11,6 +11,8 @@ python = "^3.10"
 nua-build-agent = { path = "nua-build-agent", develop = true }
 nua-dev = { path = "nua-dev", develop = true }
 nua-run = { path = "nua-run", develop = true }
+pydantic = "^1.10.7"
+dictdiffer = "^0.9.0"
 
 [tool.poetry.group.dev.dependencies]
 abilian-devtools = "^0.5.1"
