@@ -25,7 +25,8 @@ packages = [
 ]
 build-command = [
     "bin/setup",
-    "yarn cache clean; rm -fr /tmp/*"
+    "yarn cache clean",
+    "rm -fr /tmp/*"
 ]
 test = [
     # YMMV
@@ -87,12 +88,6 @@ interval = 10
 
 [[volume]]
 # declare a local volume for plublic uploads
-# bind example: type = "bind"
-type = "volume"
-
-# Name of the driver used to create the volume: (for type == "volume")
-# driver = "local"  # default for "volume" type
-# Mount source (e.g. a volume name or a host path):
 prefix = "hedgedoc_uploads"
 # Container path:
 target = "/hedgedoc/public/uploads"

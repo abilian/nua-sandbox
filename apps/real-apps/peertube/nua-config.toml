@@ -4,7 +4,7 @@ title = "PeerTube"
 author = "PeerTube authors"
 description = "ActivityPub-federated video streaming platform using P2P directly in your web browser"
 website = "https://joinpeertube.org/"
-version = "5.0.1"
+version = "5.1.0"
 release = 1
 license = "AGPL-3.0"
 
@@ -13,11 +13,12 @@ src-url = "https://github.com/Chocobozzz/PeerTube/archive/v{version}.tar.gz"
 [build]
 # Note: incompatible w/ Node 20.
 builder = "node"
-#build-command = [
-#    "yarn",
-#    "yarn run build",
-#]
+
+# TODO: should be autodetected
+build-command = [
+    "yarn",
+    "yarn run build",
+]
 test = [
-    # Why `test` though?
     "test -f ./dist/server/tests/cli/peertube.js",
 ]

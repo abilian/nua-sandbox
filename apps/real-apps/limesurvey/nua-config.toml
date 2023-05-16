@@ -4,11 +4,14 @@ title = "LimeSurvey"
 author = "LimeSurvey authors"
 description = "The most popular FOSS online survey tool on the web."
 website = "https://www.limesurvey.org"
-version = "6.0.4+230427"
+version = "6.0.6+230508"
 release = 1
 license = "GPLv2+"
 
-src-url = "https://github.com/LimeSurvey/LimeSurvey/archive/{version}.tar.gz"
+src-url = "https://github.com/LimeSurvey/LimeSurvey/archive/refs/tags/{version}.tar.gz"
+
+# These archives contain all the dependencies, but are much larger
+# src-url = "https://github.com/LimeSurvey/LimeSurvey/archive/{version}.tar.gz"
 
 [build]
 builder = "php"

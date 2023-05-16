@@ -5,6 +5,7 @@ title = "Moinmoin"
 author = "Moinmoin authors"
 tagline = "An advanced, easy to use and extensible Wiki engine with a large community of users"
 website = "https://moinmo.in/"
+repo = "https://github.com/moinwiki/moin"
 tags = ["wiki", "collaboration", "notes", "documents"]
 license = "GPLv2+"
 profile = ["generic"]

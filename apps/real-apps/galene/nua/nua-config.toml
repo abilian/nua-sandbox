@@ -62,19 +62,10 @@ network = "host"
 restart_policy.name = "always"
 
 [[volume]]
-# The mount type (bind / volume / tmpfs / npipe). Default: volume :
-# type = "bind"
-# source = "/home/nua/galene/groups"
-# target = "/nua/app/groups"
 type = "volume"
 prefix = "galene_groups"
 target = "/nua/app/groups"
 
 [[volume]]
-# The mount type (bind / volume / tmpfs / npipe). Default: volume :
-# type = "bind"
-# source = "/home/nua/galene/data"
-# target = "/nua/app/data"
-type = "volume"
 prefix = "galene_data"
 target = "/nua/app/data"
