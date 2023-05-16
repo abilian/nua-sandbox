@@ -1,0 +1,30 @@
+[metadata]
+id = "cal.com"
+version = "1.9.6"
+release = 11
+title = "Cal.com"
+author = "Cal.com developers"
+tagline = ""
+website = "https://cal.com/"
+tags = ["Scheduling"]
+license = "AGPL-3.0"
+src-url = "https://github.com/calcom/cal.com/archive/refs/heads/main.tar.gz"
+
+[build]
+builder = "node-16"
+
+# TODO: think about the path here...
+# FIXME: not working
+#build-command = [
+#    "../nua/build.sh",
+#]
+
+# Alternative approach for now
+build-command = [
+    "yarn install",
+    # "yarn global add turbo",
+    # "yarn config set network-timeout 1000000000 -g",
+    "yarn dlx turbo prune --scope=@calcom/web --docker",
+    "yarn install",
+    "yarn dlx turbo run build --filter=@calcom/web",
+]
