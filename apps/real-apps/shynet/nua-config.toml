@@ -4,6 +4,7 @@ title = "shynet"
 author = "shynet authors"
 description = "Modern, privacy-friendly, and detailed web analytics that works without cookies or JS."
 website = ""
+repo = "https://github.com/milesmcc/shynet/"
 version = "0.12.0"
 release = 1
 license = "Apache-2.0"
