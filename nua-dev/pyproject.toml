@@ -29,6 +29,8 @@ pygithub = "^1.58.1"
 snoop = "^0.4.3"
 tabulate = "^0.9.0"
 tomli = "^2.0.1"
+dictdiffer = "^0.9.0"
+pydantic = "^1.10.7"
 
 [tool.poetry.group.dev.dependencies]
 abilian-devtools = "^0.5.1"
