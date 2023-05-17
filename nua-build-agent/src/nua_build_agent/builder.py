@@ -90,8 +90,8 @@ class Builder:
                     sh.shell(command)
 
             # FIXME: remove or make it clean there is a convention
-            elif Path("build.sh").exists():
-                sh.shell("bash build.sh")
+            # elif Path("../nua/build.sh").exists():
+            #     sh.shell("bash build.sh")
 
             else:
                 # Use the generic build method of the builder
