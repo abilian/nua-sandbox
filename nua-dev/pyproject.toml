@@ -134,3 +134,14 @@ reportPrivateImportUsage = false
 reportGeneralTypeIssues = false
 reportMissingImports = false
 reportOptionalSubscript = false
+
+[tool.coverage.run]
+omit = ["tests/*.py", "**/test*.py", "**/*test.py"]
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+    'if TYPE_CHECKING:',
+    'pragma: no cover',
+    "if __name__ == '__main__':",
+]
