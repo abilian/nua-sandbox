@@ -44,8 +44,10 @@ class ValidateNgCommand(Command):
         # of the wrong type), so this is a way to check for typos in the keys, etc.
         for k, section, changes in diff(d, config.dict()):
             if len(changes) == 2 and not isinstance(changes[0], tuple):
-                changes = [changes]
-            for kk, v in changes:
+                change_list = [changes]
+            else:
+                change_list = changes
+            for kk, v in change_list:
                 if v is None:
                     continue
                 print(f"{k}: {section}.{kk}: {v}")

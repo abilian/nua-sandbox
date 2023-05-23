@@ -4,7 +4,6 @@ version = "0.1.1"
 description = ""
 authors = ["Stefane Fermigier <sf@abilian.com>"]
 readme = "README.md"
-packages = []
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -23,6 +22,14 @@ types-jsonschema = "^4.17.0.5"
 docformatter = "^1.6.3"
 pydeps = "^1.12.3"
 
+[options.packages.find]
+exclude = [
+    "tests",
+    "tests.*",
+    "doc",
+    "doc.*",
+]
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
@@ -30,4 +37,5 @@ build-backend = "poetry.core.masonry.api"
 [tool.ruff]
 ignore = [
     "E501", # line too long
+    "PLR2004", # Magic value used in comparison
 ]
