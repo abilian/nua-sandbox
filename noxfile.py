@@ -3,17 +3,16 @@ import nox
 PYTHON_VERSIONS = ["3.10", "3.11"]
 
 nox.options.reuse_existing_virtualenvs = True
-# nox.options.default_venv_backend = "venv"
 
-# Don't run 'update-deps' by default.
 nox.options.sessions = [
     "lint",
     "pytest",
-    # "doc",
 ]
 
 SUB_REPOS = [
     "nua-dev",
+    "nua-build-agent",
+    "nua-run",
 ]
 
 
@@ -27,11 +26,6 @@ def pytest(session: nox.Session, sub_repo: str):
 @nox.parametrize("sub_repo", SUB_REPOS)
 def lint(session: nox.Session, sub_repo: str):
     run_subsession(session, sub_repo)
-
-
-# @nox.session
-# def doc(session: nox.Session):
-#     print("TODO: do something with the docs")
 
 
 @nox.session(name="update-deps")

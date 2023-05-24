@@ -17,5 +17,5 @@ def cli():
 def test_version(cli, runner):
     result = runner.invoke(cli, "--version")
     assert result.exit_code == 0
-    assert "nua-dev" in result.stdout
+    assert "nua-build-agent" in result.stdout
     assert cli.version in result.stdout
