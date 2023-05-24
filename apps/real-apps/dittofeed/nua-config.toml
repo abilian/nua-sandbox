@@ -1,0 +1,15 @@
+[metadata]
+id = "dittofeed"
+title = "dittofeed"
+author = "dittofeed authors"
+description = "Send marketing messages at scale 📮"
+website = "https://dittofeed.com/"
+repo = "https://github.com/dittofeed/dittofeed"
+version = "0.0.15"
+release = 1
+license = "MIT"
+
+src-url = "https://github.com/dittofeed/dittofeed/archive/v{version}.tar.gz"
+
+[build]
+packages = []
