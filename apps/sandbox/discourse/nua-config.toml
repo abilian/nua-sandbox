@@ -1,0 +1,15 @@
+[metadata]
+id = "discourse"
+title = "discourse"
+author = "discourse authors"
+description = "A platform for community discussion. Free, open, simple."
+website = "https://www.discourse.org"
+repo = "https://github.com/discourse/discourse"
+version = "3.1.0.beta4"
+release = 1
+license = "GPL-2.0"
+
+src-url = "https://github.com/discourse/discourse/archive/v{version}.tar.gz"
+
+[build]
+packages = []
