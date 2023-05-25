@@ -1,0 +1,15 @@
+[metadata]
+id = "uptime-kuma"
+title = "uptime-kuma"
+author = "uptime-kuma authors"
+description = "A fancy self-hosted monitoring tool"
+website = "https://uptime.kuma.pet"
+repo = "https://github.com/louislam/uptime-kuma"
+version = "1.21.3"
+release = 1
+license = "MIT"
+
+src-url = "https://github.com/louislam/uptime-kuma/archive/{version}.tar.gz"
+
+[build]
+packages = []
