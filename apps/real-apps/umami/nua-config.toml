@@ -1,0 +1,15 @@
+[metadata]
+id = "umami"
+title = "umami"
+author = "umami authors"
+description = "Umami is a simple, fast, privacy-focused alternative to Google Analytics."
+website = "https://umami.is"
+repo = "https://github.com/umami-software/umami"
+version = "2.2.0"
+release = 1
+license = "MIT"
+
+src-url = "https://github.com/umami-software/umami/archive/v{version}.tar.gz"
+
+[build]
+packages = []
