@@ -21,6 +21,7 @@ nua-git = "nua_run.git_cli:app"
 python = "^3.10"
 tomli = "*"
 snoop = "*"
+typer = "^0.9.0"
 
 
 [tool.poetry.group.dev.dependencies]
