@@ -1,7 +1,5 @@
 from pathlib import Path
 
-from abilian_devtools.invoke import import_tasks
-from click import secho as echo
 from invoke import Context, task
 
 NUA_AGENT_WHL = "nua-build-agent/dist/nua_agent-0.1-py3-none-any.whl"
@@ -18,8 +16,26 @@ APPS = sorted(
     if p.is_dir() and (p / "nua-config.toml").exists() and not (p / "SKIP").exists()
 )
 
+try:
+    from click import secho
+except ImportError:
+    secho = None
 
-import_tasks(globals(), ["help"])
+
+def echo(msg, **kwargs):
+    if secho:
+        secho(msg, **kwargs)
+    else:
+        print(msg)
+
+
+try:
+    from abilian_devtools.invoke import import_tasks
+
+    import_tasks(globals(), ["help"])
+except ImportError:
+    print("Warning: abilian_devtools not installed, 'invoke help' won't work.")
+    pass
 
 
 #

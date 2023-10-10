@@ -33,6 +33,7 @@ tasks:
 
   - lint: |
       cd nua-sandbox
+      poetry install
       poetry run invoke install
       poetry run invoke lint
 
