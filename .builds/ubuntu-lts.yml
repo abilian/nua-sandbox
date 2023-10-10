@@ -31,23 +31,24 @@ tasks:
       cd nua-sandbox
       nox -e lint
 
-  - lint: |
+  - nox-test: |
       cd nua-sandbox
-      poetry install
-      poetry run invoke install
-      poetry run invoke lint
+      nox -e pytest
+
+#  - lint: |
+#      cd nua-sandbox
+#      poetry install
+#      poetry run invoke install
+#      poetry run invoke lint
 
 #  - e2e: |
 #      cd nua/tests/e2e
 #      poetry run make test
 
-  - test: |
-      cd nua-sandbox
-      poetry run invoke test
+#  - test: |
+#      cd nua-sandbox
+#      poetry run invoke test
 
-  - nox-test: |
-      cd nua-sandbox
-      nox -e pytest
 
 
 triggers:
