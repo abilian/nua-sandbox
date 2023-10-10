@@ -12,7 +12,7 @@ nox.options.sessions = [
 SUB_REPOS = [
     "nua-dev",
     "nua-build-agent",
-    "nua-run",
+    # "nua-run",
 ]
 
 
