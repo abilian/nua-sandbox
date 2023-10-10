@@ -14,15 +14,13 @@ packages:
   - python3-dev
   - py3-pip
   - pipx
-  # - poetry
 
 tasks:
   - setup: |
-      # Workaround to install poetry on Alpine
-      # (was: sudo poetry self update)
+      # Workaround to install a recent poetry on Alpine
       pipx install poetry
       sudo ln -sf ~/.local/bin/poetry /usr/local/bin/
-      cd nua-sanbox
+      cd nua-sandbox
       poetry install
 
   - lint: |
