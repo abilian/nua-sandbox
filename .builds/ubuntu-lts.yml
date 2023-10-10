@@ -24,12 +24,16 @@ packages:
 
 tasks:
   - setup: |
-      sudo pip install -U pip setuptools wheel poetry nox
+      sudo pip install -U pip setuptools wheel poetry nox invoke
       cd nua-sandbox
-      poetry install
+
+  - nox-lint: |
+      cd nua-sandbox
+      nox -e lint
 
   - lint: |
       cd nua-sandbox
+      poetry run invoke install
       poetry run invoke lint
 
 #  - e2e: |
@@ -40,9 +44,10 @@ tasks:
       cd nua-sandbox
       poetry run invoke test
 
-  - nox: |
+  - nox-test: |
       cd nua-sandbox
-      poetry run nox
+      nox -e pytest
+
 
 triggers:
   - action: email

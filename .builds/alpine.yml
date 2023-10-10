@@ -23,9 +23,13 @@ tasks:
       cd nua-sandbox
       poetry install
 
-  - lint: |
+  - nox-lint: |
       cd nua-sandbox
-      poetry run invoke lint
+      nox -e lint
+
+#  - inv-lint: |
+#      cd nua-sandbox
+#      poetry run invoke -e lint
 
 #  - test: |
 #      cd nua
