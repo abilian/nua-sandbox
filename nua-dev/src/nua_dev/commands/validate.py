@@ -16,11 +16,11 @@ class ValidateCommand(Command):
 
     name = "validate"
 
-    arguments = [
+    arguments = (
         Argument(
             "targets", nargs="*", help="Directories where to find the apps to validate"
-        )
-    ]
+        ),
+    )
 
     def run(self, targets: list[Path]):
         if not targets:

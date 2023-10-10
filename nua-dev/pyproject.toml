@@ -111,7 +111,7 @@ ignore = [
     "S701",
     # Esthetic issues I don't agree with
     "RET505",
-    "PLC1901",
+    # "PLC1901",
     #
 ]
 

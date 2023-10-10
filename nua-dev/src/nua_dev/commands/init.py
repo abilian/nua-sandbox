@@ -18,10 +18,10 @@ class InitCommand(Command):
 
     name = "init"
 
-    arguments = [
+    arguments = (
         Option("--from-github", help="GitHub repository to use as a template"),
         Option("--dir", help="Directory to create the project in"),
-    ]
+    )
 
     def run(self, from_github: str = "", dir: Path | None = None):
         """Initialize a new project."""

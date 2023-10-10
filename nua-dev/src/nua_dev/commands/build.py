@@ -19,11 +19,11 @@ class BuildCommand(Command):
 
     name = "build"
 
-    arguments = [
+    arguments = (
         Argument(
             "targets", nargs="*", help="Directories where to find the apps to build"
-        )
-    ]
+        ),
+    )
 
     def run(self, targets: list[Path]):
         if not targets:

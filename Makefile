@@ -47,6 +47,7 @@ test:
 
 ## Lint / check typing
 lint:
+	ruff */src
 	invoke lint
 
 

@@ -31,7 +31,7 @@ class BuildAllCommand(Command):
 
     name = "build-all"
 
-    arguments = [
+    arguments = (
         Argument(
             "directory",
             nargs="?",
@@ -69,7 +69,7 @@ class BuildAllCommand(Command):
         ),
         Option("-t", "--time", action=STORE_TRUE, help="Print timing info"),
         Option("-b", "--bench", action=STORE_TRUE, help="Run benchmarks"),
-    ]
+    )
 
     def run(
         self, _args, directory, build_methods, verbosity, pool_size, cwd, time, bench
