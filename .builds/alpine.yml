@@ -25,7 +25,7 @@ tasks:
 
   - nox-lint: |
       cd nua-sandbox
-      nox -e lint
+      poetry run nox -e lint
 
 #  - inv-lint: |
 #      cd nua-sandbox
