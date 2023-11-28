@@ -79,8 +79,8 @@ class Builder:
             sh.cp(dockerignore_path, build_dir)
 
     def get_agent_wheel(self) -> bytes:
-        """Returns a wheel for the agent package, or None if the agent sources
-        are not available."""
+        """Returns a wheel for the agent package, or None if the agent sources are not
+        available."""
 
         this_dir = Path(importlib.import_module("nua_dev").__path__[0])
         agent_src_root = this_dir.parent.parent.parent / "nua-build-agent"
