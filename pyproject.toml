@@ -20,7 +20,7 @@ nua-run = { path = "nua-run", develop = true }
 abilian-devtools = "^0.5.11"
 invoke = "^2.2.0"
 types-jsonschema = "^4.19.0.3"
-watchfiles = "^0.18.1"
+watchfiles = "^0.21.0"
 docformatter = "^1.7.5"
 pydeps = "^1.12.17"
 devtools = "^0.12.2"
