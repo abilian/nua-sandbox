@@ -152,6 +152,13 @@ def update(c: Context):
     run_in_subrepos(c, "poetry update && poetry install")
 
 
+@task
+def outdated(c: Context):
+    """Show outdated dependencies."""
+    c.run("poetry show -o")
+    run_in_subrepos(c, "poetry show -o")
+
+
 #
 # Helpers
 #
