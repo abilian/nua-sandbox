@@ -4,10 +4,11 @@ title = "adhocracy-plus"
 author = "adhocracy-plus authors"
 description = "adhocracy+ is a SaaS platform to make digital democracy easy for everyone"
 website = "https://adhocracy.plus/"
-version = "2301"
+version = "2306.3"
 release = 1
 license = "AGPL-3.0"
 
+repo-url = "https://github.com/liqd/adhocracy-plus/"
 src-url = "https://github.com/liqd/adhocracy-plus/archive/v{version}.tar.gz"
 
 [build]

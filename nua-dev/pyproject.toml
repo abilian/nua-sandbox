@@ -56,7 +56,7 @@ build-backend = "poetry.core.masonry.api"
 # ---------------------------------------------------------------------------
 
 [tool.ruff]
-select = [
+lint.select = [
     "F",
     "E",
     "C90",
@@ -79,18 +79,7 @@ select = [
 ]
 # Add later: "ANN", "ERA"...
 
-exclude = [
-    "src/cleez/testing.py",
-#    ".tox",
-#    ".nox",
-#    "tests",
-#    "sandbox",
-#    "doc",
-#    "scripts",
-#    "tmp",
-]
-
-ignore = [
+lint.ignore = [
     # Fix these later
     "B904",
     "BLE001",

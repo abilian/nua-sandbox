@@ -38,7 +38,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
-ignore = [
+lint.ignore = [
     "E501", # line too long
     "PLR2004", # Magic value used in comparison
 ]
