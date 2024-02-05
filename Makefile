@@ -101,7 +101,8 @@ clean:
 
 ## Cleaup harder
 tidy: clean
-	rm -rf .tox .nox */.nox */.tox
+	rm -rf .tox .nox .venv
+	rm -rf */.nox */.tox */.venv
 
 ## Update dependencies
 update-deps:

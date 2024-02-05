@@ -27,7 +27,7 @@ clean:
 
 ## Cleanup harder
 tidy: clean
-	rm -rf .tox .nox
+	rm -rf .tox .nox .venv
 
 ## Update dependencies
 update-deps:
