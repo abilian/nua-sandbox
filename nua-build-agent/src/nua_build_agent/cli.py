@@ -16,7 +16,6 @@ from __future__ import annotations
 import importlib.metadata
 import json
 
-import snoop
 from cleez import CLI, Command
 from cleez.actions import VERSION
 from cleez.colors import yellow
@@ -28,7 +27,13 @@ from .system import install_packages
 from .utils import sh
 from .utils.exceptions import Fail
 
-snoop.install()
+
+# Enable snoop if it's installed
+try:
+    import snoop
+    snoop.install()
+except ImportError:
+    pass
 
 
 #
