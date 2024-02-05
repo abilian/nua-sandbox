@@ -43,7 +43,8 @@ class Builder:
     # Lifecycle methods (called from CLI i.e. `main.py`)
     #
     def fetch_app_source(self, strip_components=1):
-        """Fetches the app source code (if needed) and puts it in /nua/build/src/."""
+        """Fetches the app source code (if needed) and puts it in
+        /nua/build/src/."""
         # Silence vulture while we figure out how to deal with this
         assert strip_components == 1
 

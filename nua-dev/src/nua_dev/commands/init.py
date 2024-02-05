@@ -13,7 +13,8 @@ from nua_dev.utils.console import Abort
 
 
 class InitCommand(Command):
-    """Initialize a new project, possibly from an existing GitHub repository."""
+    """Initialize a new project, possibly from an existing GitHub
+    repository."""
 
     name = "init"
 
