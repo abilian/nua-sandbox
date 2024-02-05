@@ -25,12 +25,19 @@ TZ = "Europe/Paris"
 ACKEE_USERNAME = "ackee"
 ACKEE_PASSWORD = { random = 'true', length = 16, display = 'true' }
 ACKEE_ALLOW_ORIGIN = { key = "domain" }
-DB_HOST = { from = "database", key = "hostname" }
-DB_USER = { from = "database", key = "MONGO_INITDB_ROOT_USERNAME" }
-DB_PWD = { from = "database", key = "MONGO_INITDB_ROOT_PASSWORD" }
 DB_PORT = 27017
+
+DB_HOST = { from = "database", key = "hostname" }
+#DB_HOST = { "@eval" = "{database.hostname}" }
+DB_USER = { from = "database", key = "MONGO_INITDB_ROOT_USERNAME" }
+#DB_USER = { "@eval" = "{database.MONGO_INITDB_ROOT_USERNAME}" }
+DB_PWD = { from = "database", key = "MONGO_INITDB_ROOT_PASSWORD" }
+#DB_PWD = { "@eval" = "{database.MONGO_INITDB_ROOT_PASSWORD}" }
+
 # ACKEE_MONGODB = "mongodb://{DB_HOST}:{DB_PORT}/ackee"
 ACKEE_MONGODB = "mongodb://{DB_USER}:{DB_PWD}@{DB_HOST}:{DB_PORT}/"
+#ACKEE_MONGODB = {"@eval" = "mongodb://{DB_USER}:{DB_PWD}@{DB_HOST}:{DB_PORT}/"}
+
 
 [port.web]
 container = 3000
